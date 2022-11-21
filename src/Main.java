@@ -12,7 +12,7 @@
  * @param <paramName>	            <param description>
  */
 
-public class Main {
+public class   Main {
     public static boolean isRunning = true;
 
     public static void checkGame(boolean myGame) {
