@@ -1,4 +1,11 @@
 public class Farmer {
+    // Superclass
+    private static String farmerName;
+    private static int farmerObjectCoin;
+    private static double farmerExp;
+    private static int farmerLevel;
+    private static FarmerType farmerType;
+
     public static String getFarmerName() {
         return farmerName;
     }
@@ -15,11 +22,11 @@ public class Farmer {
         Farmer.farmerObjectCoin = farmerObjectCoin;
     }
 
-    public static float isFarmerExp() {
+    public static double isFarmerExp() {
         return farmerExp;
     }
 
-    public static void setFarmerExp(float farmerExp) {
+    public static void setFarmerExp(double farmerExp) {
         Farmer.farmerExp = farmerExp;
     }
 
@@ -32,13 +39,6 @@ public class Farmer {
         Farmer.farmerLevel = farmerLevel;
     }
 
-    // Superclass
-    public static String farmerName;
-    public static int farmerObjectCoin;
-    public static float farmerExp;
-    public static int farmerLevel;
-    public static FarmerType farmerType;
-
     //public static ArrayList<Tool> farmerTools;
 
     public static void updateLevel(int level){
@@ -48,7 +48,7 @@ public class Farmer {
 
     }
 
-    public static void registerFarmerType(String name, float exp, int balance, FarmerType type){
+    public static void registerFarmerType(String name, double exp, int balance, FarmerType type){
         /** This function allows the farmer to register to gain perks and experience
          * @param name	            Farmer's name
          * @param exp               Farmer's experience points
