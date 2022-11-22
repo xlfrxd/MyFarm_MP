@@ -48,7 +48,8 @@ public class Main {
     }
 
     public static void printIntro(){
-        System.out.println("  _____                    _               ____  _                 _       _             \r\n"
+        System.out.println(
+                  "  _____                    _               ____  _                 _       _             \r\n"
                 + " |  ___|_ _ _ __ _ __ ___ (_)_ __   __ _  / ___|(_)_ __ ___  _   _| | __ _| |_ ___  _ __ \r\n"
                 + " | |_ / _` | '__| '_ ` _ \\| | '_ \\ / _` | \\___ \\| | '_ ` _ \\| | | | |/ _` | __/ _ \\| '__|\r\n"
                 + " |  _| (_| | |  | | | | | | | | | | (_| |  ___) | | | | | | | |_| | | (_| | || (_) | |   \r\n"
@@ -56,19 +57,49 @@ public class Main {
                 + "                                   |___/                                                 ");
     }
 
-    public static void printMenu(String input){
+    public static void printStats(){ //TODO: try to replace this function with Farmer Statistics chenachena
+
+    }
+
+    public static void printMenu(Farmer farmer, String input, boolean gameCont){
         /** This function checks myGame for conditions in continuing game
+         * @param farmer            is the current player of the game
          * @param input	            acts as user input for prompts
+         * @param gameCont          game continue sentinel variable
          */
+
+        Scanner sc = new Scanner(System.in);
+        input = sc.next();
         input.toLowerCase(); // convert input to lowercase
 
         switch(input){
+            // Display user actions
+            case "1" -> { // Plant
 
+            }
+            case "2" -> { // Tool
+                farmer.showToolList();
+            }
+            case "3" -> { // Harvest
+
+            }
+            case "4" -> { // Advance Day
+
+            }
+            case "5" -> { // Quit the game
+                System.out.println("Quitting game...");
+            }
             default -> Message.throwUnknownError(input);
         }
     }
 
-    public static void checkGame(boolean myGame) {
+    public static void useTool(Farmer farmer, Tool currentTool){ //TODO: [UML] CHANGED chooseTool -> useTool from UML
+        /** This function utilizes a tool chosen by the user onto the tile
+         * @param currentTool               acts as user input for prompts
+         */
+    }
+
+    public static void checkGame(Farmer farmer, boolean myGame) {
         /** This function checks myGame for conditions in continuing game
          * @param myGame	            acts as game's validity to continue
          */
@@ -87,15 +118,15 @@ public class Main {
         boolean gameCont = true;
 
         while(gameCont){ // Continue game unless player chooses quit (after game over)
-            Farmer farmer = new Farmer(); // Create new farmer (user)
+            Farmer farmer = new Farmer(""); // Create new farmer (user)
             printIntro(); // Print introductory terminal art
-
             farmer.setFarmerName(getName(userInput)); // Get farmerName and set farmerName
-
+            System.out.println("Howdy, " + farmer.getFarmerName()); //
 
             while(isRunning){ // Game loop
-                System.out.println("Howdy, " + farmer.getFarmerName()); // test
-                checkGame(isRunning); // Check conditions to continue game
+                printMenu(farmer, userInput, gameCont); // Print user actions
+
+                checkGame(farmer, isRunning); // Check conditions to continue game and update isRunning if necessary
             }
 
             do{
@@ -103,7 +134,6 @@ public class Main {
                         "[1] New Game    [2] Exit");
                 sc.nextLine();
             }while(userInput!="1" || userInput!="2");
-
         }
     }
 }

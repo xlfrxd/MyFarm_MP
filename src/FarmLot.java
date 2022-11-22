@@ -1,4 +1,4 @@
-public class FarmLot {
+public class FarmLot { //untouched
     private int farmRow;
     private int farmCol;
     private Tile[][] farmTiles = new Tile[5][10];

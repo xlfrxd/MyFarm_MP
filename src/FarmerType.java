@@ -1,4 +1,4 @@
-public class FarmerType {
+public class FarmerType { //untouched
     private String farmerTypeName;
     private int farmerBonusEarnings;
     private int farmerSeedCostReduction;

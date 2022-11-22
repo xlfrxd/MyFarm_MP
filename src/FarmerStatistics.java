@@ -1,4 +1,4 @@
-public class FarmerStatistics {
+public class FarmerStatistics { // untouched
     private int timesPlanted;
     private int timesPlowed;
     private int timesWatered;
