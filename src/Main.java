@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public class Main {
     private String userName;
-    private static boolean isRunning = true;
+    private boolean isRunning = true;
 
     public boolean isRunning() {
         return isRunning;
@@ -48,34 +48,24 @@ public class Main {
     }
 
     public static void printIntro(){
-        System.out.println(
-                  "  _____                    _               ____  _                 _       _             \r\n"
-                + " |  ___|_ _ _ __ _ __ ___ (_)_ __   __ _  / ___|(_)_ __ ___  _   _| | __ _| |_ ___  _ __ \r\n"
-                + " | |_ / _` | '__| '_ ` _ \\| | '_ \\ / _` | \\___ \\| | '_ ` _ \\| | | | |/ _` | __/ _ \\| '__|\r\n"
-                + " |  _| (_| | |  | | | | | | | | | | (_| |  ___) | | | | | | | |_| | | (_| | || (_) | |   \r\n"
-                + " |_|  \\__,_|_|  |_| |_| |_|_|_| |_|\\__, | |____/|_|_| |_| |_|\\__,_|_|\\__,_|\\__\\___/|_|   \r\n"
-                + "                                   |___/                                                 ");
-    }
-
-    public static void printStats(){ //TODO: try to replace this function with Farmer Statistics chenachena
 
     }
 
-    public static void printMenu(Farmer farmer, String input, boolean gameCont){
-        /** This function checks myGame for conditions in continuing game
-         * @param farmer            is the current player of the game
-         * @param input	            acts as user input for prompts
-         * @param gameCont          game continue sentinel variable
+    public static void printStats(){ //TODO: replace this function with Farmer Statistics chenachena
+
+    }
+
+    public void execute(Farmer farmer, String input){
+        /** This function processes user input from menu
+         * @param currentTool               acts as user input for prompts
          */
 
-        Scanner sc = new Scanner(System.in);
-        input = sc.next();
-        input.toLowerCase(); // convert input to lowercase
 
+        input.toLowerCase(); // convert input to lowercase
         switch(input){
             // Display user actions
             case "1" -> { // Plant
-
+                //farmer.showSeedList
             }
             case "2" -> { // Tool
                 farmer.showToolList();
@@ -87,9 +77,12 @@ public class Main {
 
             }
             case "5" -> { // Quit the game
-                System.out.println("Quitting game...");
+                Message.processCommand("quit");
+                setIsRunning(false);// TODO: isRunning change to false (exit main loop to move to game over screen)
             }
-            default -> Message.throwUnknownError(input);
+            default -> {
+                Message.throwUnknownError(input); // Unknown input
+            }
         }
     }
 
@@ -111,29 +104,38 @@ public class Main {
             }
         }
 
-
     public static void main(String[] args) {
+        Message ms = new Message();
         String userInput = "";
         Scanner sc = new Scanner(System.in);
         boolean gameCont = true;
+        boolean isRunning = true;
 
         while(gameCont){ // Continue game unless player chooses quit (after game over)
             Farmer farmer = new Farmer(""); // Create new farmer (user)
-            printIntro(); // Print introductory terminal art
-            farmer.setFarmerName(getName(userInput)); // Get farmerName and set farmerName
-            System.out.println("Howdy, " + farmer.getFarmerName()); //
+
+            Message.processCommand("intro"); // Print introductory terminal art (from Message)
+
+            userInput = getName(userInput); // Ask for user input farmerName
+            userInput = String.valueOf(userInput.charAt(0)).toUpperCase() + userInput.substring(1).toLowerCase();// format farmerName (capitalizes first letter, lowercase the rest)
+            farmer.setFarmerName(userInput); // Set farmerName to user input
+
+            Message.processCommand("greeting", farmer.getFarmerName()); // Print greeting Message
 
             while(isRunning){ // Game loop
-                printMenu(farmer, userInput, gameCont); // Print user actions
-
-                checkGame(farmer, isRunning); // Check conditions to continue game and update isRunning if necessary
+                // Print player stats (OBJCOIN, DAY, ETC.) -> MP SPECS
+                Message.processCommand("menu"); // Print actions available
+                execute(farmer, userInput); // Perform commands
+                checkGame(farmer, isRunning); // Check conditions // TODO: IMPLEMENT " Check conditions to continue game and update isRunning if necessary "
             }
 
-            do{
-                System.out.println("Game Over!\n" +
-                        "[1] New Game    [2] Exit");
+            do{ // Game over, Continue condition
+                Message.processCommand("over");
+                System.out.println(
+                        "Game Over!\n" +
+                        "[1] New Game    [2] Exit"); // TODO: Utilize Message Class() for stuff like this
                 sc.nextLine();
-            }while(userInput!="1" || userInput!="2");
+            }while(userInput!="1" || userInput!="2"); // user input validation
         }
     }
 }
