@@ -28,6 +28,7 @@ public class FarmLot { //untouched
         this.farmTiles = farmTiles;
     }
 
-    //TODO: Create a function that would convert a file (000101010...) into matrix with or without a rock (can add bonus features)
+    //TODO: Create a function, <void inputElement(file : String)>, that would convert a file (000101010...) into matrix with or without a rock (can add bonus features)
 
+    //TODO: advanceDay() func here
 }

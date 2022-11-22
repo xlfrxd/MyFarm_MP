@@ -15,6 +15,47 @@ public class Crop {
     private int harvCount;
     private int harvReq;
 
+    public Crop(String cropName, String cropType, double seedCost, double expYield, int basePrice,
+                int minProduce, int maxProduce, int waterCount, int waterReq, int waterBonus,
+                int fertCount, int fertReq, int fertBonus, int harvCount, int harvReq) {
+           /** Creates a Crop object by supplying the name, type, how many
+            * times it was watered and fertilized, how much water and fertilizer needed,
+            * how many days since it was planted, how many days for it to harvest, products
+            * produced, seed costs to buy, experience yield and price of seed when harvested.
+            *
+            * @param cropName 	        the name of the Crop
+            * @param cropType 	        the type of the Crop
+            * @param seedCost 	        value of seed costs to buy
+            * @param expYield	        experience yield if crop is harvested
+            * @param basePrice 	    base price of the seed if crop is harvested
+            * @param minProduce 	    minimum products produced
+            * @param maxProduce       	maximum products produced
+            * @param waterCount 	    number of times crop was watered
+            * @param waterReq          number of times crop needs to be watered
+            * @param waterBonus        water Bonus limit
+            * @param fertCount      	number of times crop was fertilized
+            * @param fertReq    	    number of times crop needs to be fertilized
+            * @param fertBonus     	fertilizer Bonus Limit
+            * @param harvCount         number of days passed since crop was planted
+            * @param harvReq           number of days until crop becomes ready for harvest
+            */
+        this.cropName = cropName; // Instantiates cropName via parameter
+        this.cropType = cropType; // Instantiates cropType via parameter
+        this.seedCost = seedCost; // Instantiates seedCost via parameter
+        this.expYield = expYield; // Instantiates expYield via parameter
+        this.basePrice = basePrice; // Instantiates basePrice via parameter
+        this.waterCount = 0; // default water count
+        this.waterBonus = 0; // default waterBonus value
+        this.waterReq = waterReq; // Instantiates waterNeeded via parameter
+        this.fertCount = 0; // default fertilizer count
+        this.fertBonus = 0; // default fertilizerBonus value
+        this.fertReq = fertReq; // Instantiates fertilizerNeeded via parameter
+        this.harvCount = 0; // default harvest value
+        this.harvReq = harvReq; // Instantiates harvestNeeded via parameter
+        this.minProduce = minProduce; // Instantiates minProduce via parameter
+        this.maxProduce = maxProduce; // Instantiates maxProduce via parameter
+    }
+
     public String getCropName() {
         return cropName;
     }

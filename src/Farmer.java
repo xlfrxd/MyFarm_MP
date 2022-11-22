@@ -63,14 +63,14 @@ public class Farmer {
     public void setFarmerLevel(int farmerLevel) { this.farmerLevel = farmerLevel;}
 
 
-    public void updateLevel(int exp, int level){
+    public void updateLevel(int exp){
         /** This function updates the farmer's level based on its experience
          * @param exp               Famer's current exp count
          * @param level	            Farmer's current level
          */
 
         if(exp%100==0){ // If experience is a multiple of 100
-            level+=1; // Increase the level by 1
+            this.setFarmerLevel(this.getFarmerLevel()+1); // Increase the level by 1
         }
     }
 
@@ -85,11 +85,13 @@ public class Farmer {
     }
 
 
-    public static void buySeed(int seedCost, int balance){ // debatable to put this func into main
+    public void buySeed(int seedCost){ // debatable to put this func into main
         /** This function charges the object coin balance of the Farmer when purchasing seeds
          * @param seedCost	            Seed's cost to purchase
          * @param balance               Farmer's object coin balance
          */
+
+        this.setFarmerObjectCoin(this.getFarmerObjectCoin()-seedCost);
 
     }
 
