@@ -56,6 +56,18 @@ public class Main {
                 + "                                   |___/                                                 ");
     }
 
+    public static void printMenu(String input){
+        /** This function checks myGame for conditions in continuing game
+         * @param input	            acts as user input for prompts
+         */
+        input.toLowerCase(); // convert input to lowercase
+
+        switch(input){
+
+            default -> Message.throwUnknownError(input);
+        }
+    }
+
     public static void checkGame(boolean myGame) {
         /** This function checks myGame for conditions in continuing game
          * @param myGame	            acts as game's validity to continue
