@@ -15,15 +15,6 @@ import java.util.Scanner;
  */
 
 public class Main {
-    private String userName;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public static String getName(String userName){
         /** This is a helper function that contains introductory terminal art and getting userName
@@ -36,10 +27,6 @@ public class Main {
         userName = sc.next(); // Set farmer name from user input
 
         return userName;
-    }
-
-    public static void printIntro(){
-
     }
 
     public static void printStats(){ //TODO: replace this function with Farmer Statistics chenachena
@@ -105,14 +92,15 @@ public class Main {
             Farmer farmer = new Farmer(""); // Create new farmer (user)
             Message.processCommand("intro"); // Print introductory terminal art (from Message)
 
-            userInput = getName(userInput); // Ask for user input farmerName
+            getName(userInput); // Ask for user input farmerName
             userInput = String.valueOf(userInput.charAt(0)).toUpperCase() + userInput.substring(1).toLowerCase();// format farmerName (capitalizes first letter, lowercase the rest)
             farmer.setFarmerName(userInput); // Set farmerName to user input
 
             Message.processCommand("greeting", farmer.getFarmerName()); // Print greeting Message
 
             while(Game.getIsRunning()){ // Game loop
-                // Print player stats (OBJCOIN, DAY, ETC.) -> MP SPECS
+                // Print player stats (OBJCOIN,
+                // DAY, ETC.) -> MP SPECS
                 Message.processCommand("menu"); // Print actions available
                 userInput = sc.nextLine(); // Ask user for command
                 execute(farmer, userInput); // Perform command

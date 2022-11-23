@@ -1,58 +1,53 @@
 public class FarmerStatistics { // untouched
-    private int timesPlanted;
-    private int timesPlowed;
-    private int timesWatered;
-    private int timesFertilized;
-    private int timesHarvested;
+    public static int timesPlanted;
+    public static int timesPlowed;
+    public static int timesWatered;
+    public static int timesFertilized;
+    public static int timesHarvested;
+    private static int timesHarvestedSuccessfully;
 
-    public int getTimesPlanted() {
-        return timesPlanted;
+
+    public static void addPlanted(){
+        /**
+         * This function increments timesPlanted
+         */
+        timesPlanted++;
     }
 
-    public void setTimesPlanted(int timesPlanted) {
-        this.timesPlanted = timesPlanted;
+    public static void addPlowed(){
+        /**
+         * This function increments timesPlowed
+         */
+        timesPlowed++;
     }
 
-    public int getTimesPlowed() {
-        return timesPlowed;
+    public static void addWatered(){
+        /**
+         * This function increments timesWatered
+         */
+        timesWatered++;
     }
 
-    public void setTimesPlowed(int timesPlowed) {
-        this.timesPlowed = timesPlowed;
+    public static void addFertil(){
+        /**
+         * This function increments timesFertilized
+         */
+        timesFertilized++;
     }
 
-    public int getTimesWatered() {
-        return timesWatered;
+    public static void addHarv(){
+        /**
+         * This function increments timesHarvested
+         */
+        timesHarvested++;
     }
 
-    public void setTimesWatered(int timesWatered) {
-        this.timesWatered = timesWatered;
+    public static void addHarvSuccess(){
+        /**
+         * This function increments successful timesHarvested
+         */
+        timesHarvestedSuccessfully++;
     }
 
-    public int getTimesFertilized() {
-        return timesFertilized;
-    }
-
-    public void setTimesFertilized(int timesFertilized) {
-        this.timesFertilized = timesFertilized;
-    }
-
-    public int getTimesHarvested() {
-        return timesHarvested;
-    }
-
-    public void setTimesHarvested(int timesHarvested) {
-        this.timesHarvested = timesHarvested;
-    }
-
-    public int getTimesHarvestedSuccessfully() {
-        return timesHarvestedSuccessfully;
-    }
-
-    public void setTimesHarvestedSuccessfully(int timesHarvestedSuccessfully) {
-        this.timesHarvestedSuccessfully = timesHarvestedSuccessfully;
-    }
-
-    private int timesHarvestedSuccessfully;
 
 }
