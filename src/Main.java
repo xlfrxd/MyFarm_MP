@@ -89,6 +89,7 @@ public class Main {
         boolean gameCont = true;
 
         while(gameCont){ // Continue game unless player chooses quit (after game over)
+            Game.setRunning(true);
             Farmer farmer = new Farmer(""); // Create new farmer (user)
             Message.processCommand("intro"); // Print introductory terminal art (from Message)
 
