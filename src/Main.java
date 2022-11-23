@@ -16,15 +16,6 @@ import java.util.Scanner;
 
 public class Main {
     private String userName;
-    private boolean isRunning = true;
-
-    public boolean isRunning() {
-        return isRunning;
-    }
-
-    public static void setIsRunning(boolean isRunning) {
-        this.isRunning = isRunning;
-    }
 
     public String getUserName() {
         return userName;
@@ -76,7 +67,7 @@ public class Main {
             }
             case "5" ->{
 
-                setIsRunning(false);
+                Game.setRunning(false);
                 //isRunning = (false);// TODO: isRunning change to false (exit main loop to move to game over screen)
                 Message.processCommand("quit");
             } // Quit the game
@@ -109,11 +100,9 @@ public class Main {
         String userInput = "";
         Scanner sc = new Scanner(System.in);
         boolean gameCont = true;
-        boolean isRunning = true;
 
         while(gameCont){ // Continue game unless player chooses quit (after game over)
             Farmer farmer = new Farmer(""); // Create new farmer (user)
-
             Message.processCommand("intro"); // Print introductory terminal art (from Message)
 
             userInput = getName(userInput); // Ask for user input farmerName
@@ -122,17 +111,22 @@ public class Main {
 
             Message.processCommand("greeting", farmer.getFarmerName()); // Print greeting Message
 
-            while(isRunning){ // Game loop
+            while(Game.getIsRunning()){ // Game loop
                 // Print player stats (OBJCOIN, DAY, ETC.) -> MP SPECS
                 Message.processCommand("menu"); // Print actions available
-                execute(farmer, userInput); // Perform commands
-                checkGame(farmer, isRunning); // Check conditions // TODO: IMPLEMENT " Check conditions to continue game and update isRunning if necessary "
+                userInput = sc.nextLine(); // Ask user for command
+                execute(farmer, userInput); // Perform command
+                checkGame(farmer, Game.getIsRunning()); // Check conditions
             }
 
             do{ // Game over, Continue condition
-                Message.processCommand("over");
-                sc.nextLine();
-            }while(userInput!="1" || userInput!="2"); // user input validation
+                Message.processCommand("over"); // game over info + new game or quit
+                userInput = sc.nextLine(); // get user input
+            }while(!(userInput.equals("1") || userInput.equals("2"))); // user input validation
+
+            if(userInput.equals("2")){
+                System.exit(0); // quit program
+            }
         }
     }
 }
