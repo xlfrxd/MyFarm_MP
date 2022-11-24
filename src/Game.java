@@ -3,6 +3,8 @@ public class Game {
         return isRunning;
     }
 
+    //TODO: Insert GameCont
+
     public static void setRunning(boolean running) {
         isRunning = running;
     }
