@@ -21,8 +21,8 @@ public class Message {
                 break;
             case "over":
                 System.out.println(
-                        "Game Over!\n" +
-                                "[1] New Game    [2] Exit");
+                        "Models.Game Over!\n" +
+                                "[1] New Models.Game    [2] Exit");
                 break;
             case "quit":
                 System.out.println("Quitting game...");

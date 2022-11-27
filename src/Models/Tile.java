@@ -1,3 +1,7 @@
+package Models;
+
+import Models.Crop;
+
 public class Tile { // untouched
     private boolean isPlowed;
     private Crop plantedCrop;

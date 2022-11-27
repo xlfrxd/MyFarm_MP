@@ -1,4 +1,6 @@
-public class Game {
+package Models;
+
+public class GameCont {
     public static boolean getIsRunning() {
         return isRunning;
     }

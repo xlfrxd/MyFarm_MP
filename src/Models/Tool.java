@@ -1,3 +1,5 @@
+package Models;
+
 public class Tool {
     private String toolName;
     private int toolCost;
@@ -28,7 +30,7 @@ public class Tool {
     }
 
     public Tool(String toolName, int toolCost, double toolExp){
-        /** Creates a Tool object by supplying the name of the tool,
+        /** Creates a Models.Tool object by supplying the name of the tool,
          * cost of usage and the experience gained when used.
          *
          * @param toolName	    the name of the tool

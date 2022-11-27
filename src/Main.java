@@ -8,6 +8,10 @@
  Alfred Eugene T. Victoria DLSU ID# 12111724
  *********************************************************************************************************/
 
+import Models.Farmer;
+import Models.GameCont;
+import Models.Tool;
+
 import java.util.Scanner;
 
 /** <function description>
@@ -29,11 +33,11 @@ public class Main {
         return userName;
     }
 
-    public static void printStats(){ //TODO: replace this function with Farmer Statistics chenachena
+    public static void printStats(){ //TODO: replace this function with Models.Farmer Statistics chenachena
 
     }
 
-    public static void execute(Farmer farmer, String input){
+    public static void doCommand(Farmer farmer, String input){
         /** This function processes user input from menu
          * @param currentTool               acts as user input for prompts
          */
@@ -45,7 +49,7 @@ public class Main {
                 //seedStore.showSeedList
                 //farmer.buySeed
             }
-            case "2" -> farmer.showToolList(); // Tool
+            case "2" -> farmer.showToolList(); // Models.Tool
             case "3" -> { // Harvest
                 //farmer.harvest(tile)
             }
@@ -54,7 +58,7 @@ public class Main {
             }
             case "5" ->{
 
-                Game.setRunning(false);
+                GameCont.setRunning(false);
                 //isRunning = (false);// TODO: isRunning change to false (exit main loop to move to game over screen)
                 Message.processCommand("quit");
             } // Quit the game
@@ -89,7 +93,7 @@ public class Main {
         boolean gameCont = true;
 
         while(gameCont){ // Continue game unless player chooses quit (after game over)
-            Game.setRunning(true);
+            GameCont.setRunning(true);
             Farmer farmer = new Farmer(""); // Create new farmer (user)
             Message.processCommand("intro"); // Print introductory terminal art (from Message)
 
@@ -99,16 +103,16 @@ public class Main {
 
             Message.processCommand("greeting", farmer.getFarmerName()); // Print greeting Message
 
-            while(Game.getIsRunning()){ // Game loop
+            while(GameCont.getIsRunning()){ // Models.Game loop
                 // Print player stats (OBJCOIN,
                 // DAY, ETC.) -> MP SPECS
                 Message.processCommand("menu"); // Print actions available
                 userInput = sc.nextLine(); // Ask user for command
-                execute(farmer, userInput); // Perform command
-                checkGame(farmer, Game.getIsRunning()); // Check conditions
+                doCommand(farmer, userInput); // Perform command
+                checkGame(farmer, GameCont.getIsRunning()); // Check conditions
             }
 
-            do{ // Game over, Continue condition
+            do{ // Models.Game over, Continue condition
                 Message.processCommand("over"); // game over info + new game or quit
                 userInput = sc.nextLine(); // get user input
             }while(!(userInput.equals("1") || userInput.equals("2"))); // user input validation

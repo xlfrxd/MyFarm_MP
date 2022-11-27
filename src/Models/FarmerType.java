@@ -1,3 +1,5 @@
+package Models;
+
 public class FarmerType { //untouched
     private String farmerTypeName;
     private int farmerBonusEarnings;

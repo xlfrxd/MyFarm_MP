@@ -1,3 +1,5 @@
+package Models;
+
 public class FarmLot { //untouched
     private int farmRow;
     private int farmCol;

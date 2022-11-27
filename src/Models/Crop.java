@@ -1,3 +1,5 @@
+package Models;
+
 public class Crop {
     private String cropName;
     private String cropType;
@@ -18,13 +20,13 @@ public class Crop {
     public Crop(String cropName, String cropType, double seedCost, double expYield, int basePrice,
                 int minProduce, int maxProduce, int waterCount, int waterReq, int waterBonus,
                 int fertCount, int fertReq, int fertBonus, int harvCount, int harvReq) {
-           /** Creates a Crop object by supplying the name, type, how many
+           /** Creates a Models.Crop object by supplying the name, type, how many
             * times it was watered and fertilized, how much water and fertilizer needed,
             * how many days since it was planted, how many days for it to harvest, products
             * produced, seed costs to buy, experience yield and price of seed when harvested.
             *
-            * @param cropName 	        the name of the Crop
-            * @param cropType 	        the type of the Crop
+            * @param cropName 	        the name of the Models.Crop
+            * @param cropType 	        the type of the Models.Crop
             * @param seedCost 	        value of seed costs to buy
             * @param expYield	        experience yield if crop is harvested
             * @param basePrice 	    base price of the seed if crop is harvested

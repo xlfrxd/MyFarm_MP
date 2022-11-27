@@ -1,3 +1,5 @@
+package Models;
+
 public class FarmerStatistics { // untouched
     public static int timesPlanted;
     public static int timesPlowed;

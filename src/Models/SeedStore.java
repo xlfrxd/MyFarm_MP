@@ -1,3 +1,7 @@
+package Models;
+
+import Models.Crop;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +22,7 @@ public class SeedStore {
         /** Creates a Seed Store object that creates a structure to hold the information of each seed.
          */
         setSeedList(new ArrayList<>(Arrays.asList(
-                new Crop("Turnip", "Root Crop", 5,
+                new Crop("Turnip", "Root Models.Crop", 5,
                         5, 6, 1, 2,
                         0, 1, 2,
                         0, 0, 1, 0, 2) // TURNIP
@@ -43,8 +47,8 @@ public class SeedStore {
                             int fertCount, int fertReq, int fertBonus, int harvCount, int harvReq){
         /** A helper method that is in charge of organizing and displaying the information of each crop.
          * @param index	            index of the crop
-         * @param cropName          the name of the Crop
-         * @param cropType 	        the type of the Crop
+         * @param cropName          the name of the Models.Crop
+         * @param cropType 	        the type of the Models.Crop
          * @param seedCost 	        value of seed costs to buy
          * @param expYield	        experience yield if crop is harvested
          * @param basePrice 	    base price of the seed if crop is harvested

@@ -1,3 +1,5 @@
+package Models;
+
 public class Rock {
     public static int getRemoveCost() {
         return removeCost;
