@@ -14,7 +14,14 @@ public class MainWindow {
         this.mainFrame.setSize(1000, 600);
         this.mainFrame.setLocationRelativeTo(null); // Allows window to display relative to the center of the screen
 
-        this.mainFrame.setVisible(true);
+    }
+
+    public void setWindowVisible(boolean bool){
+        this.mainFrame.setVisible(bool);
+    }
+
+    public void initializeGreetingElements(){
+        this.mainFrame.add(farmerView.getFarmerNamePromptLbl());
     }
 
 }
