@@ -10,7 +10,9 @@
 
 import Models.Farmer;
 import Models.GameCont;
+import Models.Message;
 import Models.Tool;
+import Views.MainWindow;
 
 import java.util.Scanner;
 
@@ -18,7 +20,7 @@ import java.util.Scanner;
  * @param paramName	            <param description>
  */
 
-public class Main {
+public class Game {
 
     public static String getName(String userName){
         /** This is a helper function that contains introductory terminal art and getting userName
@@ -91,17 +93,18 @@ public class Main {
         String userInput = "";
         Scanner sc = new Scanner(System.in);
         boolean gameCont = true;
+        MainWindow mw = new MainWindow();
 
         while(gameCont){ // Continue game unless player chooses quit (after game over)
             GameCont.setRunning(true);
             Farmer farmer = new Farmer(""); // Create new farmer (user)
-            Message.processCommand("intro"); // Print introductory terminal art (from Message)
+            Message.processCommand("intro"); // Print introductory terminal art (from Models.Message)
 
             getName(userInput); // Ask for user input farmerName
             userInput = String.valueOf(userInput.charAt(0)).toUpperCase() + userInput.substring(1).toLowerCase();// format farmerName (capitalizes first letter, lowercase the rest)
             farmer.setFarmerName(userInput); // Set farmerName to user input
 
-            Message.processCommand("greeting", farmer.getFarmerName()); // Print greeting Message
+            Message.processCommand("greeting", farmer.getFarmerName()); // Print greeting Models.Message
 
             while(GameCont.getIsRunning()){ // Models.Game loop
                 // Print player stats (OBJCOIN,

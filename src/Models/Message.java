@@ -1,3 +1,5 @@
+package Models;
+
 public class Message {
 
     public static void processCommand (String type){
