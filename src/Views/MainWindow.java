@@ -37,39 +37,62 @@ public class MainWindow {
         JPanel space3 = new JPanel();
         space3.setBackground(Color.green);
 
+
+
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridheight = 2;
-        gbc.fill = GridBagConstraints.VERTICAL;
-        this.mainFrame.add(space2,gbc); // RED
-
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        this.mainFrame.add(farmerView.getFarmerNameLbl(),gbc);
-
-        gbc.gridx = 2;
-        gbc.gridy = 3;
-        this.mainFrame.add(new JLabel("SeedStore"),gbc);
-
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 4;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        this.mainFrame.add(space,gbc); // BLACK
+        gbc.insets = new Insets(5,5,5,5);
+        this.mainFrame.add(space,gbc); // TOP BORDER
 
-        gbc.gridx = 3;
+        gbc = new GridBagConstraints();
+
+        gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.gridheight = 2;
+        gbc.gridheight = 3;
         gbc.fill = GridBagConstraints.VERTICAL;
-        this.mainFrame.add(space3,gbc); // GREEN
+        gbc.insets = new Insets(5,5,5,5);
+        this.mainFrame.add(space2,gbc); // LEFT BORDER
+
+        gbc = new GridBagConstraints();
 
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        //gbc.gridy = 1;
         gbc.gridwidth=2;
         gbc.fill=GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5,5,5,5);
         GamePanel gp = new GamePanel();
-        this.mainFrame.add(gp,gbc);
+        this.mainFrame.add(gp,gbc); // MAIN GAME PANEL
+
+        gbc = new GridBagConstraints();
+
+        space3.setSize(300,0);
+
+        gbc.gridx = 3;
+        //gbc.gridy = 1;
+        gbc.gridheight = 3;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        gbc.insets = new Insets(5,5,5,5);
+        this.mainFrame.add(space3,gbc); // RIGHT BORDER
+
+        gbc = new GridBagConstraints();
+
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.insets = new Insets(5,5,5,5);
+        this.mainFrame.add(farmerView.getFarmerNameLbl(),gbc);
+
+        gbc = new GridBagConstraints();
+
+        gbc.gridx = 2;
+        gbc.gridy = 4;
+        gbc.insets = new Insets(5,5,5,5);
+        this.mainFrame.add(new JLabel("SeedStore"),gbc);
+
+        this.mainFrame.pack();
+
 
 
     }
