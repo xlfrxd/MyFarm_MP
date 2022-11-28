@@ -13,9 +13,6 @@ import Views.*;
 
 import java.util.Scanner;
 
-/** <function description>
- * @param paramName	            <param description>
- */
 //jill was here meow meow
 public class Game {
 
@@ -100,19 +97,19 @@ public class Game {
 
             Message.processCommand("intro"); // Print introductory terminal art (from Models.Message)
 
-            getName(userInput); // Ask for user input farmerName
+            userInput = getName(userInput); // Ask for user input farmerName
             //userInput = String.valueOf(userInput.charAt(0)).toUpperCase() + userInput.substring(1).toLowerCase();// format farmerName (capitalizes first letter, lowercase the rest)
             farmer.setFarmerName(userInput); // Set farmerName to user input
             /*
             TESTING THIS [S]
              */
             farmerView fv = new farmerView();
-            fv.setFarmerNamePromptLbl(farmer.getFarmerName());
+            fv.setFarmerNameLbl(farmer.getFarmerName());
 
 
             // THIS SHOULD BE AT THE END OF MANIPULATING SHIZ
             // TODO: Learn how to eventHandling and eventChanges in Views package and Controller
-            mw.initializeGreetingElements();
+            //mw.initializeGreetingElements();
             mw.setWindowVisible(true);
             /*
             END
