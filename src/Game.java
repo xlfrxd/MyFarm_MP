@@ -109,7 +109,7 @@ public class Game {
 
             // THIS SHOULD BE AT THE END OF MANIPULATING SHIZ
             // TODO: Learn how to eventHandling and eventChanges in Views package and Controller
-            //mw.initializeGreetingElements();
+            mw.initializeGreetingElements();
             mw.setWindowVisible(true);
             /*
             END

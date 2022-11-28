@@ -18,8 +18,18 @@ public class MainWindow {
         this.mainFrame.setBackground(Color.red);
 
 
-        GridBagConstraints gbc = new GridBagConstraints();
 
+
+
+
+
+    }
+
+    public void setWindowVisible(boolean bool){
+        this.mainFrame.setVisible(bool);
+    }
+
+    public void initializeGreetingElements(){
         JPanel space = new JPanel();
         space.setBackground(Color.black);
         JPanel space2 = new JPanel();
@@ -27,6 +37,7 @@ public class MainWindow {
         JPanel space3 = new JPanel();
         space3.setBackground(Color.green);
 
+        GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridheight = 2;
@@ -35,7 +46,7 @@ public class MainWindow {
 
         gbc.gridx = 1;
         gbc.gridy = 3;
-        this.mainFrame.add(new JLabel("FarmerName"),gbc);
+        this.mainFrame.add(farmerView.getFarmerNameLbl(),gbc);
 
         gbc.gridx = 2;
         gbc.gridy = 3;
@@ -59,15 +70,6 @@ public class MainWindow {
         gbc.fill=GridBagConstraints.HORIZONTAL;
         GamePanel gp = new GamePanel();
         this.mainFrame.add(gp,gbc);
-
-    }
-
-    public void setWindowVisible(boolean bool){
-        this.mainFrame.setVisible(bool);
-    }
-
-    public void initializeGreetingElements(){
-        this.mainFrame.add(farmerView.getFarmerNameLbl());
 
 
     }
