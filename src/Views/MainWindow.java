@@ -37,14 +37,15 @@ public class MainWindow {
         gbc.gridy = 3;
         this.mainFrame.add(new JLabel("FarmerName"),gbc);
 
+        gbc.gridx = 2;
+        gbc.gridy = 3;
+        this.mainFrame.add(new JLabel("SeedStore"),gbc);
+
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 4;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         this.mainFrame.add(space,gbc); // BLACK
-
-        gbc.gridwidth=0;
-
 
         gbc.gridx = 3;
         gbc.gridy = 1;
@@ -58,15 +59,6 @@ public class MainWindow {
         gbc.fill=GridBagConstraints.HORIZONTAL;
         GamePanel gp = new GamePanel();
         this.mainFrame.add(gp,gbc);
-
-
-
-
-
-        //this.mainFrame.add(gp, gbc);
-
-
-
 
     }
 
