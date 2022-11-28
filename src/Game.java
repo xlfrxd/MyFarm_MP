@@ -8,18 +8,15 @@
  Alfred Eugene T. Victoria DLSU ID# 12111724
  *********************************************************************************************************/
 
-import Models.Farmer;
-import Models.GameCont;
-import Models.Message;
-import Models.Tool;
-import Views.MainWindow;
+import Models.*;
+import Views.*;
 
 import java.util.Scanner;
 
 /** <function description>
  * @param paramName	            <param description>
  */
-
+//jill was here meow meow
 public class Game {
 
     public static String getName(String userName){
@@ -90,20 +87,36 @@ public class Game {
 
     public static void main(String[] args) {
 
+        MainWindow mw = new MainWindow(); // Create mainWindow
         String userInput = "";
         Scanner sc = new Scanner(System.in);
         boolean gameCont = true;
-        MainWindow mw = new MainWindow();
+
 
         while(gameCont){ // Continue game unless player chooses quit (after game over)
             GameCont.setRunning(true);
             Farmer farmer = new Farmer(""); // Create new farmer (user)
+
+
             Message.processCommand("intro"); // Print introductory terminal art (from Models.Message)
 
             getName(userInput); // Ask for user input farmerName
-            userInput = String.valueOf(userInput.charAt(0)).toUpperCase() + userInput.substring(1).toLowerCase();// format farmerName (capitalizes first letter, lowercase the rest)
+            //userInput = String.valueOf(userInput.charAt(0)).toUpperCase() + userInput.substring(1).toLowerCase();// format farmerName (capitalizes first letter, lowercase the rest)
             farmer.setFarmerName(userInput); // Set farmerName to user input
+            /*
+            TESTING THIS [S]
+             */
+            farmerView fv = new farmerView();
+            fv.setFarmerNamePromptLbl(farmer.getFarmerName());
 
+
+            // THIS SHOULD BE AT THE END OF MANIPULATING SHIZ
+            // TODO: Learn how to eventHandling and eventChanges in Views package and Controller
+            mw.initializeGreetingElements();
+            mw.setWindowVisible(true);
+            /*
+            END
+             */
             Message.processCommand("greeting", farmer.getFarmerName()); // Print greeting Models.Message
 
             while(GameCont.getIsRunning()){ // Models.Game loop
