@@ -107,12 +107,16 @@ public class Game {
             TESTING THIS [S]
              */
             farmerView fv = new farmerView();
+<<<<<<< Updated upstream
             fv.setFarmerNamePromptLbl(farmer.getFarmerName());
+=======
+            //fv.setFarmerNameLbl(farmer.getFarmerName());
+>>>>>>> Stashed changes
 
 
             // THIS SHOULD BE AT THE END OF MANIPULATING SHIZ
             // TODO: Learn how to eventHandling and eventChanges in Views package and Controller
-            mw.initializeGreetingElements();
+            //mw.initializeGreetingElements();
             mw.setWindowVisible(true);
             /*
             END
