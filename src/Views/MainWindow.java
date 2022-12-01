@@ -20,10 +20,6 @@ public class MainWindow {
         this.mainFrame.setResizable(false);
         this.mainFrame.setLocationRelativeTo(null); // Allows window to display relative to the center of the screen
 
-
-
-
-
     }
 
     public void setWindowVisible(boolean bool){
@@ -33,5 +29,6 @@ public class MainWindow {
     public void initializeGreetingElements(){
         this.mainFrame.add(farmerView.getFarmerNamePromptLbl());
     }
+
 
 }
