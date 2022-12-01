@@ -75,7 +75,7 @@ public class Game {
          * @param myGame	            acts as game's validity to continue
          */
         if(myGame){ // If conditions are met
-            //TODO: Change <myGame> into conditions for a game to continue running
+            //TODO: Change condition statement into conditions for a game to continue running
             }
         else{ // Conditions not met; stop game
             myGame = false;
