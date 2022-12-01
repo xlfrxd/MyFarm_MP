@@ -19,6 +19,8 @@ import java.util.Scanner;
 //jill was here meow meow
 public class Game {
 
+
+
     public static String getName(String userName){
         /** This is a helper function that contains introductory terminal art and getting userName
          * @param userName	            The player's name (farmerName)
@@ -103,6 +105,8 @@ public class Game {
             getName(userInput); // Ask for user input farmerName
             //userInput = String.valueOf(userInput.charAt(0)).toUpperCase() + userInput.substring(1).toLowerCase();// format farmerName (capitalizes first letter, lowercase the rest)
             farmer.setFarmerName(userInput); // Set farmerName to user input
+            UI.setUserName(userInput);
+
             /*
             TESTING THIS [S]
              */
