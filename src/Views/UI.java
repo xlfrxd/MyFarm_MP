@@ -29,20 +29,49 @@ public class UI {
         g2.setFont(arial_40);
         g2.setColor(Color.white);
         drawPlayerStatus();
+        drawSeedStore();
+        drawToolGroup();
 
     }
 
     public void drawPlayerStatus(){
         //Window Display
-        int x = gp.tileSize*2;
+        int x = gp.tileSize;
         int y = gp.tileSize*15;
-        int width = gp.screenWidth - (gp.tileSize*4);
+        int width = gp.screenWidth - (gp.tileSize*20);
         int height = gp.tileSize*5;
         drawSubWindow(x,y,width,height);
 
         x+= gp.tileSize;
         y+= gp.tileSize;
         g2.drawString("Howdy," + getUserName(),x,y+2);
+
+    }
+
+    public void drawSeedStore(){
+        //Window Display
+        int x = gp.tileSize*13;
+        int y = gp.tileSize*15;
+        int width = gp.screenWidth - (gp.tileSize*14);
+        int height = gp.tileSize*5;
+        drawSubWindow(x,y,width,height);
+
+        x+= gp.tileSize;
+        y+= gp.tileSize;
+        g2.drawString("Seed Store" + getUserName(),x,y+2);
+
+    }
+    public void drawToolGroup(){
+        //Window Display
+        int x = gp.tileSize*29;
+        int y = gp.tileSize;
+        int width = gp.screenWidth - (gp.tileSize*30);
+        int height = gp.screenWidth - (gp.tileSize*20);
+        drawSubWindow(x,y,width,height);
+
+        x+= gp.tileSize;
+        y+= gp.tileSize;
+
 
     }
     public void drawSubWindow(int x, int y, int width, int height){
