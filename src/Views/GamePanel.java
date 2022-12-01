@@ -1,19 +1,21 @@
 package Views;
 
+import Views.tiles.tileManage;
+
 import javax.swing.*;
 import java.awt.*;
-import Views.tiles.tileManage;
+
 
 public class GamePanel extends JPanel {
 
     final int origTileSize = 16;
     final int scale = 3;
 
-    final int tileSize = origTileSize*scale; // 48x48 tile
-    final int maxScreenCol = 16;
-    final int maxScreenRow = 12;
-    final int screenWidth = tileSize*maxScreenCol; // 768 px
-    final int screenHeight = tileSize*maxScreenRow; // 576 px
+    public final int tileSize = origTileSize*scale; // 48x48 tile
+    public final int maxScreenCol = 32;
+    public final int maxScreenRow = 24;
+    public final int screenWidth = tileSize*maxScreenCol; // 768 px
+    public final int screenHeight = tileSize*maxScreenRow; // 576 px
 
     tileManage tileM = new tileManage(this);
     public GamePanel(){

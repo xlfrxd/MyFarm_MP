@@ -106,12 +106,11 @@ public class Game {
             /*
             TESTING THIS [S]
              */
-            farmerView fv = new farmerView();
-<<<<<<< Updated upstream
-            fv.setFarmerNamePromptLbl(farmer.getFarmerName());
-=======
+            //farmerView fv = new farmerView();
+
+
             //fv.setFarmerNameLbl(farmer.getFarmerName());
->>>>>>> Stashed changes
+
 
 
             // THIS SHOULD BE AT THE END OF MANIPULATING SHIZ
