@@ -102,7 +102,7 @@ public class Game {
 
             Message.processCommand("intro"); // Print introductory terminal art (from Models.Message)
 
-            getName(userInput); // Ask for user input farmerName
+            userInput = getName(userInput); // Ask for user input farmerName
             //userInput = String.valueOf(userInput.charAt(0)).toUpperCase() + userInput.substring(1).toLowerCase();// format farmerName (capitalizes first letter, lowercase the rest)
             farmer.setFarmerName(userInput); // Set farmerName to user input
             UI.setUserName(userInput);
