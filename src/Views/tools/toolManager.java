@@ -17,7 +17,7 @@ public class toolManager {
     public toolManager(GamePanel gp){
 
         this.gp = gp;
-        tools = new Views.tool.Tool[5];
+        tools = new Views.tool.Tool[6];
         getToolImage();
     }
     public void getToolImage(){
@@ -41,6 +41,11 @@ public class toolManager {
             fis = new FileInputStream(file);
             tools[3] = new Views.tool.Tool();
             tools[3].image = ImageIO.read(fis);
+
+            file = new File ("src/Views/tools/Scythe.png");
+            fis = new FileInputStream(file);
+            tools[4] = new Views.tool.Tool();
+            tools[4] = new Views.tool.Tool();
 
         }catch(IOException e){
             e.printStackTrace();

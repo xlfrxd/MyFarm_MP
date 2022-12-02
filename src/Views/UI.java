@@ -97,6 +97,9 @@ public class UI {
         g2.drawString("Shovel", textX, textY);
         textY += lineHeight;
 
+        g2.drawString("Scythe", textX, textY);
+        textY += lineHeight;
+
         int tailX = (frameX + frameWidth) - 150;
         textY = frameY+8;
 
@@ -108,6 +111,8 @@ public class UI {
         g2.drawImage(toolM.tools[2].image,tailX - gp.tileSize,textY,gp.tileSize,gp.tileSize,null);
         textY+=gp.tileSize;
         g2.drawImage(toolM.tools[3].image,tailX - gp.tileSize,textY,gp.tileSize,gp.tileSize,null);
+        textY+=gp.tileSize;
+        g2.drawImage(toolM.tools[4].image,tailX - gp.tileSize,textY,gp.tileSize,gp.tileSize,null);
         textY+=gp.tileSize;
 
 
