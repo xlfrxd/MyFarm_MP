@@ -2,9 +2,11 @@ package Models;
 
 import Models.Crop;
 
+import javax.swing.*;
+
 public class Tile { // untouched
-    private boolean isPlowed;
     private Crop plantedCrop;
+    private boolean isPlowed;
     private boolean isWithered;
     private boolean hasRock;
 

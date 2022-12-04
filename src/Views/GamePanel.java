@@ -24,8 +24,6 @@ public class GamePanel extends JPanel {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true); // improves game render performance
-
-
     }
 
     public void paintComponent(Graphics g){

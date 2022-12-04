@@ -1,26 +1,9 @@
 package Models;
 
 public class FarmLot { //untouched
-    private int farmRow;
-    private int farmCol;
-    private Tile[][] farmTiles = new Tile[5][10];
-
-
-    public int getFarmRow() {
-        return farmRow;
-    }
-
-    public void setFarmRow(int farmRow) {
-        this.farmRow = farmRow;
-    }
-
-    public int getFarmCol() {
-        return farmCol;
-    }
-
-    public void setFarmCol(int farmCol) {
-        this.farmCol = farmCol;
-    }
+    private static final int farmRow = 5;
+    private static final int farmCol = 10;
+    private Tile[][] farmTiles = new Tile[farmRow][farmCol];
 
     public Tile[][] getFarmTiles() {
         return farmTiles;

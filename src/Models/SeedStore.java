@@ -2,6 +2,7 @@ package Models;
 
 import Models.Crop;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,11 +23,19 @@ public class SeedStore {
         /** Creates a Seed Store object that creates a structure to hold the information of each seed.
          */
         setSeedList(new ArrayList<>(Arrays.asList(
-                new Crop("Turnip", "Root Models.Crop", 5,
-                        5, 6, 1, 2,
+                new Crop("Turnip", "Root", 5,
+                        7.5, 6, 1, 2,
                         0, 1, 2,
-                        0, 0, 1, 0, 2) // TURNIP
-
+                        0, 0, 1, 0, 2), // TURNIP
+                new Crop("Carrot", "Root", 10,
+                        5, 9, 1,2,
+                        0,1,2,
+                        0,0,1,0,3), // CARROT
+                new Crop("Potato", "Root", 20,
+                        12.5, 3,1,10,
+                        0,3,4,
+                        0,1,2,0,5 ) // POTATO
+                //new Crop("Rose", "Flower", )
         ))); //TODO: ADD ALL SEEDS HERE
     }
 

@@ -2,10 +2,10 @@ package Views;
 
 import javax.swing.*;
 
-public class farmerView {
+public class statsView extends JPanel {
     static JLabel farmerNamePromptLbl;
 
-    public farmerView(){
+    public statsView(){
         farmerNamePromptLbl = new JLabel("test");
     }
 

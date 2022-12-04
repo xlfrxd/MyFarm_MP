@@ -9,9 +9,6 @@
  *********************************************************************************************************/
 
 import Models.*;
-import Views.*;
-
-import java.util.Scanner;
 
 /** <function description>
  * @param paramName	            <param description>
@@ -19,24 +16,6 @@ import java.util.Scanner;
 //jill was here meow meow
 public class Game {
 
-
-
-    public static String getName(String userName){
-        /** This is a helper function that contains introductory terminal art and getting userName
-         * @param userName	            The player's name (farmerName)
-         */
-
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("\nWhat's your name farmer?");
-        userName = sc.next(); // Set farmer name from user input
-
-        return userName;
-    }
-
-    public static void printStats(){ //TODO: replace this function with Models.Farmer Statistics chenachena
-
-    }
 
     public static void doCommand(Farmer farmer, String input){
         /** This function processes user input from menu
@@ -87,62 +66,16 @@ public class Game {
             }
         }
 
+    GameGUI mw = new GameGUI(this);
+
+
+    public Game(){
+
+    }
+
     public static void main(String[] args) {
-
-        MainWindow mw = new MainWindow(); // Create mainWindow
-        String userInput = "";
-        Scanner sc = new Scanner(System.in);
-        boolean gameCont = true;
+        new Game(); // Create mainWindow
 
 
-        while(gameCont){ // Continue game unless player chooses quit (after game over)
-            GameCont.setRunning(true);
-            Farmer farmer = new Farmer(""); // Create new farmer (user)
-
-
-            Message.processCommand("intro"); // Print introductory terminal art (from Models.Message)
-
-            userInput = getName(userInput); // Ask for user input farmerName
-            //userInput = String.valueOf(userInput.charAt(0)).toUpperCase() + userInput.substring(1).toLowerCase();// format farmerName (capitalizes first letter, lowercase the rest)
-            farmer.setFarmerName(userInput); // Set farmerName to user input
-            UI.setUserName(userInput);
-
-            /*
-            TESTING THIS [S]
-             */
-            //farmerView fv = new farmerView();
-
-
-            //fv.setFarmerNameLbl(farmer.getFarmerName());
-
-
-
-            // THIS SHOULD BE AT THE END OF MANIPULATING SHIZ
-            // TODO: Learn how to eventHandling and eventChanges in Views package and Controller
-            //mw.initializeGreetingElements();
-            mw.setWindowVisible(true);
-            /*
-            END
-             */
-            Message.processCommand("greeting", farmer.getFarmerName()); // Print greeting Models.Message
-
-            while(GameCont.getIsRunning()){ // Models.Game loop
-                // Print player stats (OBJCOIN,
-                // DAY, ETC.) -> MP SPECS
-                Message.processCommand("menu"); // Print actions available
-                userInput = sc.nextLine(); // Ask user for command
-                doCommand(farmer, userInput); // Perform command
-                checkGame(farmer, GameCont.getIsRunning()); // Check conditions
-            }
-
-            do{ // Models.Game over, Continue condition
-                Message.processCommand("over"); // game over info + new game or quit
-                userInput = sc.nextLine(); // get user input
-            }while(!(userInput.equals("1") || userInput.equals("2"))); // user input validation
-
-            if(userInput.equals("2")){
-                System.exit(0); // quit program
-            }
-        }
     }
 }
