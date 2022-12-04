@@ -47,7 +47,7 @@ public class UI {
 
         x+= gp.tileSize;
         y+= gp.tileSize;
-        g2.drawString("Howdy," + getUserName(),x,y+2);
+        g2.drawString("Howdy, " + getUserName(),x,y+2);
 
     }
 
@@ -61,7 +61,7 @@ public class UI {
 
         x+= gp.tileSize;
         y+= gp.tileSize;
-        g2.drawString("Seed Store" + getUserName(),x,y+2);
+        g2.drawString("Seed Store",x,y+2);
 
     }
     public void drawToolGroup(){
@@ -75,7 +75,7 @@ public class UI {
         frameX+= gp.tileSize;
         frameY+= gp.tileSize;
 
-        g2.drawString("Tools" + getUserName(),frameX+30,frameY);
+        g2.drawString("Tools",frameX+30,frameY);
 
         //Tool Names Text
         g2.setColor(Color.white);
