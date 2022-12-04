@@ -8,6 +8,7 @@
  Alfred Eugene T. Victoria DLSU ID# 12111724
  *********************************************************************************************************/
 
+import Input.Input;
 import Models.*;
 import Views.*;
 
@@ -18,6 +19,12 @@ import java.util.Scanner;
  */
 //jill was here meow meow
 public class Game {
+
+    public static Input input;
+
+    public Game() {
+        this.input = input;
+    }
 
 
 
@@ -87,9 +94,15 @@ public class Game {
             }
         }
 
+    public static void handleMouseInput(Input input){
+        if (input.isMouseClicked()){
+            System.out.print("Mouse Clicked at  x:" +  input.getMousePosition().x + "y:"  + input.getMousePosition().y);
+        }
+    }
+
     public static void main(String[] args) {
 
-        MainWindow mw = new MainWindow(); // Create mainWindow
+        MainWindow mw = new MainWindow(input); // Create mainWindow
         String userInput = "";
         Scanner sc = new Scanner(System.in);
         boolean gameCont = true;
@@ -124,6 +137,7 @@ public class Game {
             /*
             END
              */
+            //handleMouseInput(input);
             Message.processCommand("greeting", farmer.getFarmerName()); // Print greeting Models.Message
 
             while(GameCont.getIsRunning()){ // Models.Game loop
