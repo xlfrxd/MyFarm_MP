@@ -33,7 +33,7 @@ public class farmLotView extends JPanel {
             btn.setPreferredSize(new Dimension(PIX_SIZE,PIX_SIZE));
 
             try {
-                BufferedImage bufferedImage = ImageIO.read(new File("src/Views/tiles/Grass.png"));
+                BufferedImage bufferedImage = ImageIO.read(new File("src/Views/tiles/Soil.png"));
                 BufferedImage bufferedImageResult = new BufferedImage(
                         PIX_SIZE,
                         PIX_SIZE,
@@ -49,13 +49,13 @@ public class farmLotView extends JPanel {
                         null
                 );
                 g2d.dispose();
-                String formatName = "src/Views/tiles/Grass.png".substring(
-                        "src/Views/tiles/Grass.png".lastIndexOf(".") + 1
+                String formatName = "src/Views/tiles/Soil.png".substring(
+                        "src/Views/tiles/Soil.png".lastIndexOf(".") + 1
                 );
                 ImageIO.write(
                         bufferedImageResult,
                         formatName,
-                        new File("src/Views/tiles/Grass.png")
+                        new File("src/Views/tiles/Soil.png")
                 );
 
                 btn.setIcon(new ImageIcon(bufferedImageResult));
@@ -68,7 +68,7 @@ public class farmLotView extends JPanel {
             }
 
 
-            btn.setIcon(new ImageIcon("src/Views/tiles/Grass.png")); // scale this image to fit button
+            btn.setIcon(new ImageIcon("src/Views/tiles/Soil.png")); // scale this image to fit button
             container.add(btn);
             validate();
         }

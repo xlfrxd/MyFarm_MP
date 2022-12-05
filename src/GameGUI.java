@@ -61,11 +61,12 @@ public class GameGUI implements ActionListener {
 
     public void createUIElements(){
         // FARMER STATS (BOTTOM LEFT UI)
-        statsUI.setBounds(50,750,500,200);
+        statsUI.setBounds(50,750,500,220);
         statsUI.setBackground(Color.gray);
 
         // SEED STORE (BOTTOM RIGHT UI)
-        seedStoreUI.setBounds(650,750,500,200);
+        seedStoreUI.setLayout(null);
+        seedStoreUI.setBounds(650,750,500,220);
         seedStoreUI.setBackground(Color.blue);
 
         // TOOL LIST (MIDDLE RIGHT UI)
