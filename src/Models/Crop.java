@@ -1,5 +1,7 @@
 package Models;
 
+import java.awt.image.BufferedImage;
+
 public class Crop {
     private String cropName;
     private String cropType;
@@ -57,6 +59,7 @@ public class Crop {
         this.minProduce = minProduce; // Instantiates minProduce via parameter
         this.maxProduce = maxProduce; // Instantiates maxProduce via parameter
     }
+
 
     public String getCropName() {
         return cropName;
