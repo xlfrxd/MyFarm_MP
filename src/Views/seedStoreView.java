@@ -156,7 +156,7 @@ public class seedStoreView extends JPanel {
             }
 
             btn.setIcon(new ImageIcon(imagePath)); // scale this image to fit button
-            validate();
+
 
     }
 

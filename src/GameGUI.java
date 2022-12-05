@@ -3,10 +3,15 @@ import Models.Farmer;
 import Models.Message;
 import Models.Tool;
 import Views.*;
+import Views.tiles.tileManage;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GameGUI implements ActionListener {
@@ -25,6 +30,9 @@ public class GameGUI implements ActionListener {
 
     messageView messagePrompt = new messageView();
     JPanel messageAvatar;
+    //JLabel background;
+
+
 
     public GameGUI(Game game){
         this.game = game;
@@ -35,10 +43,12 @@ public class GameGUI implements ActionListener {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLayout(null);
         mainFrame.setLocationRelativeTo(null); // Allows window to display relative to the center of the screen
-        mainFrame.getContentPane().setBackground(Color.black); // Sets background of window
+        mainFrame.setLayout(new BorderLayout());
+        mainFrame.setContentPane(new JLabel(new ImageIcon("C:\\Users\\Jill\\Desktop\\MCO2 - CCPROG3\\MyFarm_MP\\src\\Views\\tiles\\Background.png"))); // Sets background of window
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null); // Allows window to display relative to the center of the screen
 
+        //mainFrame.add(background);
         createUIElements();
 
         //Tool currentTool = new Tool();
@@ -75,6 +85,9 @@ public class GameGUI implements ActionListener {
     }
 
     public void createUIElements(){
+
+
+
         // FARMER STATS (BOTTOM LEFT UI)
         statsUI.setBounds(50,650,575,150);
         statsUI.setBackground(Color.gray);
@@ -146,4 +159,7 @@ public class GameGUI implements ActionListener {
 
 
     }
-}
+
+
+    }
+

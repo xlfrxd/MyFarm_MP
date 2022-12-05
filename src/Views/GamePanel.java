@@ -30,7 +30,6 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         tileM.draw(g2);
-        ui.draw(g2);
         g2.dispose();
     }
 
