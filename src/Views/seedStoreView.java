@@ -29,14 +29,17 @@ public class seedStoreView extends JPanel {
 
         turnipBtn.setBounds(50,50,100,40);
         turnipBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        seedList[0] = turnipBtn;
         this.add(turnipBtn);
 
         carrotBtn.setBounds(50,100,100,40);
         carrotBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        seedList[1] = carrotBtn;
         this.add(carrotBtn);
 
         potatoBtn.setBounds(50,150,100,40);
         potatoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        seedList[2] = potatoBtn;
         this.add(potatoBtn);
 
         // FLOWERS
@@ -46,14 +49,17 @@ public class seedStoreView extends JPanel {
 
         roseBtn.setBounds(200,50,100,40);
         roseBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        seedList[3] = roseBtn;
         this.add(roseBtn);
 
         tulipBtn.setBounds(200,100,100,40);
         tulipBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        seedList[4] = tulipBtn;
         this.add(tulipBtn);
 
         sunflowerBtn.setBounds(200,150,100,40);
         sunflowerBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        seedList[5] = sunflowerBtn;
         this.add(sunflowerBtn);
 
         //FRUIT TREES
@@ -63,11 +69,18 @@ public class seedStoreView extends JPanel {
 
         mangoBtn.setBounds(350,50,100,40);
         mangoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        seedList[6] = mangoBtn;
         this.add(mangoBtn);
 
         appleBtn.setBounds(350,100,100,40);
         appleBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        seedList[7] = appleBtn;
         this.add(appleBtn);
+
+        for (JButton btn:
+             seedList) {
+            btn.setActionCommand(btn.getText());
+        }
 
 
     }

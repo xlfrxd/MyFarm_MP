@@ -73,9 +73,6 @@ public class farmLotView extends JPanel {
             validate();
         }
 
-
-
-
         this.add(container);
     }
 

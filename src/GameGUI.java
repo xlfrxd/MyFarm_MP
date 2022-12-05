@@ -1,6 +1,7 @@
 import Models.FarmLot;
 import Models.Farmer;
 import Models.Message;
+import Models.Tool;
 import Views.*;
 
 import java.awt.*;
@@ -22,7 +23,7 @@ public class GameGUI implements ActionListener {
     farmLotView farmLotUI = new farmLotView();
     JButton nextDayBtn = new JButton();
 
-    public JTextArea messagePrompt;
+    messageView messagePrompt = new messageView();
     JPanel messageAvatar;
 
     public GameGUI(Game game){
@@ -30,7 +31,7 @@ public class GameGUI implements ActionListener {
 
         // MAIN WINDOW SETTINGS
         mainFrame = new JFrame("My Farmer Game");
-        mainFrame.setSize(new Dimension(1200,1050));
+        mainFrame.setSize(new Dimension(1200,1000));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLayout(null);
         mainFrame.setLocationRelativeTo(null); // Allows window to display relative to the center of the screen
@@ -40,10 +41,16 @@ public class GameGUI implements ActionListener {
 
         createUIElements();
 
-        ActionListener toolListener = new ActionListener() {
+        //Tool currentTool = new Tool();
+        String currentTool;
+        ActionListener buttonListener = new ActionListener() {
+            JButton previousButton = null;
+            JButton lastButton = null;
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Current tool:" + e.getActionCommand());
+                lastButton = (JButton) e.getSource();
+                // TODO: Integrate last button and previous button to perform command Plow->Tile or Seed->Tile
+                previousButton = lastButton;
             }
         };
         ActionListener currentTile = new ActionListener() {
@@ -53,24 +60,32 @@ public class GameGUI implements ActionListener {
             }
         };
 
-        toolListUI.setActionListener(toolListener);
+        ActionListener currentSeed = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Current seed:" + e.getActionCommand());
+            }
+        };
+
+        toolListUI.setActionListener(buttonListener);
         farmLotUI.setActionListener(currentTile);
+        seedStoreUI.setActionListener(currentSeed);
         mainFrame.setVisible(true);
 
     }
 
     public void createUIElements(){
         // FARMER STATS (BOTTOM LEFT UI)
-        statsUI.setBounds(50,750,500,220);
+        statsUI.setBounds(50,650,575,150);
         statsUI.setBackground(Color.gray);
 
         // SEED STORE (BOTTOM RIGHT UI)
         seedStoreUI.setLayout(null);
-        seedStoreUI.setBounds(650,750,500,220);
+        seedStoreUI.setBounds(650,575,500,225);
         seedStoreUI.setBackground(Color.blue);
 
         // TOOL LIST (MIDDLE RIGHT UI)
-        toolListUI.setBounds(950,100,200,450);
+        toolListUI.setBounds(950,100,200,350);
         toolListUI.setBackground(Color.green);
 
         // DAY COUNTER (MIDDLE-UPPER LEFT UI)
@@ -82,36 +97,30 @@ public class GameGUI implements ActionListener {
 
         // FARM LOT (MIDDLE UI)
         farmLotUI.generateLot();
-        farmLotUI.setBounds(50,100,875,450);
+        farmLotUI.setBounds(50,100,875,415);
 
         // LIL FARMER IMAGE
         messageAvatar = new JPanel();
         //messageAvatar.setBounds(150,575,100,200); // its own image
-        messageAvatar.setBounds(150,575,550,150); // is a larger image
+        messageAvatar.setBounds(50,525,100,100); // is a larger image
         messageAvatar.setBackground(Color.PINK);
 
         // LIL FARMER TEXT PROMPTER
-        messagePrompt = new JTextArea("HELLO");
-        messagePrompt.setBounds(300,600,350,100);
-        messagePrompt.setBackground(Color.cyan);
-        messagePrompt.setForeground(Color.white);
-        messagePrompt.setEditable(false);
-        messagePrompt.setLineWrap(true);
-        messagePrompt.setWrapStyleWord(true);
+        messagePrompt.setBounds(175,525,450,100);
 
-        messagePrompt.setFont(new Font("Arial", Font.PLAIN,20));
+
 
         // NEXT DAY BUTTON
         nextDayBtn.setText("Next Day");
-        nextDayBtn.setBounds(750,625,200,100);
+        nextDayBtn.setBounds(950,475,200,75);
         nextDayBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 
+        mainFrame.add(farmLotUI);
         mainFrame.add(statsUI);
         mainFrame.add(seedStoreUI);
         mainFrame.add(toolListUI);
         mainFrame.add(dayUI);
-        mainFrame.add(farmLotUI);
         mainFrame.add(messagePrompt);
         mainFrame.add(messageAvatar);
         mainFrame.add(nextDayBtn);
