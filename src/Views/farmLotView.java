@@ -19,8 +19,8 @@ public class farmLotView extends JPanel {
         FlowLayout layout = new FlowLayout();
         Container container = new Container();
         container.setLayout(new GridLayout(5,10));
-        layout.setHgap(5);
-        layout.setVgap(5);
+        //layout.setHgap(5);
+        //layout.setVgap(5);
         this.setLayout(layout);
         this.setCursor(new Cursor(Cursor.HAND_CURSOR));
 

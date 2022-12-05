@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 
 public class GameGUI implements ActionListener {
 
@@ -95,7 +96,10 @@ public class GameGUI implements ActionListener {
         // SEED STORE (BOTTOM RIGHT UI)
         seedStoreUI.setLayout(null);
         seedStoreUI.setBounds(650,575,500,225);
-        seedStoreUI.setBackground(Color.blue);
+        seedStoreUI.setBackground(new Color(150,75,0));
+
+
+
 
         // TOOL LIST (MIDDLE RIGHT UI)
         toolListUI.setBounds(950,100,200,350);
@@ -110,7 +114,7 @@ public class GameGUI implements ActionListener {
 
         // FARM LOT (MIDDLE UI)
         farmLotUI.generateLot();
-        farmLotUI.setBounds(50,100,875,415);
+        farmLotUI.setBounds(50,100,800,400);
 
         // LIL FARMER IMAGE
         messageAvatar = new JPanel();
