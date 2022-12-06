@@ -107,13 +107,6 @@ public class seedStoreView extends JPanel {
             btn.setActionCommand(btn.getText());
         }
 
-<<<<<<< Updated upstream
-=======
-        rectangle.setIcon(new ImageIcon("src/Views/seeds/Store Background.png"));
-        rectangle.setBounds(0,0, 500, 225);
-        this.add(rectangle);
-
->>>>>>> Stashed changes
 
 
     }

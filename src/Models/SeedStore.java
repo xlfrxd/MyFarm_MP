@@ -34,23 +34,9 @@ public class SeedStore {
                 new Crop("Potato", "Root", 20,
                         12.5, 3,1,10,
                         0,3,4,
-                        0,1,2,0,5 ), // POTATO
-                new Crop("Rose", "Flower", 5,2.5,   //ROSE
-                        5,1,1,0,1,2,
-                        0,0,1,0,1),
-                new Crop("Tulips", "Flower", 10,5,
-                        9,1,1,0,2,3, //TULIPS
-                        0,0,1,0,2),
-                new Crop("Sunflower", "Flower", 20,7.5,  //SUNFLOWER
-                        19,1,1,0,2,3,
-                        0,1,2,0,3),
-                new Crop("Mango", "Fruit Tree", 100,25,  //MANGO
-                        8,5,15,0,7,7,
-                        0,4,4,0,10),
-                new Crop("Apple", "Fruit Tree", 200,25,  //APPLE
-                        5,10,15,0,7,7,
-                        0,5,5,0,10)
-        ))); 
+                        0,1,2,0,5 ) // POTATO
+                //new Crop("Rose", "Flower", )
+        ))); //TODO: ADD ALL SEEDS HERE
     }
 
     public void displaySeedList(){
