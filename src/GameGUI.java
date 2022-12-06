@@ -1,39 +1,58 @@
-import Models.FarmLot;
-import Models.Farmer;
-import Models.Message;
-import Models.Tool;
+import Models.*;
 import Views.*;
-import Views.tiles.tileManage;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EtchedBorder;
 
-public class GameGUI implements ActionListener {
+public class GameGUI {
 
     Game game;
-
-    Farmer farmer;
 
     JFrame mainFrame;
     statsView statsUI = new statsView();
     seedStoreView seedStoreUI = new seedStoreView();
+
     toolListView toolListUI = new toolListView();
     dayView dayUI = new dayView();
-    farmLotView farmLotUI = new farmLotView();
-    JButton nextDayBtn = new JButton();
 
+    FarmLot farmLot = new FarmLot();
+    FarmLotView farmLotUI = new FarmLotView();
     messageView messagePrompt = new messageView();
+
+    JButton nextDayBtn = new JButton();
+    JButton registerFarmerBtn = new JButton();
+
     JPanel messageAvatar;
-    //JLabel background;
 
+    private String currentTool;
+    private String currentTile;
+    private String currentSeed;
 
+    public String getCurrentTool() {
+        return currentTool;
+    }
+
+    public String getCurrentTile() {
+        return currentTile;
+    }
+
+    public String getCurrentSeed() {
+        return currentSeed;
+    }
+
+    public void setCurrentTool(String currentTool) {
+        this.currentTool = currentTool;
+    }
+
+    public void setCurrentTile(String currentTile) {
+        this.currentTile = currentTile;
+    }
+
+    public void setCurrentSeed(String currentSeed) {
+        this.currentSeed = currentSeed;
+    }
 
     public GameGUI(Game game){
         this.game = game;
@@ -45,49 +64,63 @@ public class GameGUI implements ActionListener {
         mainFrame.setLayout(null);
         mainFrame.setLocationRelativeTo(null); // Allows window to display relative to the center of the screen
         mainFrame.setLayout(new BorderLayout());
-        mainFrame.setContentPane(new JLabel(new ImageIcon("C:\\Users\\Jill\\Desktop\\MCO2 - CCPROG3\\MyFarm_MP\\src\\Views\\tiles\\Background.png"))); // Sets background of window
+        mainFrame.setContentPane(new JLabel(new ImageIcon("src/Views/tiles/Background.png"))); // Sets background of window
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null); // Allows window to display relative to the center of the screen
 
-        //mainFrame.add(background);
         createUIElements();
 
-        //Tool currentTool = new Tool();
-        String currentTool;
+        Farmer farmer = new Farmer("Alfred");
+        //TODO: Display farmerName in a label
+
+        // Update farmlot by updating through setFarmLot -> can be used for mapping too
+
+
+
         ActionListener buttonListener = new ActionListener() {
-            JButton previousButton = null;
-            JButton lastButton = null;
             @Override
             public void actionPerformed(ActionEvent e) {
-                lastButton = (JButton) e.getSource();
-                // TODO: Integrate last button and previous button to perform command Plow->Tile or Seed->Tile
-                previousButton = lastButton;
-            }
-        };
-        ActionListener currentTile = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Current tile index:" + e.getActionCommand());
+                for (JButton btn:
+                        toolListUI.getToolList()) {
+                    if(e.getSource().equals(btn)){
+                        // If btn is a tool
+                        setCurrentTool(e.getActionCommand()); // Set current tool
+                        System.out.println(getCurrentTool());
+                    }
+                }
+
+                for (JButton btn :
+                        seedStoreUI.getSeedList()) {
+                    if(e.getSource().equals(btn)){
+                        // If btn is a seed
+                        setCurrentSeed(e.getActionCommand()); // Set current seed
+                        System.out.println(getCurrentSeed());
+                    }
+                }
+
+                for (JButton btn :
+                        farmLotUI.getFarmTiles()) {
+                    if(e.getSource().equals(btn)){
+                        // If btn is a tile
+                        setCurrentTile(e.getActionCommand()); // Set current tile
+                        System.out.println(getCurrentTile());
+                    }
+                }
             }
         };
 
-        ActionListener currentSeed = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Current seed:" + e.getActionCommand());
-            }
-        };
 
         toolListUI.setActionListener(buttonListener);
-        farmLotUI.setActionListener(currentTile);
-        seedStoreUI.setActionListener(currentSeed);
+        seedStoreUI.setActionListener(buttonListener);
+        farmLotUI.setActionListener(buttonListener);
         mainFrame.setVisible(true);
 
     }
 
     public void createUIElements(){
-
-
+        /**
+         * This function instantiates all the UI elements and their positions, then adds them to the main panel
+         */
 
         // FARMER STATS (BOTTOM LEFT UI)
         statsUI.setBounds(50,650,575,150);
@@ -98,9 +131,6 @@ public class GameGUI implements ActionListener {
         seedStoreUI.setBounds(650,575,500,225);
         seedStoreUI.setBackground(new Color(150,75,0));
 
-
-
-
         // TOOL LIST (MIDDLE RIGHT UI)
         toolListUI.setBounds(950,100,200,350);
         toolListUI.setBackground(Color.green);
@@ -109,29 +139,27 @@ public class GameGUI implements ActionListener {
         dayUI.setBounds(50,25,100,50);
         dayUI.setForeground(Color.white);
         // Add this to a class?
-        dayUI.setFont(new Font("Arial", Font.PLAIN,20));
-        dayUI.setText("Day: 0");
+        dayUI.setFont(new Font("Arial", Font.PLAIN,20)); //TODO: Change Font?
+        dayUI.setText("Day: 0"); //TODO: Make this dynamic
 
         // FARM LOT (MIDDLE UI)
         farmLotUI.generateLot();
         farmLotUI.setBounds(50,100,800,400);
 
         // LIL FARMER IMAGE
-        messageAvatar = new JPanel();
-        //messageAvatar.setBounds(150,575,100,200); // its own image
-        messageAvatar.setBounds(50,525,100,100); // is a larger image
+        messageAvatar = new JPanel(); //TODO: SET IMAGE HERE
+        messageAvatar.setBounds(50,525,100,100);
         messageAvatar.setBackground(Color.PINK);
 
         // LIL FARMER TEXT PROMPTER
         messagePrompt.setBounds(175,525,450,100);
-
-
 
         // NEXT DAY BUTTON
         nextDayBtn.setText("Next Day");
         nextDayBtn.setBounds(950,475,200,75);
         nextDayBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+        // REGISTER FARMER BUTTON
 
         mainFrame.add(farmLotUI);
         mainFrame.add(statsUI);
@@ -143,27 +171,11 @@ public class GameGUI implements ActionListener {
         mainFrame.add(nextDayBtn);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Tool Selected
-//        if(e.getActionCommand().equals("Plow")){
-//            messagePrompt.setText("You Plowed a Tile!");
-//        } else if (e.getActionCommand().equals("Watering Can")) {
-//            messagePrompt.setText("You Watered a Tile!");
-//        } else if (e.getActionCommand().equals("Fertilizer")) {
-//            messagePrompt.setText("You Fertilized a Tile!");
-//        } else if (e.getActionCommand().equals("Pickaxe")) {
-//            messagePrompt.setText("You Broke a Rock!");
-//        } else if (e.getActionCommand().equals("Shovel")) {
-//            messagePrompt.setText("You Shoved a Shit!");
-//        }
-//        else if (e.getActionCommand().equals("Scythe")) {
-//            messagePrompt.setText("You Harvested a Tile!");
-//        }
-
+    public void updateFarmTile(int tileNum, FarmLot farmLot, FarmLotView farmLotView){
+        //TODO: update each farmTile accdg to tileNum
+    }
+    public void updateFarmTile(FarmLot farmLot, FarmLotView farmLotView){
 
     }
-
-
-    }
+}
 

@@ -8,8 +8,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class farmLotView extends JPanel {
+public class FarmLotView extends JPanel {
 
+
+    public JButton[] getFarmTiles() {
+        return farmTiles;
+    }
 
     JButton[] farmTiles = new JButton[50];
 
@@ -76,16 +80,10 @@ public class farmLotView extends JPanel {
         this.add(container);
     }
 
-    public void allocateTileImage(String filePath){
-
-    }
-
     public void setActionListener(ActionListener listener){
         for (JButton btn :
                 farmTiles) {
             btn.addActionListener(listener);
         }
     }
-
-
 }

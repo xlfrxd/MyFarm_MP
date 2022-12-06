@@ -22,7 +22,9 @@ public class Farmer {
         setFarmerTools(new ArrayList<Tool>(Arrays.asList(
                 new Tool("Plow", 0, 0.5),
                 new Tool("Watering Can", 0, 0.5),
-                new Tool("Fertilizer", 10, 4)
+                new Tool("Fertilizer", 10, 4),
+                new Tool("Pickaxe", 50,15),
+                new Tool("Shovel",7,2)
         )));
     }
 

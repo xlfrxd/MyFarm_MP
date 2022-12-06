@@ -13,6 +13,11 @@ public class toolListView extends JPanel {
     JButton pickBtn = new JButton("Pickaxe");
     JButton shovBtn = new JButton("Shovel");
     JButton scythBtn = new JButton("Scythe");
+
+    public JButton[] getToolList() {
+        return toolList;
+    }
+
     JButton[] toolList = new JButton[6];
 
     public toolListView(){
@@ -31,11 +36,10 @@ public class toolListView extends JPanel {
         for (JButton btn :
                 toolList) {
             btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            btn.setPreferredSize(new Dimension(200,50));
+            btn.setPreferredSize(new Dimension(150,50));
             btnGroup.add(btn);
             this.add(btn);
         }
-
     }
 
     public void setActionListener(ActionListener listener){
