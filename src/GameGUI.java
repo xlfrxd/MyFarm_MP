@@ -23,6 +23,9 @@ public class GameGUI {
 
     JButton nextDayBtn = new JButton();
     JButton registerFarmerBtn = new JButton();
+    JButton seedInfoBtn = new JButton();
+
+    seedInfoView seedInfoUI = new seedInfoView();
 
     JPanel messageAvatar;
 
@@ -106,10 +109,31 @@ public class GameGUI {
                         System.out.println(getCurrentTile());
                     }
                 }
+
+                if(e.getSource()==seedInfoBtn)
+                {
+                    seedInfoUI.setDefaultCloseOperation(seedInfoUI.EXIT_ON_CLOSE);
+                    seedInfoUI.setVisible(true);
+                }
+
+
             }
         };
 
+        ActionListener popupListener = new ActionListener() {
+                @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource()==seedInfoBtn)
+                {
+                    seedInfoUI.popup.setVisible(true);
+                    seedInfoUI.setBounds(100,100,500,500);
+                }
 
+
+            }
+        };
+
+        seedInfoBtn.addActionListener(popupListener);
         toolListUI.setActionListener(buttonListener);
         seedStoreUI.setActionListener(buttonListener);
         farmLotUI.setActionListener(buttonListener);
@@ -160,6 +184,16 @@ public class GameGUI {
         nextDayBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         // REGISTER FARMER BUTTON
+        registerFarmerBtn.setText("Register Farmer");
+        registerFarmerBtn.setBounds(50,830,200,75);
+        registerFarmerBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        //SEED INFO BUTTON
+        seedInfoBtn.setText("Seed Info");
+        seedInfoBtn.setBounds(600,830,200,75);
+        seedInfoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+
 
         mainFrame.add(farmLotUI);
         mainFrame.add(statsUI);
@@ -169,7 +203,12 @@ public class GameGUI {
         mainFrame.add(messagePrompt);
         mainFrame.add(messageAvatar);
         mainFrame.add(nextDayBtn);
+        mainFrame.add(registerFarmerBtn);
+        mainFrame.add(seedInfoBtn);
+
     }
+
+
 
     public void updateFarmTile(int tileNum, FarmLot farmLot, FarmLotView farmLotView){
         //TODO: update each farmTile accdg to tileNum

@@ -1,13 +1,11 @@
 package Models;
 
-import java.awt.image.BufferedImage;
-
 public class Crop {
     private String cropName;
     private String cropType;
     private double seedCost;
     private double expYield;
-    private int basePrice;
+    private double basePrice;
     private int minProduce;
     private int maxProduce;
     private int waterCount;
@@ -93,11 +91,11 @@ public class Crop {
         this.expYield = expYield;
     }
 
-    public int getBasePrice() {
+    public double getBasePrice() {
         return basePrice;
     }
 
-    public void setBasePrice(int basePrice) {
+    public void setBasePrice(double basePrice) {
         this.basePrice = basePrice;
     }
 

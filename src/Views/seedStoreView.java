@@ -117,7 +117,7 @@ public class seedStoreView extends JPanel {
         tulipLbl.setBounds(245,95,50,50);
         this.add(tulipLbl);
 
-        //Sunflower
+        //Sunflowers
         sunflowerBtn.setBounds(200,145,50,50);
         sunflowerBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         generateSeedImage(sunflowerBtn, "src/Views/seeds/Sunflower Seeds.png");

@@ -1,8 +1,5 @@
 package Models;
 
-import Models.Crop;
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -65,7 +62,7 @@ public class SeedStore {
         }
     }
 
-    public void displayCrop(int index, String cropName, String cropType, double seedCost, double expYield, int basePrice,
+    public void displayCrop(int index, String cropName, String cropType, double seedCost, double expYield, double basePrice,
                             int minProduce, int maxProduce, int waterCount, int waterReq, int waterBonus,
                             int fertCount, int fertReq, int fertBonus, int harvCount, int harvReq){
         /** A helper method that is in charge of organizing and displaying the information of each crop.
