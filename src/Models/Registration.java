@@ -64,7 +64,4 @@ public class Registration {
             return " " + type;
         }
 
-
-
-
 }
