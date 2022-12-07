@@ -33,8 +33,6 @@ public class seedInfoView extends JFrame {
             {
                 popup.setVisible(false);
             }
-
-
         }
     };
 }

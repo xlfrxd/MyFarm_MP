@@ -76,11 +76,12 @@ public class GameGUI {
         Farmer farmer = new Farmer("Alfred");
         //TODO: Display farmerName in a label
 
-        // Update farmlot by updating through setFarmLot -> can be used for mapping too
+        // Update farmLot by updating through setFarmLot -> can be used for mapping too
 
 
 
         ActionListener buttonListener = new ActionListener() {
+            String prevCmd = "";
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (JButton btn:
@@ -89,6 +90,7 @@ public class GameGUI {
                         // If btn is a tool
                         setCurrentTool(e.getActionCommand()); // Set current tool
                         System.out.println(getCurrentTool());
+                        prevCmd = "Tool";
                     }
                 }
 
@@ -98,19 +100,25 @@ public class GameGUI {
                         // If btn is a seed
                         setCurrentSeed(e.getActionCommand()); // Set current seed
                         System.out.println(getCurrentSeed());
+                        prevCmd = "Seed";
                     }
                 }
 
-                for (JButton btn :
-                        farmLotUI.getFarmTiles()) {
-                    if(e.getSource().equals(btn)){
-                        // If btn is a tile
-                        setCurrentTile(e.getActionCommand()); // Set current tile
-                        System.out.println(getCurrentTile());
+                for (int i = 0; i < farmLotUI.getRow(); i++) {
+                    for (int j = 0; j < farmLotUI.getCol(); j++) {
+                        if(e.getSource().equals((farmLotUI.getFarmTiles()[i][j]))){
+                            // If btn is a tile
+                            setCurrentTile(e.getActionCommand()); // Set current tile
+                            System.out.println(getCurrentTile());
+
+                            updateTile(i,j,farmLot.getFarmTiles()[i][j],farmLotUI.getFarmTiles()[i][j],prevCmd);
+
+                        }
+
                     }
                 }
 
-                if(e.getSource()==seedInfoBtn)
+                if(e.getSource()==seedInfoBtn) // If seed Information opened
                 {
                     seedInfoUI.setDefaultCloseOperation(seedInfoUI.EXIT_ON_CLOSE);
                     seedInfoUI.setVisible(true);
@@ -138,7 +146,40 @@ public class GameGUI {
         seedStoreUI.setActionListener(buttonListener);
         farmLotUI.setActionListener(buttonListener);
         mainFrame.setVisible(true);
+    }
 
+    public void updateTile(int x, int y, Tile currentTile, JButton btn, String prevCmd){
+        if(prevCmd.equals("Tool")){
+
+            switch(getCurrentTool()){
+                case "Plow":
+                    currentTile.setPlowed(true);
+                    btn.setIcon(new ImageIcon("src/Views/tiles/Plowed Soil.png"));
+                    break;
+                case "Watering Can":
+
+                    break;
+                case "Fertilizer":
+
+                    break;
+                case "Pickaxe":
+                    btn.setIcon(new ImageIcon("src/Views/tiles/Soil.png"));
+                    break;
+                case "Shovel":
+
+                    break;
+                case "Scythe":
+
+                    break;
+                default:
+                    break;
+            }
+        }
+        else if(prevCmd.equals("Seed")){
+            currentTile.setPlantedCrop(null);
+            btn.setIcon(new ImageIcon("src/Views/tiles/Seeds on Soil.png"));
+
+        }
     }
 
     public void createUIElements(){
@@ -205,15 +246,6 @@ public class GameGUI {
         mainFrame.add(nextDayBtn);
         mainFrame.add(registerFarmerBtn);
         mainFrame.add(seedInfoBtn);
-
-    }
-
-
-
-    public void updateFarmTile(int tileNum, FarmLot farmLot, FarmLotView farmLotView){
-        //TODO: update each farmTile accdg to tileNum
-    }
-    public void updateFarmTile(FarmLot farmLot, FarmLotView farmLotView){
 
     }
 }
