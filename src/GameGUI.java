@@ -4,6 +4,10 @@ import Views.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GameGUI {
@@ -21,13 +25,13 @@ public class GameGUI {
     FarmLotView farmLotUI = new FarmLotView();
     messageView messagePrompt = new messageView();
 
-    JButton nextDayBtn = new JButton();
-    JButton registerFarmerBtn = new JButton();
-    JButton seedInfoBtn = new JButton();
+    JButton nextDayBtn = new JButton("Next Day");
+    JButton registerFarmerBtn = new JButton("Register Farmer");
+    JButton seedInfoBtn = new JButton("Seed Info");
 
     seedInfoView seedInfoUI = new seedInfoView();
 
-    JPanel messageAvatar;
+    JLabel messageAvatar;
 
 
 
@@ -200,6 +204,7 @@ public class GameGUI {
          */
 
         // FARMER STATS (BOTTOM LEFT UI)
+        statsUI.setLayout(null);
         statsUI.setBounds(50,650,575,150);
         statsUI.setBackground(Color.gray);
 
@@ -221,30 +226,40 @@ public class GameGUI {
         dayUI.setText("Day: 0"); //TODO: Make this dynamic
 
         // FARM LOT (MIDDLE UI)
+
         farmLotUI.generateLot();
         farmLotUI.setBounds(50,100,800,400);
 
         // LIL FARMER IMAGE
-        messageAvatar = new JPanel(); //TODO: SET IMAGE HERE
+
+        messageAvatar = new JLabel(); //TODO: SET IMAGE HERE
         messageAvatar.setBounds(50,525,100,100);
-        messageAvatar.setBackground(Color.PINK);
+        messageAvatar.setIcon(new ImageIcon("src/Views/assets/Player Icon.png"));
 
         // LIL FARMER TEXT PROMPTER
+        messagePrompt.setLayout(null);
         messagePrompt.setBounds(175,525,450,100);
 
         // NEXT DAY BUTTON
-        nextDayBtn.setText("Next Day");
-        nextDayBtn.setBounds(950,475,200,75);
+        nextDayBtn.setLayout(null);
+        generateButtonImage(100,nextDayBtn, "src/Views/assets/Next Day.png");
+        nextDayBtn.setForeground(Color.BLACK);
+        nextDayBtn.setBounds(980,400,200,150);
         nextDayBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+
         // REGISTER FARMER BUTTON
-        registerFarmerBtn.setText("Register Farmer");
-        registerFarmerBtn.setBounds(50,830,200,75);
+        registerFarmerBtn.setLayout(null);
+        generateButtonImage(100,registerFarmerBtn, "src/Views/assets/Register Farmer.png");
+        registerFarmerBtn.setForeground(Color.BLACK);
+        registerFarmerBtn.setBounds(100,830,250,75);
         registerFarmerBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         //SEED INFO BUTTON
-        seedInfoBtn.setText("Seed Info");
-        seedInfoBtn.setBounds(600,830,200,75);
+        seedInfoBtn.setLayout(null);
+        generateButtonImage(100,seedInfoBtn, "src/Views/assets/Help.png");
+        seedInfoBtn.setForeground(Color.BLACK);
+        seedInfoBtn.setBounds(380,830,200,75);
         seedInfoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
 
@@ -259,6 +274,48 @@ public class GameGUI {
         mainFrame.add(nextDayBtn);
         mainFrame.add(registerFarmerBtn);
         mainFrame.add(seedInfoBtn);
+
+    }
+
+    public void generateButtonImage(int PIX_SIZE,JButton btn, String imagePath){
+
+        try {
+            BufferedImage bufferedImage = ImageIO.read(new File(imagePath));
+            BufferedImage bufferedImageResult = new BufferedImage(
+                    PIX_SIZE,
+                    PIX_SIZE,
+                    bufferedImage.getType()
+            );
+            Graphics2D g2d = bufferedImageResult.createGraphics();
+            g2d.drawImage(
+                    bufferedImage,
+                    0,
+                    0,
+                    PIX_SIZE,
+                    PIX_SIZE,
+                    null
+            );
+            g2d.dispose();
+            String formatName = imagePath.substring(
+                    imagePath.lastIndexOf(".") + 1
+            );
+            ImageIO.write(
+                    bufferedImageResult,
+                    formatName,
+                    new File(imagePath)
+            );
+
+            btn.setIcon(new ImageIcon(bufferedImageResult));
+            btn.setOpaque(false);
+            btn.setContentAreaFilled(false);
+            btn.setBorderPainted(false);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        btn.setIcon(new ImageIcon(imagePath)); // scale this image to fit button
+
 
     }
 }
