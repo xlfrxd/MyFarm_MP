@@ -20,31 +20,31 @@ public class SeedStore {
         /** Creates a Seed Store object that creates a structure to hold the information of each seed.
          */
         setSeedList(new ArrayList<>(Arrays.asList(
-                new Crop("Turnip", "Root", 5,
+                new Crop("Turnips", "Root", 5,
                         7.5, 6, 1, 2,
                         0, 1, 2,
                         0, 0, 1, 0, 2), // TURNIP
-                new Crop("Carrot", "Root", 10,
+                new Crop("Carrots", "Root", 10,
                         5, 9, 1,2,
                         0,1,2,
                         0,0,1,0,3), // CARROT
-                new Crop("Potato", "Root", 20,
+                new Crop("Potatoes", "Root", 20,
                         12.5, 3,1,10,
                         0,3,4,
                         0,1,2,0,5 ), // POTATO
-                new Crop("Rose", "Flower", 5,2.5,   //ROSE
+                new Crop("Roses", "Flower", 5,2.5,   //ROSE
                 5,1,1,0,1,2,
                 0,0,1,0,1),
                 new Crop("Tulips", "Flower", 10,5,
                         9,1,1,0,2,3, //TULIPS
                         0,0,1,0,2),
-                new Crop("Sunflower", "Flower", 20,7.5,  //SUNFLOWER
+                new Crop("Sunflowers", "Flower", 20,7.5,  //SUNFLOWER
                         19,1,1,0,2,3,
                         0,1,2,0,3),
-                new Crop("Mango", "Fruit Tree", 100,25,  //MANGO
+                new Crop("Mangoes", "Fruit Tree", 100,25,  //MANGO
                         8,5,15,0,7,7,
                         0,4,4,0,10),
-                new Crop("Apple", "Fruit Tree", 200,25,  //APPLE
+                new Crop("Apples", "Fruit Tree", 200,25,  //APPLE
                         5,10,15,0,7,7,
                         0,5,5,0,10)
         )));

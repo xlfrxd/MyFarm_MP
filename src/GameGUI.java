@@ -29,6 +29,10 @@ public class GameGUI {
 
     JPanel messageAvatar;
 
+
+
+    SeedStore seedStore = new SeedStore();
+
     private String currentTool;
     private String currentTile;
     private String currentSeed;
@@ -109,9 +113,8 @@ public class GameGUI {
                         if(e.getSource().equals((farmLotUI.getFarmTiles()[i][j]))){
                             // If btn is a tile
                             setCurrentTile(e.getActionCommand()); // Set current tile
-                            System.out.println(getCurrentTile());
 
-                            updateTile(i,j,farmLot.getFarmTiles()[i][j],farmLotUI.getFarmTiles()[i][j],prevCmd);
+                            updateTile(i,j,farmLot.getFarmTiles()[i][j].getTile(),farmLotUI.getFarmTiles()[i][j],prevCmd);
 
                         }
 
@@ -151,9 +154,10 @@ public class GameGUI {
     public void updateTile(int x, int y, Tile currentTile, JButton btn, String prevCmd){
         if(prevCmd.equals("Tool")){
 
+            // TODO: BE SURE TO CHECK CONDITIONS ACCDG TO SPECS BEFORE USING TOOLS, IMPLEMENT A CHECKING FUNCTION
+            // TODO: CREATE A FUNCTION THAT WOULD DO THE FUNCTIONALITIES OF THESE BUTTONS AND TOOLS
             switch(getCurrentTool()){
                 case "Plow":
-                    currentTile.setPlowed(true);
                     btn.setIcon(new ImageIcon("src/Views/tiles/Plowed Soil.png"));
                     break;
                 case "Watering Can":
@@ -176,8 +180,16 @@ public class GameGUI {
             }
         }
         else if(prevCmd.equals("Seed")){
-            currentTile.setPlantedCrop(null);
-            btn.setIcon(new ImageIcon("src/Views/tiles/Seeds on Soil.png"));
+            for (Crop crop:
+                 seedStore.getSeedList()) {
+                if(crop.getCropName().equals(currentSeed)) { // Get the currentSeed from seedStore
+                    currentTile.setPlantedCrop(crop); // Plants the current Crop to the current Tile
+                    break;
+                }
+            }
+                btn.setIcon(new ImageIcon("src/Views/tiles/Seeds on Soil.png")); // Update the farmLotUI button
+            // TODO: CREATE PLANT FUNCTION FOR THIS
+                System.out.println(currentTile.getPlantedCrop().getCropName() + " was planted at tile ("  + x + "," + y + ")");
 
         }
     }

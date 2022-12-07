@@ -10,11 +10,15 @@ public class Tile { // untouched
     private boolean isWithered;
     private boolean hasRock;
 
-    Tile(){
+    public Tile(){
         plantedCrop = null;
         isPlowed = false;
         isWithered = false;
         hasRock = false;
+    }
+
+    public Tile getTile(){
+        return this;
     }
 
 
