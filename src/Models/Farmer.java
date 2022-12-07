@@ -7,11 +7,12 @@ import java.util.List;
 public class Farmer {
     // Superclass
     private String farmerName;
-    private int farmerObjectCoin;
+    private double farmerObjectCoin;
     private double farmerExp;
     private int farmerLevel;
     private FarmerType farmerType;
     private List<Tool> farmerTools;
+    private Registration registration;
 
     public Farmer(String farmerName){
         this.farmerName = farmerName;
@@ -44,11 +45,11 @@ public class Farmer {
         this.farmerName = farmerName;
     }
 
-    public int getFarmerObjectCoin() {
+    public double getFarmerObjectCoin() {
         return farmerObjectCoin;
     }
 
-    public void setFarmerObjectCoin(int farmerObjectCoin) {
+    public void setFarmerObjectCoin(double farmerObjectCoin) {
         this.farmerObjectCoin = farmerObjectCoin;
     }
 
@@ -66,6 +67,10 @@ public class Farmer {
 
     public void setFarmerLevel(int farmerLevel) { this.farmerLevel = farmerLevel;}
 
+    public Models.Registration getRegistration() {
+        return registration;
+    }
+
 
     public void updateLevel(int exp){
         /** This function updates the farmer's level based on its experience
@@ -78,18 +83,83 @@ public class Farmer {
         }
     }
 
-    public void registerFarmerType(String name, double exp, int balance, FarmerType type){
+
+    //public void registerFarmerType(String name, double exp, int balance, FarmerType type, List<Crop> seedList, List<Registration> registrationList){
         /** This function allows the farmer to register to gain perks and experience
-         * @param name	            Models.Farmer's name
-         * @param exp               Models.Farmer's experience points
-         * @param balance           Models.Farmer's object coins
-         * @param type              Models.Farmer's farmer type
+         * @param //name	            Models.Farmer's name
+         * @param //exp               Models.Farmer's experience points
+         * @param //balance           Models.Farmer's object coins
+         * @param //type              Models.Farmer's farmer type
          */
+/*
+        registering for "Registered Farmer"
+       if(registration.getType().equals("Farmer")) {
+
+            //fail if level condition is not met
+           if(farmerLevel < registrationList.get(1).getLevelNeeded())
+                return new Message (false, "Must reach level " + registrationList.get(1).getLevelNeeded());
+                //fail if there are insufficient funds
+            else if(farmerObjectCoin < registrationList.get(1).getRegistrationFee())
+                //return new Message (false, "Insufficient Funds");
+                //success
+            else {
+                this.registration = registrationList.get(1);
+                registration.increaseEarnings(seedList);
+                registration.reduceCost(seedList);
+                registration.increaseWaterBonusLimit(seedList);
+                registration.increaseFertilizerBonusLimit(seedList);
+               farmerObjectCoin=  farmerObjectCoin-registration.getRegistrationFee();
+               return new Message (true, "Registered successfully", 0, 0, registration.getRegistrationFee());
+            }
+        }
+
+                //registering for "Distinguished Farmer"
+        else if(registration.getType().equals("Registered Farmer")) {
+
+            //fail if level condition is not met
+            if(farmerLevel < registrationList.get(2).getLevelNeeded())
+               return new Message (false, "Must reach level " + registrationList.get(2).getLevelNeeded());
+                //fail if there are insufficient funds
+            else if(farmerObjectCoin < registrationList.get(2).getRegistrationFee())
+                return new Message (false, "Insufficient Funds");
+                //success
+            else {
+                this.registration = registrationList.get(2);
+                registration.increaseEarnings(seedList);
+                registration.reduceCost(seedList);
+                registration.increaseWaterBonusLimit(seedList);
+                registration.increaseFertilizerBonusLimit(seedList);
+                farmerObjectCoin = farmerObjectCoin-registration.getRegistrationFee();
+                return new Message (true, "Registered successfully", 0, 0, registration.getRegistrationFee());
+            }
+        }
+
+
+        //registering for "Legendary Farmer"
+        else {
+
+            //fail if level condition is not met
+            if(farmerLevel < registrationList.get(3).getLevelNeeded())
+                return new Message  (false, "Must reach level " + registrationList.get(3).getLevelNeeded());
+                //fail if there are insufficient funds
+            else if(farmerObjectCoin < registrationList.get(3).getRegistrationFee())
+                return new Message  (false, "Insufficient Funds");
+                //success
+            else {
+                this.registration = registrationList.get(3);
+                registration.increaseEarnings(seedList);
+                registration.reduceCost(seedList);
+                registration.increaseWaterBonusLimit(seedList);
+                registration.increaseFertilizerBonusLimit(seedList);
+                farmerObjectCoin = farmerObjectCoin-registration.getRegistrationFee();
+                return new Message (true, "Registered successfully", 0, 0, registration.getRegistrationFee());
+            }
+        }
 
     }
+          */
 
-
-    public void buySeed(int seedCost){ // debatable to put this func into main
+    public void buySeed(double seedCost){ // debatable to put this func into main
         /** This function charges the object coin balance of the Models.Farmer when purchasing seeds
          * @param seedCost	            Seed's cost to purchase
          * @param balance               Models.Farmer's object coin balance

@@ -209,7 +209,8 @@ public class GameGUI {
         seedStoreUI.setBackground(new Color(150,75,0));
 
         // TOOL LIST (MIDDLE RIGHT UI)
-        toolListUI.setBounds(950,100,200,350);
+        toolListUI.setLayout(null);
+        toolListUI.setBounds(950,100,200,300);
         toolListUI.setBackground(Color.green);
 
         // DAY COUNTER (MIDDLE-UPPER LEFT UI)
