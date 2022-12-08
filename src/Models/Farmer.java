@@ -10,9 +10,20 @@ public class Farmer {
     private double farmerObjectCoin;
     private double farmerExp;
     private int farmerLevel;
+
+    public FarmerType getFarmerType() {
+        return farmerType;
+    }
+
+    public void setFarmerType(FarmerType farmerType) {
+        this.farmerType = farmerType;
+    }
+
     private FarmerType farmerType;
     private List<Tool> farmerTools;
     private Registration registration;
+
+    private List<FarmerType> farmerTypes;
 
     public Farmer(String farmerName){
         this.farmerName = farmerName;
@@ -27,6 +38,23 @@ public class Farmer {
                 new Tool("Pickaxe", 50,15),
                 new Tool("Shovel",7,2)
         )));
+
+        setFarmerTypes(new ArrayList<FarmerType>(Arrays.asList(
+                new FarmerType("Farmer",0,0,0,0,0,0),
+                new FarmerType("Registered Farmer",5,1,1,0,0,200),
+                new FarmerType("Distinguished Farmer", 10,2,2,1,0,300),
+                new FarmerType("Legendary Farmer",15,4,3,2,1,400)
+        )));
+
+        setFarmerType(this.getFarmerTypes().get(0)); // Sets farmerType to unregistered by default
+    }
+
+    public List<FarmerType> getFarmerTypes() {
+        return farmerTypes;
+    }
+
+    public void setFarmerTypes(List<FarmerType> farmerTypes) {
+        this.farmerTypes = farmerTypes;
     }
 
     public List<Tool> getFarmerTools() {
@@ -53,7 +81,7 @@ public class Farmer {
         this.farmerObjectCoin = farmerObjectCoin;
     }
 
-    public double isFarmerExp() {
+    public double getFarmerExp() {
         return farmerExp;
     }
 
