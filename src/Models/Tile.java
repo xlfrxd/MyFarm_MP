@@ -1,9 +1,5 @@
 package Models;
 
-import Models.Crop;
-
-import javax.swing.*;
-
 public class Tile { // untouched
     private Crop plantedCrop;
     private boolean isPlowed;
@@ -22,7 +18,7 @@ public class Tile { // untouched
     }
 
 
-    public boolean isPlowed() {
+    public boolean getIsPlowed() {
         return isPlowed;
     }
 
@@ -38,7 +34,7 @@ public class Tile { // untouched
         this.plantedCrop = plantedCrop;
     }
 
-    public boolean isWithered() {
+    public boolean getIsWithered() {
         return isWithered;
     }
 
@@ -46,7 +42,7 @@ public class Tile { // untouched
         isWithered = withered;
     }
 
-    public boolean isHasRock() {
+    public boolean getHasRock() {
         return hasRock;
     }
 

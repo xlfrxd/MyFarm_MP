@@ -38,14 +38,24 @@ public class GameGUI {
     SeedStore seedStore = new SeedStore();
 
     private String currentTool;
-    private String currentTile;
+    private Tile currentTile;
     private String currentSeed;
+
+    private Message currentMessage;
+
+    public Message getCurrentMessage() {
+        return currentMessage;
+    }
+
+    public void setCurrentMessage(Message currentMessage) {
+        this.currentMessage = currentMessage;
+    }
 
     public String getCurrentTool() {
         return currentTool;
     }
 
-    public String getCurrentTile() {
+    public Tile getCurrentTile() {
         return currentTile;
     }
 
@@ -57,7 +67,7 @@ public class GameGUI {
         this.currentTool = currentTool;
     }
 
-    public void setCurrentTile(String currentTile) {
+    public void setCurrentTile(Tile currentTile) {
         this.currentTile = currentTile;
     }
 
@@ -116,10 +126,15 @@ public class GameGUI {
                     for (int j = 0; j < farmLotUI.getCol(); j++) {
                         if(e.getSource().equals((farmLotUI.getFarmTiles()[i][j]))){
                             // If btn is a tile
-                            setCurrentTile(e.getActionCommand()); // Set current tile
+                            setCurrentTile(farmLot.getFarmTiles()[i][j].getTile()); // Set current tile
 
-                            updateTile(i,j,farmLot.getFarmTiles()[i][j].getTile(),farmLotUI.getFarmTiles()[i][j],prevCmd);
-
+                            if(checkTile(currentTile,prevCmd)){ // checks if command can be executed to current tile
+                                updateTile(currentTile,farmLotUI.getFarmTiles()[i][j],prevCmd); // updates current tile image
+                                messagePrompt.setMessageText("Command Successful"); // update messageprompt to user
+                            }
+                            else{
+                                messagePrompt.setMessageText("Command Failed"); // update messageprompt to user
+                            }
                         }
 
                     }
@@ -155,14 +170,47 @@ public class GameGUI {
         mainFrame.setVisible(true);
     }
 
-    public void updateTile(int x, int y, Tile currentTile, JButton btn, String prevCmd){
+    public boolean checkTile(Tile currentTile, String prevCmd){
+        boolean valid = false;
+        switch(prevCmd){
+            case "Tool":
+                if(!currentTile.getIsPlowed()){
+                    valid = true;
+                    currentTile.setPlowed(true);
+                }
+                break;
+            case "Seed":
+                if(currentTile.getIsPlowed()){
+                    valid = true;
+                    for (Crop crop:
+                            seedStore.getSeedList()) {
+                        if(crop.getCropName().equals(currentSeed)) { // Get the currentSeed from seedStore
+                            currentTile.setPlantedCrop(crop); // Plants the current Crop to the current Tile
+                            break;
+                        }
+                    }
+                }
+                break;
+
+            default:
+                valid = false;
+                break;
+        }
+        return valid;
+    }
+
+    public void updateTile(Tile currentTile, JButton currentBtn, String prevCmd){
+        /**
+         * This function updates the current tile's assets
+         */
         if(prevCmd.equals("Tool")){
 
             // TODO: BE SURE TO CHECK CONDITIONS ACCDG TO SPECS BEFORE USING TOOLS, IMPLEMENT A CHECKING FUNCTION
             // TODO: CREATE A FUNCTION THAT WOULD DO THE FUNCTIONALITIES OF THESE BUTTONS AND TOOLS
+            // TODO: UPDATE USER MESSAGE PROMPT
             switch(getCurrentTool()){
                 case "Plow":
-                    btn.setIcon(new ImageIcon("src/Views/tiles/Plowed Soil.png"));
+                    currentBtn.setIcon(new ImageIcon("src/Views/tiles/Plowed Soil.png"));
                     break;
                 case "Watering Can":
 
@@ -171,7 +219,7 @@ public class GameGUI {
 
                     break;
                 case "Pickaxe":
-                    btn.setIcon(new ImageIcon("src/Views/tiles/Soil.png"));
+                    currentBtn.setIcon(new ImageIcon("src/Views/tiles/Soil.png"));
                     break;
                 case "Shovel":
 
@@ -184,16 +232,9 @@ public class GameGUI {
             }
         }
         else if(prevCmd.equals("Seed")){
-            for (Crop crop:
-                 seedStore.getSeedList()) {
-                if(crop.getCropName().equals(currentSeed)) { // Get the currentSeed from seedStore
-                    currentTile.setPlantedCrop(crop); // Plants the current Crop to the current Tile
-                    break;
-                }
-            }
-                btn.setIcon(new ImageIcon("src/Views/tiles/Seeds on Soil.png")); // Update the farmLotUI button
+
+                currentBtn.setIcon(new ImageIcon("src/Views/tiles/Seeds on Soil.png")); // Update the farmLotUI button
             // TODO: CREATE PLANT FUNCTION FOR THIS
-                System.out.println(currentTile.getPlantedCrop().getCropName() + " was planted at tile ("  + x + "," + y + ")");
 
         }
     }
@@ -239,6 +280,8 @@ public class GameGUI {
         // LIL FARMER TEXT PROMPTER
         messagePrompt.setLayout(null);
         messagePrompt.setBounds(175,525,450,100);
+        messagePrompt.setForeground(Color.black);
+        messagePrompt.setVisible(true);
 
         // NEXT DAY BUTTON
         nextDayBtn.setLayout(null);
@@ -246,7 +289,6 @@ public class GameGUI {
         nextDayBtn.setForeground(Color.BLACK);
         nextDayBtn.setBounds(980,400,200,150);
         nextDayBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
 
         // REGISTER FARMER BUTTON
         registerFarmerBtn.setLayout(null);
