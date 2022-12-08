@@ -420,18 +420,18 @@ public class GameGUI {
                         messagePrompt.feedback.setText(farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " is halfway from harvest!");
                     }
                     else if(farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvCount()==farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvReq() && farmLot.getFarmTiles()[i][j].getPlantedCrop().getWaterCount()>=farmLot.getFarmTiles()[i][j].getPlantedCrop().getWaterReq() && farmLot.getFarmTiles()[i][j].getPlantedCrop().getFertCount()>=farmLot.getFarmTiles()[i][j].getPlantedCrop().getFertReq()){
-                        farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon(""));// Update plant icon to harvestable
+                        farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon("src/Views/tiles/%s on Soil.png",farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName()));// Update plant icon to harvestable
                         System.out.println(farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " is harvestable!");
                         messagePrompt.feedback.setText(farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " is harvestable!");
                     }
                     else if(farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvCount()==farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvReq() && (farmLot.getFarmTiles()[i][j].getPlantedCrop().getWaterCount()<farmLot.getFarmTiles()[i][j].getPlantedCrop().getWaterReq() || farmLot.getFarmTiles()[i][j].getPlantedCrop().getFertCount()<farmLot.getFarmTiles()[i][j].getPlantedCrop().getFertReq())){
-                        farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon(""));// Update plant icon to withered
+                        farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon("src/Views/tiles/Withered.png"));// Update plant icon to withered
                         farmLot.getFarmTiles()[i][j].setWithered(true); // Update plant info
                         System.out.println(farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " withered");
                         messagePrompt.feedback.setText(farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " withered");
                     }
                     else if(farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvCount()>farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvReq()){
-                        farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon(""));// Update plant icon to withered
+                        farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon("src/Views/tiles/Withered.png"));// Update plant icon to withered
                         farmLot.getFarmTiles()[i][j].setWithered(true); // Update plant info
                         System.out.println(farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " withered");
                         messagePrompt.feedback.setText(farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " withered");
