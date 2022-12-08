@@ -12,6 +12,7 @@ public class statsView extends JPanel {
         background.setIcon(new ImageIcon("src/Views/assets/Player Status.png"));
         background.setBounds(0,0, 575, 150);
         this.add(background);
+        this.add(farmerNamePromptLbl);
     }
 
     public void setFarmerNamePromptLbl(String farmerName){

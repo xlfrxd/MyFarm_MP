@@ -17,7 +17,7 @@ public class Crop {
     private int harvCount;
     private int harvReq;
 
-    public Crop(String cropName, String cropType, double seedCost, double expYield, int basePrice,
+    public Crop(String cropName, String cropType, double seedCost, double expYield, double basePrice,
                 int minProduce, int maxProduce, int waterCount, int waterReq, int waterBonus,
                 int fertCount, int fertReq, int fertBonus, int harvCount, int harvReq) {
            /** Creates a Models.Crop object by supplying the name, type, how many
@@ -46,13 +46,13 @@ public class Crop {
         this.seedCost = seedCost; // Instantiates seedCost via parameter
         this.expYield = expYield; // Instantiates expYield via parameter
         this.basePrice = basePrice; // Instantiates basePrice via parameter
-        this.waterCount = 0; // default water count
-        this.waterBonus = 0; // default waterBonus value
+        this.waterCount = waterCount; // Instantiates water count via parameter
+        this.waterBonus = waterBonus; // Instantiates waterBonus via parameter
         this.waterReq = waterReq; // Instantiates waterNeeded via parameter
-        this.fertCount = 0; // default fertilizer count
-        this.fertBonus = 0; // default fertilizerBonus value
+        this.fertCount = fertCount; // Instantiates fertilizer via parameter
+        this.fertBonus = fertBonus; // Instantiates fertilizerBonus via parameter
         this.fertReq = fertReq; // Instantiates fertilizerNeeded via parameter
-        this.harvCount = 0; // default harvest value
+        this.harvCount = harvCount; // Instantiates harvest via parameter
         this.harvReq = harvReq; // Instantiates harvestNeeded via parameter
         this.minProduce = minProduce; // Instantiates minProduce via parameter
         this.maxProduce = maxProduce; // Instantiates maxProduce via parameter
