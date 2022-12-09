@@ -164,7 +164,7 @@ public class GameGUI {
 
                             if(checkTile(currentTile,prevCmd)){ // checks if command can be executed to current tile
                                 updateAllTiles(); // updates tiles assets and information
-                                executeTile(currentTile,prevCmd);
+                                executeTile(farmLotUI.getFarmTiles()[i][j],currentTile,prevCmd);
                                 updateTile(farmLotUI.getFarmTiles()[i][j],prevCmd); // updates current tile image
 
 
@@ -239,7 +239,7 @@ public class GameGUI {
         mainFrame.setVisible(true);
     }
 
-    public void executeTile(Tile currentTile, String prevCmd){
+    public void executeTile(JButton currentBtn, Tile currentTile, String prevCmd){
         switch (prevCmd) {
             case "Tool" -> {
                 if (!currentToolName.equals("Scythe")){
@@ -251,33 +251,41 @@ public class GameGUI {
                     case "Plow":
                         currentTile.setPlowed(true);
                         this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
+                        currentBtn.setToolTipText("<html>A plowed tile<br><br><i>Try planting on the plot to start growing crops</i></html>");
 
                         break;
                     case "Watering Can":
                         if (currentTile.getPlantedCrop().getWaterCount() != currentTile.getPlantedCrop().getWaterBonus()) {
                             currentTile.getPlantedCrop().setWaterCount(currentTile.getPlantedCrop().getWaterCount() + 1); // Adds the water count of the current tile crop
                             this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
+                            currentBtn.setToolTipText("<html>" + currentTile.getPlantedCrop().getCropName() + "<br>" + "Times Watered: " + currentTile.getPlantedCrop().getWaterCount() + "<br>" + "Times Fertilized: " + currentTile.getPlantedCrop().getFertCount() + "<br><br><i>" + String.valueOf(currentTile.getPlantedCrop().getHarvReq() - currentTile.getPlantedCrop().getHarvCount()) + " days until harvest</i></html>");
+
                         }
                         break;
                     case "Fertilizer":
                         if (currentTile.getPlantedCrop().getFertCount() != currentTile.getPlantedCrop().getFertBonus()) {
                             currentTile.getPlantedCrop().setFertCount(currentTile.getPlantedCrop().getFertCount() + 1);
                             this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
+                            currentBtn.setToolTipText("<html>" + currentTile.getPlantedCrop().getCropName() + "<br>" + "Times Watered: " + currentTile.getPlantedCrop().getWaterCount() + "<br>" + "Times Fertilized: " + currentTile.getPlantedCrop().getFertCount() + "<br><br><i>" + String.valueOf(currentTile.getPlantedCrop().getHarvReq() - currentTile.getPlantedCrop().getHarvCount()) + " days until harvest</i></html>");
+
                         }
                         break;
                     case "Pickaxe":
                         this.farmer.setFarmerObjectCoin(this.farmer.getFarmerObjectCoin() - currentTool.getToolCost());
                         this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
-
+                        currentBtn.setToolTipText("<html>A plowed tile<br><br><i>Try planting on the plot to start growing crops</i></html>");
+                        currentTile.setHasRock(false);
                         break;
                     case "Shovel":
                         this.farmer.setFarmerObjectCoin(this.farmer.getFarmerObjectCoin() - currentTool.getToolCost());
                         this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
                         currentTile.setPlantedCrop(null);
+                        currentBtn.setToolTipText("<html>A plowed tile<br><br><i>Try planting on the plot to start growing crops</i></html>");
+
                         break;
                     case "Scythe":
                         Random random = new Random();
-                        double harvestTotal = 0, finalHarvestPrice = 0;
+                        double harvestTotal, finalHarvestPrice;
                         double waterBonus, fertilizerBonus;
                         int productsProduced = random.nextInt(currentTile.getPlantedCrop().getMaxProduce() + 1 - currentTile.getPlantedCrop().getMinProduce()) + currentTile.getPlantedCrop().getMinProduce(); // randomly generated produce from min and max yield
                         double basePricePerPiece = currentTile.getPlantedCrop().getBasePrice();
@@ -293,7 +301,7 @@ public class GameGUI {
                             finalHarvestPrice = finalHarvestPrice * 1.1;
                         }
 
-                        System.out.println("Earned " + finalHarvestPrice + " from " + productsProduced + " pcs of " + currentTile.getPlantedCrop().getCropName() + "!");
+                        currentBtn.setToolTipText("<html>A plowed tile<br><br><i>Try planting on the plot to start growing crops</i></html>");
 
 
                         // Update farmer stats
@@ -313,11 +321,12 @@ public class GameGUI {
                         seedStore.getSeedList()) {
                     if (crop.getCropName().equals(this.currentSeedName)) { // Get the currentSeed from seedStore
                         currentSeed = new Crop(crop.getCropName(), crop.getCropType(), crop.getSeedCost(), crop.getExpYield(), crop.getBasePrice(), crop.getMinProduce(), crop.getMaxProduce(), crop.getWaterCount(), crop.getWaterReq(), crop.getWaterBonus(), crop.getFertCount(), crop.getFertReq(), crop.getFertBonus(), crop.getHarvCount(), crop.getHarvReq());
-
                     }
                 }
+
                 this.messagePrompt.feedback.setText(this.currentSeedName + " was planted"); // update user with seed planted information
                 currentTile.setPlantedCrop(currentSeed); // Plants the current Crop to the current Tile
+                currentBtn.setToolTipText("<html>" + currentTile.getPlantedCrop().getCropName() + "<br>" + "Times Watered: " + currentTile.getPlantedCrop().getWaterCount() + "<br>" + "Times Fertilized: " + currentTile.getPlantedCrop().getFertCount() + "<br><br><i>" + String.valueOf(currentTile.getPlantedCrop().getHarvReq() - currentTile.getPlantedCrop().getHarvCount()) + " days until harvest</i></html>");
                 currentTile.setPlowed(false);
                 currentTile.setHasRock(false);
             }
@@ -406,9 +415,6 @@ public class GameGUI {
     }
 
     public void updateAllTiles(){
-
-
-
         /*
         Updates all tile info, assets, and seed information in tooltips
          */
@@ -418,7 +424,6 @@ public class GameGUI {
 
                     if(farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvCount()==farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvReq()/2){
                         farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon("src/Views/tiles/Seedling.png"));// Update plant icon to seedling
-                        farmLotUI.getFarmTiles()[i][j].setToolTipText("<html>" + farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + "\n" + "Times Watered: " + farmLot.getFarmTiles()[i][j].getPlantedCrop().getWaterCount() + "<br>" + "Times Fertilized: " + farmLot.getFarmTiles()[i][j].getPlantedCrop().getFertCount() + "<br><br><i>" + String.valueOf(farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvReq() - farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvCount()) + " days until harvest</i></html>");
 
                     }
                     else if(farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvCount()==farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvReq() && farmLot.getFarmTiles()[i][j].getPlantedCrop().getWaterCount()>=farmLot.getFarmTiles()[i][j].getPlantedCrop().getWaterReq() && farmLot.getFarmTiles()[i][j].getPlantedCrop().getFertCount()>=farmLot.getFarmTiles()[i][j].getPlantedCrop().getFertReq()){
@@ -426,27 +431,23 @@ public class GameGUI {
                         farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon(filePath));// Update plant icon to harvestable
 
                         farmLotUI.getFarmTiles()[i][j].setToolTipText("<html>"+farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " is harvestable!<br><br><i>Use a scythe to harvest the plant</i></html>");
-                        //clearLabel();
+
                         messagePrompt.feedback.setText(farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " is harvestable!");
                     }
                     else if(farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvCount()==farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvReq() && (farmLot.getFarmTiles()[i][j].getPlantedCrop().getWaterCount()<farmLot.getFarmTiles()[i][j].getPlantedCrop().getWaterReq() || farmLot.getFarmTiles()[i][j].getPlantedCrop().getFertCount()<farmLot.getFarmTiles()[i][j].getPlantedCrop().getFertReq())){
                         farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon("src/Views/tiles/Withered.png"));// Update plant icon to withered
                         farmLot.getFarmTiles()[i][j].setWithered(true); // Update plant info
                         farmLotUI.getFarmTiles()[i][j].setToolTipText("<html>"+farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " has withered<br><br><i>Use a shovel to remove the plant</i></html>");
-                        //clearLabel();
+
                         messagePrompt.feedback.setText(farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " withered");
                     }
                     else if(farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvCount()>farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvReq()){
                         farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon("src/Views/tiles/Withered.png"));// Update plant icon to withered
                         farmLot.getFarmTiles()[i][j].setWithered(true); // Update plant info
-                        System.out.println(farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " withered");
                         farmLotUI.getFarmTiles()[i][j].setToolTipText("<html>"+farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " has withered<br><br><i>Use a shovel to remove the plant</i></html>");
-                        //clearLabel();
+
                         messagePrompt.feedback.setText(farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " withered");
                     }
-                }
-                else{
-                    farmLotUI.getFarmTiles()[i][j].setToolTipText("<html>An empty tile<br><br><i>Try plowing the plot to start growing crops</i></html>");
                 }
             }
         }
@@ -466,6 +467,7 @@ public class GameGUI {
             switch(getCurrentTool()){
                 case "Plow":
                     currentBtn.setIcon(new ImageIcon("src/Views/tiles/Plowed Soil.png"));
+                    currentBtn.setToolTipText("<html>A plowed tile<br><br><i>Try planting on the plot to start growing crops</i></html>");
 
                     break;
                 case "Watering Can":
@@ -526,8 +528,8 @@ public class GameGUI {
         // initialize the first day once jframe opens
         dayUI.setDay(1);
         dayUI.setText("Day: "+dayUI.getDay());
-        // FARM LOT (MIDDLE UI)
 
+        // FARM LOT (MIDDLE UI)
         farmLotUI.generateLot();
         farmLotUI.setBounds(50,110,800,400);
         farmLotUI.setOpaque(false);
