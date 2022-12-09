@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 import javax.imageio.ImageIO;
@@ -22,37 +24,37 @@ public class GameGUI {
     seedStoreView seedStoreUI = new seedStoreView();
     toolListView toolListUI = new toolListView();
     dayView dayUI = new dayView();
+
     FarmLot farmLot = new FarmLot();
+    String[][] farmMap = new String[farmLot.getFarmRow()][farmLot.getFarmCol()];
+
     FarmLotView farmLotUI = new FarmLotView();
     messageView messagePrompt = new messageView();
-
     JButton nextDayBtn = new JButton("Next Day");
+
     JButton registerFarmerBtn = new JButton("Register Farmer");
     JButton seedInfoBtn = new JButton("Seed Info");
-
     seedInfoView seedInfoUI = new seedInfoView();
 
     JLabel messageAvatar;
-
-
 
     SeedStore seedStore = new SeedStore();
 
     private int currentDay;
 
     private String currentToolName;
-    private String currentSeedName;
 
+    private String currentSeedName;
     private Tool currentTool;
 
     private Crop currentSeed;
-    private Tile currentTile;
 
+    private Tile currentTile;
     private Message currentMessage;
+
     public Message getCurrentMessage() {
         return currentMessage;
     }
-
     public void setCurrentTool(Tool currentTool) {
         this.currentTool = currentTool;
     }
@@ -240,6 +242,9 @@ public class GameGUI {
     }
 
     public void executeTile(JButton currentBtn, Tile currentTile, String prevCmd){
+        /**
+         * Executes tool commands to selected tile then updates information necessary
+         */
         switch (prevCmd) {
             case "Tool" -> {
                 if (!currentToolName.equals("Scythe")){
@@ -273,14 +278,14 @@ public class GameGUI {
                     case "Pickaxe":
                         this.farmer.setFarmerObjectCoin(this.farmer.getFarmerObjectCoin() - currentTool.getToolCost());
                         this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
-                        currentBtn.setToolTipText("<html>A plowed tile<br><br><i>Try planting on the plot to start growing crops</i></html>");
+                        currentBtn.setToolTipText("<html>An empty tile<br><br><i>Try plowing the plot to start growing crops</i></html>");
                         currentTile.setHasRock(false);
                         break;
                     case "Shovel":
                         this.farmer.setFarmerObjectCoin(this.farmer.getFarmerObjectCoin() - currentTool.getToolCost());
                         this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
                         currentTile.setPlantedCrop(null);
-                        currentBtn.setToolTipText("<html>A plowed tile<br><br><i>Try planting on the plot to start growing crops</i></html>");
+                        currentBtn.setToolTipText("<html>An empty tile<br><br><i>Try plowing the plot to start growing crops</i></html>");
 
                         break;
                     case "Scythe":
@@ -301,7 +306,7 @@ public class GameGUI {
                             finalHarvestPrice = finalHarvestPrice * 1.1;
                         }
 
-                        currentBtn.setToolTipText("<html>A plowed tile<br><br><i>Try planting on the plot to start growing crops</i></html>");
+                        currentBtn.setToolTipText("<html>An empty tile<br><br><i>Try plowing the plot to start growing crops</i></html>");
 
 
                         // Update farmer stats
@@ -342,7 +347,7 @@ public class GameGUI {
                 switch(currentToolName){
                     case "Plow":
                         if(this.farmer.getFarmerObjectCoin() >= currentTool.getToolCost()) { // if farmer can use tool based on its cost
-                            if (!currentTile.getIsPlowed()) {
+                            if (!currentTile.getIsPlowed() && !currentTile.getHasRock()) {
                                 valid = true;
                             }
                         }
@@ -361,7 +366,7 @@ public class GameGUI {
                     case "Fertilizer":
                         if(this.farmer.getFarmerObjectCoin() >= currentTool.getToolCost()) { // if farmer can use tool based on its cost
 
-                            if (currentTile.getPlantedCrop() != null) {
+                            if (currentTile.getPlantedCrop() != null && !currentTile.getHasRock()) {
 
                                 if (currentTile.getPlantedCrop().getFertCount() != currentTile.getPlantedCrop().getFertBonus()) {
                                     valid = true;
@@ -379,7 +384,7 @@ public class GameGUI {
                     case "Shovel":
                         if(this.farmer.getFarmerObjectCoin() >= currentTool.getToolCost()) { // if farmer can use tool based on its cost
 
-                            if (currentTile.getPlantedCrop() != null) {
+                            if (currentTile.getPlantedCrop() != null && !currentTile.getHasRock()) {
                                 valid = true;
                             }
                         }
@@ -477,12 +482,7 @@ public class GameGUI {
                     // Soil fertilized?
                     break;
                 case "Pickaxe":
-                    currentBtn.setIcon(new ImageIcon("src/Views/tiles/Soil.png"));
-                    break;
                 case "Shovel":
-                    currentBtn.setIcon(new ImageIcon("src/Views/tiles/Soil.png"));
-                    break;
-
                 case "Scythe":
                     currentBtn.setIcon(new ImageIcon("src/Views/tiles/Soil.png"));
                     break;
@@ -531,6 +531,8 @@ public class GameGUI {
 
         // FARM LOT (MIDDLE UI)
         farmLotUI.generateLot();
+        setMap(farmMap);
+        loadMap(farmMap);
         farmLotUI.setBounds(50,110,800,400);
         farmLotUI.setOpaque(false);
 
@@ -619,8 +621,47 @@ public class GameGUI {
         }
 
         btn.setIcon(new ImageIcon(imagePath)); // scale this image to fit button
+    }
 
+    public void loadMap(String[][] map){
+        for(int i = 0; i < farmLot.getFarmRow(); i++){
+            for(int j = 0; j < farmLot.getFarmCol(); j++){
+                if(map[i][j].equals("1")){
+                    farmLot.getFarmTiles()[i][j].setHasRock(true);
+                    farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon("src/Views/tiles/Rock on Soil.png"));
+                    farmLotUI.getFarmTiles()[i][j].setToolTipText("<html>A rock tile<br><br><i>Try removing it first before you start growing crops</i></html>");;
+                }
+            }
+        }
 
+    }
+    
+    public void setMap(String[][] map){
+        BufferedReader reader;
+
+        try {
+            reader = new BufferedReader(new FileReader("src/Views/maps/default_map.txt"));
+            String line = reader.readLine();
+            int i=0,j;
+            while (line != null) {
+                j=0;
+                for (char c :
+                        line.toCharArray()) {
+                    if(j==10){
+                        break;
+                    }
+                    map[i][j]=String.valueOf(c);
+                    j++;
+                }
+                i++;
+                // read next line
+                line = reader.readLine();
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getCurrentDay() {
@@ -628,14 +669,30 @@ public class GameGUI {
     }
 
     //@Override
+
     public void clearLabel() {
         messagePrompt.feedback.setText("");
 
     }
 
-
     public void setCurrentDay(int currentDay) {
         this.currentDay = currentDay;
+    }
+
+    public FarmLot getFarmLot() {
+        return farmLot;
+    }
+
+    public void setFarmLot(FarmLot farmLot) {
+        this.farmLot = farmLot;
+    }
+
+    public FarmLotView getFarmLotUI() {
+        return farmLotUI;
+    }
+
+    public void setFarmLotUI(FarmLotView farmLotUI) {
+        this.farmLotUI = farmLotUI;
     }
 }
 

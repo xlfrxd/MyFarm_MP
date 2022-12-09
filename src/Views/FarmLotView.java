@@ -56,39 +56,6 @@ public class FarmLotView extends JPanel {
                 farmTiles[i][j].setActionCommand(i + "," + j);
                 farmTiles[i][j].setPreferredSize(new Dimension(PIX_SIZE, PIX_SIZE));
 
-//                try {
-//                    BufferedImage bufferedImage = ImageIO.read(new File("src/Views/tiles/Soil.png"));
-//                    BufferedImage bufferedImageResult = new BufferedImage(
-//                            PIX_SIZE,
-//                            PIX_SIZE,
-//                            bufferedImage.getType()
-//                    );
-//                    Graphics2D g2d = bufferedImageResult.createGraphics();
-//                    g2d.drawImage(
-//                            bufferedImage,
-//                            0,
-//                            0,
-//                            PIX_SIZE,
-//                            PIX_SIZE,
-//                            null
-//                    );
-//                    g2d.dispose();
-//                    String formatName = "src/Views/tiles/Soil.png".substring(
-//                            "src/Views/tiles/Soil.png".lastIndexOf(".") + 1
-//                    );
-//                    ImageIO.write(
-//                            bufferedImageResult,
-//                            formatName,
-//                            new File("src/Views/tiles/Soil.png")
-//                    );
-//
-//                    farmTiles[i][j].setIcon(new ImageIcon(bufferedImageResult));
-//
-//
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-
                 farmTiles[i][j].setOpaque(false);
                 farmTiles[i][j].setContentAreaFilled(false);
                 farmTiles[i][j].setBorderPainted(false);
