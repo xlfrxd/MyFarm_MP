@@ -31,8 +31,8 @@ public class seedStoreView extends JPanel {
     JLabel tulipLbl = new JLabel("Tulips");
     JButton sunflowerBtn = new JButton("Sunflowers");
     JLabel sunflowerLbl = new JLabel("Sunflowers");
-    JButton mangoBtn = new JButton("Mango");
-    JLabel mangoLbl = new JLabel("Mango");
+    JButton mangoBtn = new JButton("Mangoes");
+    JLabel mangoLbl = new JLabel("Mangoes");
 
     JButton appleBtn = new JButton("Apples");
     JLabel appleLbl = new JLabel("Apples");

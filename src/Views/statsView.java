@@ -12,7 +12,6 @@ public class statsView extends JPanel {
 
 
     public statsView(){
-        farmerNamePromptLbl = new JLabel("test");
         background.setIcon(new ImageIcon("src/Views/assets/Player Status.png"));
         background.setBounds(0,0, 575, 150);
 
@@ -24,7 +23,6 @@ public class statsView extends JPanel {
         experience.setForeground(Color.BLACK);
         experience.setBounds(120,80,500,30);
         experience.setFont(new Font("Arial", Font.PLAIN,15));
-
 
 
         this.add(balance);
