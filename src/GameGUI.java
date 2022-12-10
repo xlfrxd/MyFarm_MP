@@ -34,10 +34,10 @@ public class GameGUI {
 
     FarmLotView farmLotUI = new FarmLotView();
     messageView messagePrompt = new messageView();
-    JButton nextDayBtn = new JButton("Next Day");
+    JButton nextDayBtn = new JButton();
 
-    JButton registerFarmerBtn = new JButton("Register Farmer");
-    JButton seedInfoBtn = new JButton("Seed Info");
+    JButton registerFarmerBtn = new JButton();
+    JButton seedInfoBtn = new JButton();
     seedInfoView seedInfoUI = new seedInfoView();
 
     JLabel messageAvatar;
@@ -208,7 +208,7 @@ public class GameGUI {
                     // update farmer stats
                     updateAllTiles(); // updates tiles assets and information
                     dayUI.setDay(dayUI.getDay() + 1); // adds a day to counter
-                    dayUI.setText("Day: "+ dayUI.getDay()); // displays day information
+                    dayUI.setText("Day "+ dayUI.getDay()); // displays day information
 
                 }
 
@@ -250,11 +250,12 @@ public class GameGUI {
 
 
 
-                System.out.println("Bal:"+farmer.getFarmerObjectCoin());
-                System.out.println("Exp:"+farmer.getFarmerExp());
-                System.out.println("Lvl:"+farmer.getFarmerLevel());
-                statsUI.balance.setText("Bal: " + df.format(farmer.getFarmerObjectCoin()));
-                statsUI.experience.setText("Exp: "+farmer.getFarmerExp());
+                System.out.println("Balance:"+farmer.getFarmerObjectCoin());
+                System.out.println("Experience:"+farmer.getFarmerExp());
+                System.out.println("Level:"+farmer.getFarmerLevel());
+                statsUI.balance.setText("Balance: " + df.format(farmer.getFarmerObjectCoin()));
+                statsUI.experience.setText("Experience: "+farmer.getFarmerExp());
+                statsUI.level.setText("Level: "+farmer.getFarmerLevel());
             }
         };
 
@@ -607,6 +608,7 @@ public class GameGUI {
         statsUI.setBounds(50,650,575,150);
         statsUI.setBackground(Color.gray);
 
+        statsUI.farmerType.setText(" "+ farmer.getFarmerType());
         statsUI.balance.setText("Balance: " + df.format(farmer.getFarmerObjectCoin()));
         statsUI.experience.setText("Experience: "+farmer.getFarmerExp());
         statsUI.planted.setText("Planted: " + farmerStats.getTimesPlanted() + " seed/s" );
@@ -657,20 +659,18 @@ public class GameGUI {
         nextDayBtn.setLayout(null);
         generateButtonImage(100,nextDayBtn, "src/Views/assets/Next Day.png");
         nextDayBtn.setForeground(Color.BLACK);
-        nextDayBtn.setBounds(980,400,200,150);
+        nextDayBtn.setBounds(930,400,200,150);
         nextDayBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         // REGISTER FARMER BUTTON
         registerFarmerBtn.setLayout(null);
         generateButtonImage(100,registerFarmerBtn, "src/Views/assets/Register Farmer.png");
-        registerFarmerBtn.setForeground(Color.BLACK);
         registerFarmerBtn.setBounds(100,830,250,75);
         registerFarmerBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         //SEED INFO BUTTON
         seedInfoBtn.setLayout(null);
         generateButtonImage(100,seedInfoBtn, "src/Views/assets/Help.png");
-        seedInfoBtn.setForeground(Color.BLACK);
         seedInfoBtn.setBounds(380,830,200,75);
         seedInfoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
