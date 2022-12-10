@@ -1,3 +1,6 @@
+import javax.swing.*;
+import java.awt.*;
+
 /*********************************************************************************************************
  This is to certify that this project is my own work, based on my personal efforts in studying and applying the concepts
  learned. I have constructed the functions and their respective algorithms and corresponding code by myself. The
@@ -13,7 +16,8 @@ public class Game {
     GameGUI mw = new GameGUI(this);
 
     public static void main(String[] args) {
-        new Game(); // Create mainWindow
+
+        new TitleScreen();
 
     }
 }

@@ -99,7 +99,7 @@ public class GameGUI {
         this.game = game;
 
         // MAIN WINDOW SETTINGS
-        mainFrame = new JFrame("My Farmer Game");
+        mainFrame = new JFrame("Sprout Valley");
         mainFrame.setSize(new Dimension(1200,1000));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLayout(null);
