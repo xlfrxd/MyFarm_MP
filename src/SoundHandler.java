@@ -4,11 +4,14 @@ import java.io.IOException;
 
 public class SoundHandler {
 
-    public static void RunMusic (String path){
+    public static void RunMusic (String path, float volume){
         try {
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File(path));
             Clip clip = AudioSystem.getClip();
             clip.open(inputStream);
+            FloatControl gainControl =
+                    (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(volume);
             clip.loop(0);
         }catch (UnsupportedAudioFileException e){
             e.printStackTrace();

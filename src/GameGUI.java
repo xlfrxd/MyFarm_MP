@@ -126,6 +126,9 @@ public class GameGUI {
                         toolListUI.getToolList()) {
                     if(e.getSource().equals(btn)){
                         // If btn is a tool
+
+                        SoundHandler.RunMusic("src/sfx/tool_select.wav",0);
+
                         setCurrentTool(e.getActionCommand()); // Set current tool
 
                         String toolPath = "src/Views/tools/" + currentToolName + ".png";
@@ -138,6 +141,9 @@ public class GameGUI {
                         seedStoreUI.getSeedList()) {
                     if(e.getSource().equals(btn)){
                         // If btn is a seed
+
+                        SoundHandler.RunMusic("src/sfx/seed_select.wav",0);
+
                         setCurrentSeedName(e.getActionCommand()); // Set current seed
                         for (Crop crop :
                                 seedStore.getSeedList()) {
@@ -172,6 +178,9 @@ public class GameGUI {
                                 updateTile(farmLotUI.getFarmTiles()[i][j],prevCmd); // updates current tile image
                             }
                             else{
+
+                                SoundHandler.RunMusic("src/sfx/error_sfx.wav",0);
+
                                 Random randomPrompt = new Random();
                                 switch(randomPrompt.nextInt(2)){
                                     case 0:
@@ -190,11 +199,17 @@ public class GameGUI {
 
                 if(e.getSource()==seedInfoBtn) // If seed Information opened
                 {
+
+                    SoundHandler.RunMusic("src/sfx/buttonClick_sfx.wav",0);
+
                     seedInfoUI.setDefaultCloseOperation(seedInfoUI.EXIT_ON_CLOSE);
                     seedInfoUI.setVisible(true);
                 }
 
                 if(e.getSource()==nextDayBtn){
+
+                    SoundHandler.RunMusic("src/sfx/buttonClick_sfx.wav",0);
+
                     messagePrompt.feedback.setText("On to the next day!");
                     // Update day
                     for(int i=0; i < farmLot.getFarmRow(); i++){
@@ -213,6 +228,9 @@ public class GameGUI {
                 }
 
                 if(e.getSource()==registerFarmerBtn){
+
+                    SoundHandler.RunMusic("src/sfx/buttonClick_sfx.wav",0);
+
                     if(farmer.getFarmerLevel()%5==0){
                         FarmerType ableType = null;
                         for (FarmerType type:
@@ -233,6 +251,7 @@ public class GameGUI {
                 // CHECK IF ALL PLANTS WITHERED
 
                 boolean allPlantsWithered=false;
+
                 for(Tile[] tiles: farmLot.getFarmTiles()){
                     for(Tile tile: tiles){
                         if(tile.getPlantedCrop()!=null) {
@@ -241,13 +260,21 @@ public class GameGUI {
                     }
                 }
 
+                boolean plantsNonExist=false;
+                for(Tile[] tiles: farmLot.getFarmTiles()){
+                    for (Tile tile: tiles) {
+                        if(tile.getPlantedCrop()!=null) {
+                            break;
+                        }
+                        plantsNonExist = true;
+                    }
+                }
 
                 // GAME END
-                if(allPlantsWithered){
+                if(allPlantsWithered && plantsNonExist){
                         if(farmer.getFarmerObjectCoin()<=5){
                             // END CONDITION
-                            JFrame endFrame = new JFrame("Game over, try again?");
-                            endFrame.setVisible(true);
+                            mainFrame.setVisible(false);
                         }
                 }
 
@@ -313,12 +340,18 @@ public class GameGUI {
 
                 switch (currentToolName) {
                     case "Plow":
+
+                        SoundHandler.RunMusic("src/sfx/plow_tile.wav",0);
+
                         currentTile.setPlowed(true);
                         this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
                         currentBtn.setToolTipText("<html>A plowed tile<br><br><i>Try planting on the plot to start growing crops</i></html>");
 
                         break;
                     case "Watering Can":
+
+                        SoundHandler.RunMusic("src/sfx/water_tile.wav",0);
+
                         if (currentTile.getPlantedCrop().getWaterCount() != currentTile.getPlantedCrop().getWaterBonus()) {
                             currentTile.getPlantedCrop().setWaterCount(currentTile.getPlantedCrop().getWaterCount() + 1); // Adds the water count of the current tile crop
                             this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
@@ -327,6 +360,9 @@ public class GameGUI {
                         }
                         break;
                     case "Fertilizer":
+
+                        SoundHandler.RunMusic("src/sfx/fert_tile.wav",0);
+
                         if (currentTile.getPlantedCrop().getFertCount() != currentTile.getPlantedCrop().getFertBonus()) {
                             currentTile.getPlantedCrop().setFertCount(currentTile.getPlantedCrop().getFertCount() + 1);
                             this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
@@ -335,12 +371,18 @@ public class GameGUI {
                         }
                         break;
                     case "Pickaxe":
+
+                        SoundHandler.RunMusic("src/sfx/pick_tile.wav",0);
+
                         this.farmer.setFarmerObjectCoin(this.farmer.getFarmerObjectCoin() - currentTool.getToolCost());
                         this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
                         currentBtn.setToolTipText("<html>An empty tile<br><br><i>Try plowing the plot to start growing crops</i></html>");
                         currentTile.setHasRock(false);
                         break;
                     case "Shovel":
+
+                        SoundHandler.RunMusic("src/sfx/shov_tile.wav",0);
+
                         this.farmer.setFarmerObjectCoin(this.farmer.getFarmerObjectCoin() - currentTool.getToolCost());
                         this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
                         currentTile.setPlantedCrop(null);
@@ -348,6 +390,9 @@ public class GameGUI {
 
                         break;
                     case "Scythe":
+
+                        SoundHandler.RunMusic("src/sfx/harvest_tile.wav",0);
+
                         Random random = new Random();
                         double harvestTotal, finalHarvestPrice;
                         double waterBonus, fertilizerBonus;
@@ -392,6 +437,8 @@ public class GameGUI {
                     }
                 }
 
+                SoundHandler.RunMusic("src/sfx/seed_tile.wav",0);
+
                 this.messagePrompt.feedback.setText(this.currentSeedName + " was planted"); // update user with seed planted information
                 currentTile.setPlantedCrop(currentSeed); // Plants the current Crop to the current Tile
                 this.farmer.setFarmerObjectCoin(this.farmer.getFarmerObjectCoin() - (this.currentSeed.getSeedCost()-this.farmer.getFarmerType().getFarmerSeedCostReduction())); // deduct seedCost from balance
@@ -404,8 +451,6 @@ public class GameGUI {
         }
 
         updateFarmerLevel();
-
-
 
         if(this.farmer.getFarmerLevel()%5==0 && this.farmer.getFarmerLevel()!=0){
             FarmerType ableType = null;
@@ -427,6 +472,7 @@ public class GameGUI {
          * Updates farmer level according to next level
          */
         if(this.farmer.getFarmerLevel()==0){
+
             this.farmer.setFarmerLevel((int) this.farmer.getFarmerExp() / ((this.farmer.getFarmerLevel() + 1) * 100));
         }
         else if(this.farmer.getFarmerExp()/((this.farmer.getFarmerLevel()+1)*100) >= this.farmer.getFarmerLevel()) {
