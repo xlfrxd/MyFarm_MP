@@ -76,7 +76,6 @@ public class FarmLotView extends JPanel {
        for(int i=0; i < row; i++){
            for (int j=0; j < col; j++){
                farmTiles[i][j].addActionListener(listener);
-               farmTiles[i][j].setToolTipText("<html>An empty tile<br><br><i>Try plowing the plot to start growing crops</i></html>");
 
            }
        }

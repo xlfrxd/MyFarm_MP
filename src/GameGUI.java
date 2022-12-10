@@ -126,7 +126,6 @@ public class GameGUI {
                     if(e.getSource().equals(btn)){
                         // If btn is a tool
                         setCurrentTool(e.getActionCommand()); // Set current tool
-                        System.out.println(getCurrentTool());
                         prevCmd = "Tool";
                     }
                 }
@@ -164,7 +163,7 @@ public class GameGUI {
 
 
 
-                            if(checkTile(currentTile,prevCmd)){ // checks if command can be executed to current tile
+                            if(checkTile(i,j,currentTile,prevCmd)){ // checks if command can be executed to current tile
                                 updateAllTiles(); // updates tiles assets and information
                                 executeTile(farmLotUI.getFarmTiles()[i][j],currentTile,prevCmd);
                                 updateTile(farmLotUI.getFarmTiles()[i][j],prevCmd); // updates current tile image
@@ -306,7 +305,9 @@ public class GameGUI {
                             finalHarvestPrice = finalHarvestPrice * 1.1;
                         }
 
-                        currentBtn.setToolTipText("<html>An empty tile<br><br><i>Try plowing the plot to start growing crops</i></html>");
+                        if(currentTile.getPlantedCrop()==null){
+                            currentBtn.setToolTipText("<html>An empty tile<br><br><i>Try plowing the plot to start growing crops</i></html>");
+                        }
 
 
                         // Update farmer stats
@@ -340,7 +341,7 @@ public class GameGUI {
         }
     }
 
-    public boolean checkTile(Tile currentTile, String prevCmd){
+    public boolean checkTile(int row, int col, Tile currentTile, String prevCmd){
         boolean valid = false;
         switch(prevCmd){
             case "Tool":
@@ -406,7 +407,16 @@ public class GameGUI {
                     if(!currentTile.getHasRock()){ // Checks if current tile does not have a rock
                         if(currentTile.getIsPlowed()){ // Checks if current tile is plowed
                             if(currentTile.getPlantedCrop()==null){ // Checks if current tile is empty
+
                                 valid = true;
+                                if(currentSeedName.equals("Mangoes") || currentSeedName.equals("Apples")){
+                                    // if the current seed is a tree seed
+                                    valid = checkSurroundingTiles(row,col);
+
+                                }
+                                else{
+                                    valid = false;
+                                }
                             }
                         }
                     }
@@ -417,6 +427,18 @@ public class GameGUI {
                 break;
         }
         return valid;
+    }
+
+    public boolean checkSurroundingTiles(int x, int y){
+        if(x == 0 || y == 0 || x == this.farmLot.getFarmRow() || y == this.farmLot.getFarmCol()){
+            return false;
+        }
+        else{
+            if(this.farmLot.getFarmTiles()[x - 1][y].getPlantedCrop() == null || this.farmLot.getFarmTiles()[x][y - 1].getPlantedCrop() == null || this.farmLot.getFarmTiles()[x - 1][y - 1].getPlantedCrop() == null || this.farmLot.getFarmTiles()[x][y].getPlantedCrop() == null || this.farmLot.getFarmTiles()[x + 1][x - 1].getPlantedCrop() == null || this.farmLot.getFarmTiles()[x - 1][y + 1].getPlantedCrop() == null){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void updateAllTiles(){
@@ -467,8 +489,6 @@ public class GameGUI {
         Tile interaction with tools and seed planting
          */
         if(prevCmd.equals("Tool")){
-
-
             switch(getCurrentTool()){
                 case "Plow":
                     currentBtn.setIcon(new ImageIcon("src/Views/tiles/Plowed Soil.png"));
@@ -628,8 +648,12 @@ public class GameGUI {
             for(int j = 0; j < farmLot.getFarmCol(); j++){
                 if(map[i][j].equals("1")){
                     farmLot.getFarmTiles()[i][j].setHasRock(true);
+                    farmLot.getFarmTiles()[i][j].setPlantedCrop(null);
                     farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon("src/Views/tiles/Rock on Soil.png"));
                     farmLotUI.getFarmTiles()[i][j].setToolTipText("<html>A rock tile<br><br><i>Try removing it first before you start growing crops</i></html>");;
+                }
+                else{
+                    farmLotUI.getFarmTiles()[i][j].setToolTipText("<html>An empty tile<br><br><i>Try plowing the plot to start growing crops</i></html>");
                 }
             }
         }
