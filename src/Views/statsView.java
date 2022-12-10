@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class statsView extends JPanel {
     static JLabel farmerNamePromptLbl;
-    public JLabel farmerType = new JLabel("");
+    public JLabel farmerType = new JLabel("Farmer");
     public JLabel balance = new JLabel("Balance:");
     public JLabel experience = new JLabel("Experience:");
 
@@ -37,12 +37,12 @@ public class statsView extends JPanel {
         planted.setFont(new Font("Helvetica", Font.BOLD,15));
 
         harvested.setForeground(Color.WHITE);
-        harvested.setBounds(360,85,300,30);
+        harvested.setBounds(365,85,300,30);
         harvested.setFont(new Font("Helvetica", Font.BOLD,15));
 
         farmerType.setForeground(Color.WHITE);
-        farmerType.setBounds(30,30,300,30);
-        farmerType.setFont(new Font("Helvetica", Font.BOLD,12));
+        farmerType.setBounds(80,10,300,30);
+        farmerType.setFont(new Font("Helvetica", Font.BOLD,15));
 
         this.add(balance);
         this.add(experience);

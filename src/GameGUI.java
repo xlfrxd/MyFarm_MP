@@ -222,6 +222,7 @@ public class GameGUI {
                                 farmer.setFarmerType(type);
                                 farmer.setFarmerObjectCoin(farmer.getFarmerObjectCoin()-type.getFarmerRegFee());
                                 messagePrompt.feedback.setText("You have registered as " + type.getFarmerTypeName());
+                                statsUI.farmerType.setText(" "+ type.getFarmerTypeName());
                                 break;
                             }
                         }
@@ -621,7 +622,7 @@ public class GameGUI {
         statsUI.setBounds(50,650,575,150);
         statsUI.setBackground(Color.gray);
 
-        statsUI.farmerType.setText(" "+ farmer.getFarmerType());
+        //statsUI.farmerType.setText("Farmer");
         statsUI.balance.setText("Balance: " + df.format(farmer.getFarmerObjectCoin()));
         statsUI.experience.setText("Experience: "+farmer.getFarmerExp());
         statsUI.planted.setText("Planted: " + farmerStats.getTimesPlanted() + " seed/s" );
