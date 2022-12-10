@@ -7,11 +7,11 @@ public class FarmerStatistics { // untouched
         return timesPlanted;
     }
 
-    public static void setTimesPlanted(int timesPlanted) {
+    public void setTimesPlanted(int timesPlanted) {
         FarmerStatistics.timesPlanted = timesPlanted;
     }
 
-    public static int getTimesHarvested() {
+    public int getTimesHarvested() {
         return timesHarvested;
     }
 

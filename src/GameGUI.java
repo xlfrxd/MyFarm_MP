@@ -21,10 +21,13 @@ public class GameGUI {
     JFrame mainFrame;
 
     Farmer farmer = new Farmer("Farmer");
+    FarmerStatistics farmerStats = new FarmerStatistics();
+
     statsView statsUI = new statsView();
     seedStoreView seedStoreUI = new seedStoreView();
     toolListView toolListUI = new toolListView();
     dayView dayUI = new dayView();
+    JLabel dayBackground = new JLabel();
 
     FarmLot farmLot = new FarmLot();
     String[][] farmMap = new String[farmLot.getFarmRow()][farmLot.getFarmCol()];
@@ -357,6 +360,8 @@ public class GameGUI {
                         this.messagePrompt.feedback.setText("Earned " + finalHarvestPrice + " from " + productsProduced + " pcs of " + currentTile.getPlantedCrop().getCropName() + "!");
                         currentTile.setPlantedCrop(null);
                         currentTile.setWithered(false);
+                        farmerStats.setTimesHarvested(farmerStats.getTimesHarvested()+1);
+                        statsUI.harvested.setText("Harvested: " + farmerStats.getTimesHarvested() + " crop/s" );
                         //clearLabel();
                         break;
                     default:
@@ -585,6 +590,8 @@ public class GameGUI {
         else if(prevCmd.equals("Seed")){
             currentBtn.setIcon(new ImageIcon("src/Views/tiles/Seeds on Soil.png")); // Update the farmLotUI button
             currentBtn.setToolTipText("<html>" + this.currentTile.getPlantedCrop().getCropName() + "\n" + "Times Watered: " + this.currentTile.getPlantedCrop().getWaterCount() + "<br>" + "Times Fertilized: " + this.currentTile.getPlantedCrop().getFertCount() + "<br><br><i>" + String.valueOf(this.currentTile.getPlantedCrop().getHarvReq() - this.currentTile.getPlantedCrop().getHarvCount()) + " days until harvest</i></html>");
+            farmerStats.setTimesPlanted(farmerStats.getTimesPlanted()+1);
+            statsUI.planted.setText("Planted: " + farmerStats.getTimesPlanted() + " seed/s" );
 
         }
 
@@ -600,8 +607,11 @@ public class GameGUI {
         statsUI.setBounds(50,650,575,150);
         statsUI.setBackground(Color.gray);
 
-        statsUI.balance.setText("Bal: " + df.format(farmer.getFarmerObjectCoin()));
-        statsUI.experience.setText("Exp: "+farmer.getFarmerExp());
+        statsUI.balance.setText("Balance: " + df.format(farmer.getFarmerObjectCoin()));
+        statsUI.experience.setText("Experience: "+farmer.getFarmerExp());
+        statsUI.planted.setText("Planted: " + farmerStats.getTimesPlanted() + " seed/s" );
+        statsUI.harvested.setText("Harvested: " + farmerStats.getTimesHarvested() + " crop/s" );
+
 
         // SEED STORE (BOTTOM RIGHT UI)
         seedStoreUI.setLayout(null);
@@ -614,12 +624,16 @@ public class GameGUI {
         toolListUI.setBackground(Color.green);
 
         // DAY COUNTER (MIDDLE-UPPER LEFT UI)
-        dayUI.setBounds(50,25,100,50);
-        dayUI.setFont(new Font("Arial", Font.PLAIN,20)); //TODO: Change Font?
+        dayUI.setBounds(70,20,100,50);
+        dayUI.setForeground(Color.WHITE);
+        dayUI.setFont(new Font("Helvetica", Font.BOLD,20));
+        dayBackground = new JLabel(); //TODO: SET IMAGE HERE
+        dayBackground.setBounds(50,25,100,50);
+        dayBackground.setIcon(new ImageIcon("src/Views/assets/Day.png"));
 
         // initialize the first day once jframe opens
         dayUI.setDay(1);
-        dayUI.setText("Day: "+dayUI.getDay());
+        dayUI.setText("Day "+dayUI.getDay());
 
         // FARM LOT (MIDDLE UI)
         farmLotUI.generateLot();
@@ -672,6 +686,7 @@ public class GameGUI {
         mainFrame.add(nextDayBtn);
         mainFrame.add(registerFarmerBtn);
         mainFrame.add(seedInfoBtn);
+        mainFrame.add(dayBackground);
 
     }
 
