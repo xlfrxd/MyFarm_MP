@@ -43,6 +43,10 @@ public class TitleScreen extends JFrame{
 
     ActionListener btnListener = new ActionListener() {
 
+        /**
+         * Sets button action when button is clicked
+         */
+
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()==playBtn)

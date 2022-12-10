@@ -283,6 +283,10 @@ public class GameGUI {
         mainFrame.setVisible(true);
     }
 
+    /**
+     * Sets the cursor with a custom image depending on the button that was clicked.
+     */
+
     public void setCursor(String filePath){
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image = toolkit.getImage(filePath);;
@@ -420,7 +424,7 @@ public class GameGUI {
 
     public void updateFarmerLevel(){
         /**
-         * Updates farmer level accdg to next level
+         * Updates farmer level according to next level
          */
         if(this.farmer.getFarmerLevel()==0){
             this.farmer.setFarmerLevel((int) this.farmer.getFarmerExp() / ((this.farmer.getFarmerLevel() + 1) * 100));
@@ -433,6 +437,9 @@ public class GameGUI {
 
 
     public boolean checkTile(int row, int col, Tile currentTile, String prevCmd){
+        /**
+         * Checks if the tile is occupied with a crop or a rock
+         */
         boolean valid = false;
         switch(prevCmd){
             case "Tool":
@@ -518,6 +525,9 @@ public class GameGUI {
     }
 
     public boolean checkSurroundingTiles(int x, int y){
+        /**
+         * Checks if the designated tile to be planted has surrounding tiles that are occupied
+         */
         if(x == 0 || y == 0 || x == this.farmLot.getFarmRow() || y == this.farmLot.getFarmCol()){
             return false;
         }
@@ -530,8 +540,8 @@ public class GameGUI {
     }
 
     public void updateAllTiles(){
-        /*
-        Updates all tile info, assets, and seed information in tooltips
+        /**
+          *  Updates all tile information, assets, and seed information in tooltips
          */
         for(int i = 0; i < farmLotUI.getRow(); i++) {
             for (int j = 0; j < farmLotUI.getCol(); j++){
@@ -640,7 +650,7 @@ public class GameGUI {
         dayUI.setBounds(70,20,100,50);
         dayUI.setForeground(Color.WHITE);
         dayUI.setFont(new Font("Helvetica", Font.BOLD,20));
-        dayBackground = new JLabel(); //TODO: SET IMAGE HERE
+        dayBackground = new JLabel();
         dayBackground.setBounds(50,25,100,50);
         dayBackground.setIcon(new ImageIcon("src/Views/assets/Day.png"));
 
@@ -656,7 +666,7 @@ public class GameGUI {
         farmLotUI.setOpaque(false);
 
         // LIL FARMER IMAGE
-        messageAvatar = new JLabel(); //TODO: SET IMAGE HERE
+        messageAvatar = new JLabel();
         messageAvatar.setBounds(50,525,100,100);
         messageAvatar.setIcon(new ImageIcon("src/Views/assets/Player Icon.png"));
 
@@ -703,6 +713,10 @@ public class GameGUI {
 
     public void generateButtonImage(int PIX_SIZE,JButton btn, String imagePath){
 
+        /**
+         * Generates image for a button by reading file input and changing the button opacity
+         */
+
         try {
             BufferedImage bufferedImage = ImageIO.read(new File(imagePath));
             BufferedImage bufferedImageResult = new BufferedImage(
@@ -742,6 +756,10 @@ public class GameGUI {
     }
 
     public void loadMap(String[][] map){
+
+        /**
+         * Generates farm lot with either a soil with rocks or without rocks
+         */
         for(int i = 0; i < farmLot.getFarmRow(); i++){
             for(int j = 0; j < farmLot.getFarmCol(); j++){
                 if(map[i][j].equals("1")){
@@ -759,6 +777,11 @@ public class GameGUI {
     }
     
     public void setMap(String[][] map){
+
+        /**
+         * Reads text file input to generate soil tiles and tiles with rock
+         */
+
         BufferedReader reader;
 
         try {
@@ -791,7 +814,9 @@ public class GameGUI {
     }
 
     //@Override
-
+    /**
+     * Clears the JLabel Text
+     */
     public void clearLabel() {
         messagePrompt.feedback.setText("");
 

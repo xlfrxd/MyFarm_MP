@@ -42,5 +42,5 @@ public class Tool {
         this.toolExp = toolExp;
     }
 
-    // WILL TRY TO IMPLEMENT TOOL ACTIONS IN FARMER CLASS TODO: [UML] UPDATE TOOL CLASSES
+
 }

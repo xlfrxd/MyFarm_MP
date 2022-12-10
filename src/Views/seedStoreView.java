@@ -165,6 +165,11 @@ public class seedStoreView extends JPanel {
     }
 
     public void setActionListener(ActionListener listener){
+
+        /**
+         * Sets button action when button is clicked
+         */
+
         turnipBtn.addActionListener(listener);
         carrotBtn.addActionListener(listener);
         potatoBtn.addActionListener(listener);
@@ -174,6 +179,10 @@ public class seedStoreView extends JPanel {
         mangoBtn.addActionListener(listener);
         appleBtn.addActionListener(listener);
     }
+
+    /**
+     * Generates image for buttons
+     */
 
     public void generateSeedImage(JButton btn, String imagePath){
         int PIX_SIZE = 50;

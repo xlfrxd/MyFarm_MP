@@ -5,7 +5,6 @@ public class GameCont {
         return isRunning;
     }
 
-    //TODO: Insert GameCont
 
     public static void setRunning(boolean running) {
         isRunning = running;

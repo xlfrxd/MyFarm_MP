@@ -21,9 +21,6 @@ public class FarmLot { //untouched
     }
 
 
-    //TODO: Create a function, <void inputElement(file : String)>, that would convert a file (000101010...) into matrix with or without a rock (can add bonus features)
-
-    //TODO: advanceDay() func here
     public int getFarmRow() {
         return farmRow;
     }
