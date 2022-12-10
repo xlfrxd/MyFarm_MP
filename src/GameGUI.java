@@ -144,7 +144,6 @@ public class GameGUI {
                             if (crop.getCropName().equals(currentSeedName)) { // Get the currentSeed from seedStore
                                 currentSeed = new Crop(crop.getCropName(),crop.getCropType(),crop.getSeedCost(),crop.getExpYield(),crop.getBasePrice(),crop.getMinProduce(),crop.getMaxProduce(),crop.getWaterCount(),crop.getWaterReq(),crop.getWaterBonus(),crop.getFertCount(),crop.getFertReq(),crop.getFertBonus(),crop.getHarvCount(),crop.getHarvReq());
 
-                                System.out.println(currentSeedName);
                                 String toolPath = "src/Views/seeds/" + currentSeedName + " Seeds.png";
                                 setCursor(toolPath);
                             }
@@ -196,7 +195,7 @@ public class GameGUI {
                 }
 
                 if(e.getSource()==nextDayBtn){
-                    System.out.println("Day Pressed");
+                    messagePrompt.feedback.setText("On to the next day!");
                     // Update day
                     for(int i=0; i < farmLot.getFarmRow(); i++){
                         for(int j=0; j < farmLot.getFarmCol(); j++){
@@ -254,9 +253,6 @@ public class GameGUI {
 
 
 
-                System.out.println("Balance:"+farmer.getFarmerObjectCoin());
-                System.out.println("Experience:"+farmer.getFarmerExp());
-                System.out.println("Level:"+farmer.getFarmerLevel());
                 statsUI.balance.setText("Balance: " + df.format(farmer.getFarmerObjectCoin()));
                 statsUI.experience.setText("Experience: "+farmer.getFarmerExp());
                 statsUI.level.setText("Level: "+farmer.getFarmerLevel());
