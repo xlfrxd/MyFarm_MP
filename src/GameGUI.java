@@ -361,7 +361,6 @@ public class GameGUI {
             }
         }
 
-
         updateFarmerLevel();
 
 
@@ -383,11 +382,13 @@ public class GameGUI {
 
     public void updateFarmerLevel(){
         /**
-         * Updates farmer level per exp
+         * Updates farmer level accdg to next level
          */
-        if(this.farmer.getFarmerExp()/((this.farmer.getFarmerLevel()+1)*100) > 0){
-
-            this.farmer.setFarmerLevel((int)this.farmer.getFarmerExp()/((this.farmer.getFarmerLevel()+1)*100));
+        if(this.farmer.getFarmerLevel()==0){
+            this.farmer.setFarmerLevel((int) this.farmer.getFarmerExp() / ((this.farmer.getFarmerLevel() + 1) * 100));
+        }
+        else if(this.farmer.getFarmerExp()/((this.farmer.getFarmerLevel()+1)*100) >= this.farmer.getFarmerLevel()) {
+            this.farmer.setFarmerLevel(this.farmer.getFarmerLevel() + 1);
         }
 
     }
