@@ -66,7 +66,7 @@ public class seedStoreView extends JPanel {
         //Turnips
         turnipBtn.setBounds(85,45,50,50);
         turnipBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        generateSeedImage(turnipBtn, "src/Views/seeds/Turnip Seeds.png");
+        generateSeedImage(turnipBtn, "src/Views/seeds/Turnips Seeds.png");
         this.add(turnipBtn);
 
         turnipLbl.setForeground(Color.WHITE);
@@ -76,7 +76,7 @@ public class seedStoreView extends JPanel {
         //Carrots
         carrotBtn.setBounds(85,95,50,50);
         carrotBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        generateSeedImage(carrotBtn, "src/Views/seeds/Carrot Seeds.png");
+        generateSeedImage(carrotBtn, "src/Views/seeds/Carrots Seeds.png");
         this.add(carrotBtn);
 
         carrotLbl.setForeground(Color.WHITE);
@@ -86,7 +86,7 @@ public class seedStoreView extends JPanel {
         //Potatoes
         potatoBtn.setBounds(85,145,50,50);
         potatoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        generateSeedImage(potatoBtn, "src/Views/seeds/Potato Seeds.png");
+        generateSeedImage(potatoBtn, "src/Views/seeds/Potatoes Seeds.png");
         this.add(potatoBtn);
 
         potatoLbl.setForeground(Color.WHITE);
@@ -101,7 +101,7 @@ public class seedStoreView extends JPanel {
         //Rose
         roseBtn.setBounds(200,45,50,50);
         roseBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        generateSeedImage(roseBtn, "src/Views/seeds/Rose Seeds.png");
+        generateSeedImage(roseBtn, "src/Views/seeds/Roses Seeds.png");
         this.add(roseBtn);
 
         roseLbl.setForeground(Color.WHITE);
@@ -111,7 +111,7 @@ public class seedStoreView extends JPanel {
         //Tulips
         tulipBtn.setBounds(200,95,50,50);
         tulipBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        generateSeedImage(tulipBtn, "src/Views/seeds/Tulip Seeds.png");
+        generateSeedImage(tulipBtn, "src/Views/seeds/Tulips Seeds.png");
         this.add(tulipBtn);
         tulipLbl.setForeground(Color.WHITE);
         tulipLbl.setBounds(245,95,50,50);
@@ -120,7 +120,7 @@ public class seedStoreView extends JPanel {
         //Sunflowers
         sunflowerBtn.setBounds(200,145,50,50);
         sunflowerBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        generateSeedImage(sunflowerBtn, "src/Views/seeds/Sunflower Seeds.png");
+        generateSeedImage(sunflowerBtn, "src/Views/seeds/Sunflowers Seeds.png");
         this.add(sunflowerBtn);
 
         sunflowerLbl.setForeground(Color.WHITE);
@@ -134,7 +134,7 @@ public class seedStoreView extends JPanel {
         //Mangoes
         mangoBtn.setBounds(310,45,50,50);
         mangoBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        generateSeedImage(mangoBtn, "src/Views/seeds/Mango Seeds.png");
+        generateSeedImage(mangoBtn, "src/Views/seeds/Mangoes Seeds.png");
         this.add(mangoBtn);
 
         mangoLbl.setForeground(Color.WHITE);
@@ -144,7 +144,7 @@ public class seedStoreView extends JPanel {
         //Apples
         appleBtn.setBounds(310,95,50,50);
         appleBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        generateSeedImage(appleBtn, "src/Views/seeds/Apple Seeds.png");
+        generateSeedImage(appleBtn, "src/Views/seeds/Apples Seeds.png");
         this.add(appleBtn);
 
         appleLbl.setForeground(Color.WHITE);

@@ -124,6 +124,9 @@ public class GameGUI {
                     if(e.getSource().equals(btn)){
                         // If btn is a tool
                         setCurrentTool(e.getActionCommand()); // Set current tool
+
+                        String toolPath = "src/Views/tools/" + currentToolName + ".png";
+                        setCursor(toolPath);
                         prevCmd = "Tool";
                     }
                 }
@@ -138,6 +141,9 @@ public class GameGUI {
                             if (crop.getCropName().equals(currentSeedName)) { // Get the currentSeed from seedStore
                                 currentSeed = new Crop(crop.getCropName(),crop.getCropType(),crop.getSeedCost(),crop.getExpYield(),crop.getBasePrice(),crop.getMinProduce(),crop.getMaxProduce(),crop.getWaterCount(),crop.getWaterReq(),crop.getWaterBonus(),crop.getFertCount(),crop.getFertReq(),crop.getFertBonus(),crop.getHarvCount(),crop.getHarvReq());
 
+                                System.out.println(currentSeedName);
+                                String toolPath = "src/Views/seeds/" + currentSeedName + " Seeds.png";
+                                setCursor(toolPath);
                             }
                         }
                         prevCmd = "Seed";
@@ -154,19 +160,14 @@ public class GameGUI {
                                     farmer.getFarmerTools()) {
                                 if (tool.getToolName().equals(currentToolName)) { // Get the currentTool from toolList
                                     currentTool = tool;
-
                                     break;
                                 }
                             }
-
-
 
                             if(checkTile(i,j,currentTile,prevCmd)){ // checks if command can be executed to current tile
                                 updateAllTiles(); // updates tiles assets and information
                                 executeTile(farmLotUI.getFarmTiles()[i][j],currentTile,prevCmd);
                                 updateTile(farmLotUI.getFarmTiles()[i][j],prevCmd); // updates current tile image
-
-
                             }
                             else{
                                 Random randomPrompt = new Random();
@@ -242,6 +243,7 @@ public class GameGUI {
                         if(farmer.getFarmerObjectCoin()<=5){
                             // END CONDITION
                             JFrame endFrame = new JFrame("Game over, try again?");
+                            endFrame.setVisible(true);
                         }
                 }
 
@@ -277,6 +279,17 @@ public class GameGUI {
         seedStoreUI.setActionListener(buttonListener);
         farmLotUI.setActionListener(buttonListener);
         mainFrame.setVisible(true);
+    }
+
+    public void setCursor(String filePath){
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image image = toolkit.getImage(filePath);;
+        Cursor c = toolkit.createCustomCursor(image, new Point(0,
+                0), "cursor");
+        mainFrame.setCursor(c);
+        toolListUI.setCursor(c);
+        seedStoreUI.setCursor(c);
+        farmLotUI.setCursor(c);
     }
 
     public void executeTile(JButton currentBtn, Tile currentTile, String prevCmd){
@@ -354,7 +367,7 @@ public class GameGUI {
                         // Update farmer stats
                         this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTile.getPlantedCrop().getExpYield());
                         this.farmer.setFarmerObjectCoin(this.farmer.getFarmerObjectCoin() + finalHarvestPrice);
-                        this.messagePrompt.feedback.setText("Earned " + finalHarvestPrice + " from " + productsProduced + " pcs of " + currentTile.getPlantedCrop().getCropName() + "!");
+                        this.messagePrompt.feedback.setText("Earned " + df.format(finalHarvestPrice) + " from " + productsProduced + " pcs of " + currentTile.getPlantedCrop().getCropName() + "!");
                         currentTile.setPlantedCrop(null);
                         currentTile.setWithered(false);
                         //clearLabel();
