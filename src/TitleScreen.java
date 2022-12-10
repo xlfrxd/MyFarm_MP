@@ -14,8 +14,6 @@ public class TitleScreen extends JFrame{
     public JButton playBtn = new JButton("play");
     public JButton quitBtn = new JButton("quit");
 
-    public boolean prevCmd;
-
 
     public TitleScreen(){
 
@@ -55,14 +53,9 @@ public class TitleScreen extends JFrame{
             if(e.getSource()==quitBtn)
             {
                 titleFrame.setVisible(false);
-                prevCmd = false;
             }
         }
     };
-
-    public boolean getPrevCmd() {
-        return prevCmd;
-    }
 
     public void generateButtonImage(JButton btn, String imagePath){
         int PIX_SIZE = 300;
