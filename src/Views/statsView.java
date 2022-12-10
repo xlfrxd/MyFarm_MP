@@ -9,7 +9,7 @@ public class statsView extends JPanel {
     public JLabel balance = new JLabel("Balance:");
     public JLabel experience = new JLabel("Experience:");
 
-    public JLabel level = new JLabel("Level:");
+    public JLabel level = new JLabel("Level: 0");
     public JLabel planted = new JLabel("Planted: ");
     public JLabel harvested= new JLabel("Harvested: ");
     JLabel background = new JLabel();
