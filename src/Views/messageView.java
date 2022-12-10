@@ -29,9 +29,9 @@ public class messageView extends JPanel {
 
         //container.add(textArea);
 
-        feedback.setForeground(Color.BLACK);
+        feedback.setForeground(Color.WHITE);
         feedback.setBounds(70,30,800,30);
-        feedback.setFont(new Font("Arial", Font.PLAIN,20));
+        feedback.setFont(new Font("Helvetica", Font.BOLD,15));
 
         background.setIcon(new ImageIcon("src/Views/assets/Message Prompt.png"));
         background.setBounds(0,0, 450, 100);

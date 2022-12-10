@@ -5,9 +5,13 @@ import java.awt.*;
 
 public class statsView extends JPanel {
     static JLabel farmerNamePromptLbl;
+    public JLabel farmerType = new JLabel("");
+    public JLabel balance = new JLabel("Balance:");
+    public JLabel experience = new JLabel("Experience:");
 
-    public JLabel balance = new JLabel("Bal:");
-    public JLabel experience = new JLabel("Exp:");
+    public JLabel level = new JLabel("Level:");
+    public JLabel planted = new JLabel("Planted: ");
+    public JLabel harvested= new JLabel("Harvested: ");
     JLabel background = new JLabel();
 
 
@@ -15,18 +19,37 @@ public class statsView extends JPanel {
         background.setIcon(new ImageIcon("src/Views/assets/Player Status.png"));
         background.setBounds(0,0, 575, 150);
 
-        balance.setForeground(Color.BLACK);
-        balance.setBounds(120,50,500,30);
-        balance.setFont(new Font("Arial", Font.PLAIN,15));
+        balance.setForeground(Color.WHITE);
+        balance.setBounds(105,55,200,30);
+        balance.setFont(new Font("Helvetica", Font.BOLD,15));
 
 
-        experience.setForeground(Color.BLACK);
-        experience.setBounds(120,80,500,30);
-        experience.setFont(new Font("Arial", Font.PLAIN,15));
+        experience.setForeground(Color.WHITE);
+        experience.setBounds(105,90,300,30);
+        experience.setFont(new Font("Helvetica", Font.BOLD,15));
 
+        level.setForeground(Color.WHITE);
+        level.setBounds(255,55,300,30);
+        level.setFont(new Font("Helvetica", Font.BOLD,15));
+
+        planted.setForeground(Color.WHITE);
+        planted.setBounds(360,55,300,30);
+        planted.setFont(new Font("Helvetica", Font.BOLD,15));
+
+        harvested.setForeground(Color.WHITE);
+        harvested.setBounds(360,85,300,30);
+        harvested.setFont(new Font("Helvetica", Font.BOLD,15));
+
+        farmerType.setForeground(Color.WHITE);
+        farmerType.setBounds(30,30,300,30);
+        farmerType.setFont(new Font("Helvetica", Font.BOLD,12));
 
         this.add(balance);
         this.add(experience);
+        this.add(level);
+        this.add(planted);
+        this.add(farmerType);
+        this.add(harvested);
         this.add(background);
     }
 
