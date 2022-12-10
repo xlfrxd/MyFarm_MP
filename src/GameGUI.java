@@ -243,6 +243,7 @@ public class GameGUI {
                 }
 
 
+                // GAME END
                 if(allPlantsWithered){
                         if(farmer.getFarmerObjectCoin()<=5){
                             // END CONDITION
