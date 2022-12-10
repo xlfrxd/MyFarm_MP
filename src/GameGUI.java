@@ -211,8 +211,26 @@ public class GameGUI {
 
                 }
 
+                if(e.getSource()==registerFarmerBtn){
+                    if(farmer.getFarmerLevel()%5==0){
+                        FarmerType ableType = null;
+                        for (FarmerType type:
+                                farmer.getFarmerTypes()) {
+                            if(type.getFarmerLevelReq()==farmer.getFarmerLevel()/5){
+                                farmer.setFarmerType(type);
+                                farmer.setFarmerObjectCoin(farmer.getFarmerObjectCoin()-type.getFarmerRegFee());
+                                messagePrompt.feedback.setText("You have registered as " + type.getFarmerTypeName());
+                                break;
+                            }
+                        }
+                    }
+                    messagePrompt.feedback.setText("You are unable to register at this time.");
+
+                }
+
                 System.out.println("Bal:"+farmer.getFarmerObjectCoin());
                 System.out.println("Exp:"+farmer.getFarmerExp());
+                System.out.println("Lvl:"+farmer.getFarmerLevel());
                 statsUI.balance.setText("Bal: " + farmer.getFarmerObjectCoin());
                 statsUI.experience.setText("Exp: "+farmer.getFarmerExp());
             }
@@ -234,6 +252,7 @@ public class GameGUI {
         seedInfoBtn.addActionListener(popupListener);
 
         nextDayBtn.addActionListener(buttonListener);
+        registerFarmerBtn.addActionListener(buttonListener);
         toolListUI.setActionListener(buttonListener);
         seedStoreUI.setActionListener(buttonListener);
         farmLotUI.setActionListener(buttonListener);
@@ -244,6 +263,8 @@ public class GameGUI {
         /**
          * Executes tool commands to selected tile then updates information necessary
          */
+
+
         switch (prevCmd) {
             case "Tool" -> {
                 if (!currentToolName.equals("Scythe")){
@@ -322,16 +343,16 @@ public class GameGUI {
                 }
             }
             case "Seed" -> {
-                this.farmer.setFarmerObjectCoin(this.farmer.getFarmerObjectCoin() - this.currentSeed.getSeedCost()); // deduct seedCost from balance
                 for (Crop crop :
                         seedStore.getSeedList()) {
                     if (crop.getCropName().equals(this.currentSeedName)) { // Get the currentSeed from seedStore
-                        currentSeed = new Crop(crop.getCropName(), crop.getCropType(), crop.getSeedCost(), crop.getExpYield(), crop.getBasePrice(), crop.getMinProduce(), crop.getMaxProduce(), crop.getWaterCount(), crop.getWaterReq(), crop.getWaterBonus(), crop.getFertCount(), crop.getFertReq(), crop.getFertBonus(), crop.getHarvCount(), crop.getHarvReq());
+                        currentSeed = new Crop(crop.getCropName(), crop.getCropType(), crop.getSeedCost(), crop.getExpYield(), crop.getBasePrice(), crop.getMinProduce(), crop.getMaxProduce(), crop.getWaterCount(), crop.getWaterReq(), crop.getWaterBonus()+this.farmer.getFarmerType().getFarmerWaterBonusLimit(), crop.getFertCount(), crop.getFertReq(), crop.getFertBonus()+this.farmer.getFarmerType().getFarmerFertBonusLimit(), crop.getHarvCount(), crop.getHarvReq());
                     }
                 }
 
                 this.messagePrompt.feedback.setText(this.currentSeedName + " was planted"); // update user with seed planted information
                 currentTile.setPlantedCrop(currentSeed); // Plants the current Crop to the current Tile
+                this.farmer.setFarmerObjectCoin(this.farmer.getFarmerObjectCoin() - (this.currentSeed.getSeedCost()-this.farmer.getFarmerType().getFarmerSeedCostReduction())); // deduct seedCost from balance
                 currentBtn.setToolTipText("<html>" + currentTile.getPlantedCrop().getCropName() + "<br>" + "Times Watered: " + currentTile.getPlantedCrop().getWaterCount() + "<br>" + "Times Fertilized: " + currentTile.getPlantedCrop().getFertCount() + "<br><br><i>" + String.valueOf(currentTile.getPlantedCrop().getHarvReq() - currentTile.getPlantedCrop().getHarvCount()) + " days until harvest</i></html>");
                 currentTile.setPlowed(false);
                 currentTile.setHasRock(false);
@@ -339,7 +360,45 @@ public class GameGUI {
             default -> {
             }
         }
+
+        updateFarmerLevel();
+
+
+
+        if(this.farmer.getFarmerLevel()%5==0 && this.farmer.getFarmerLevel()!=0){
+            FarmerType ableType = null;
+            for (FarmerType type:
+                 farmer.getFarmerTypes()) {
+                if(type.getFarmerLevelReq()==this.farmer.getFarmerLevel()/5){
+                    ableType = type;
+                    break;
+                }
+            }
+            if(ableType!=null){
+                this.messagePrompt.feedback.setText("You can register as a " + ableType.getFarmerTypeName() + " farmer type!");
+            }
+        }
     }
+
+    public void updateFarmerLevel(){
+        /**
+         * Updates farmer level accdg to next level
+         */
+        if(this.farmer.getFarmerLevel()==0){
+            this.farmer.setFarmerLevel((int) this.farmer.getFarmerExp() / ((this.farmer.getFarmerLevel() + 1) * 100));
+        }
+        else if(this.farmer.getFarmerExp()/((this.farmer.getFarmerLevel()+1)*100) >= this.farmer.getFarmerLevel()) {
+            this.farmer.setFarmerLevel(this.farmer.getFarmerLevel() + 1);
+        }
+
+    }
+
+    public void checkCrops(){
+        /**
+         * function that checks the game ending condition if all crops are withered or no crops are growing
+         */
+    }
+
 
     public boolean checkTile(int row, int col, Tile currentTile, String prevCmd){
         boolean valid = false;
@@ -348,7 +407,7 @@ public class GameGUI {
                 switch(currentToolName){
                     case "Plow":
                         if(this.farmer.getFarmerObjectCoin() >= currentTool.getToolCost()) { // if farmer can use tool based on its cost
-                            if (!currentTile.getIsPlowed() && !currentTile.getHasRock()) {
+                            if (!currentTile.getIsPlowed() && !currentTile.getHasRock() && currentTile.getPlantedCrop()==null) {
                                 valid = true;
                             }
                         }
@@ -413,9 +472,6 @@ public class GameGUI {
                                     // if the current seed is a tree seed
                                     valid = checkSurroundingTiles(row,col);
 
-                                }
-                                else{
-                                    valid = false;
                                 }
                             }
                         }
