@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.text.DecimalFormat;
 import java.util.Random;
 import javax.imageio.ImageIO;
@@ -172,6 +173,9 @@ public class GameGUI {
                                 }
                             }
 
+                            System.out.println("thisRock:"+currentTile.getHasRock());
+                            farmer.setFarmerObjectCoin(1000);
+
                             if(checkTile(i,j,currentTile,prevCmd)){ // checks if command can be executed to current tile
                                 updateAllTiles(); // updates tiles assets and information
                                 executeTile(farmLotUI.getFarmTiles()[i][j],currentTile,prevCmd);
@@ -330,8 +334,6 @@ public class GameGUI {
         /**
          * Executes tool commands to selected tile then updates information necessary
          */
-
-
         switch (prevCmd) {
             case "Tool" -> {
                 if (!currentToolName.equals("Scythe")){
@@ -472,12 +474,13 @@ public class GameGUI {
         /**
          * Updates farmer level according to next level
          */
-        if(this.farmer.getFarmerLevel()==0){
+        System.out.println("exp:"+this.farmer.getFarmerExp()+"Level:"+this.farmer.getFarmerLevel());
 
-            this.farmer.setFarmerLevel((int) this.farmer.getFarmerExp() / ((this.farmer.getFarmerLevel() + 1) * 100));
+        if(this.farmer.getFarmerLevel()==0){
+            if(this.farmer.getFarmerExp()>=100) this.farmer.setFarmerLevel(1);
         }
-        else if(this.farmer.getFarmerExp()/((this.farmer.getFarmerLevel()+1)*100) >= this.farmer.getFarmerLevel()) {
-            this.farmer.setFarmerLevel(this.farmer.getFarmerLevel() + 1);
+        else if((this.farmer.getFarmerExp()>(this.farmer.getFarmerLevel()*100))) {
+            this.farmer.setFarmerLevel((int) ((this.farmer.getFarmerExp()/100)));
         }
 
     }
@@ -512,7 +515,7 @@ public class GameGUI {
                     case "Fertilizer":
                         if(this.farmer.getFarmerObjectCoin() >= currentTool.getToolCost()) { // if farmer can use tool based on its cost
 
-                            if (currentTile.getPlantedCrop() != null && !currentTile.getHasRock()) {
+                            if (currentTile.getPlantedCrop() != null) {
 
                                 if (currentTile.getPlantedCrop().getFertCount() != currentTile.getPlantedCrop().getFertBonus()) {
                                     valid = true;
@@ -557,7 +560,7 @@ public class GameGUI {
                                 if(currentSeedName.equals("Mangoes") || currentSeedName.equals("Apples")){
                                     // if the current seed is a tree seed
                                     valid = checkSurroundingTiles(row,col);
-
+                                    System.out.println("TREEIN");
                                 }
                             }
                         }
@@ -576,14 +579,19 @@ public class GameGUI {
          * Checks if the designated tile to be planted has surrounding tiles that are occupied
          */
         if(x == 0 || y == 0 || x == this.farmLot.getFarmRow() || y == this.farmLot.getFarmCol()){
+            System.out.println("1");
             return false;
         }
-        else{
-            if(this.farmLot.getFarmTiles()[x - 1][y].getPlantedCrop() == null || this.farmLot.getFarmTiles()[x][y - 1].getPlantedCrop() == null || this.farmLot.getFarmTiles()[x - 1][y - 1].getPlantedCrop() == null || this.farmLot.getFarmTiles()[x][y].getPlantedCrop() == null || this.farmLot.getFarmTiles()[x + 1][x - 1].getPlantedCrop() == null || this.farmLot.getFarmTiles()[x - 1][y + 1].getPlantedCrop() == null){
-                return false;
-            }
+        else if(!(this.farmLot.getFarmTiles()[x - 1][y - 1].getPlantedCrop() == null && this.farmLot.getFarmTiles()[x - 1][y].getPlantedCrop() == null && this.farmLot.getFarmTiles()[x - 1][y + 1].getPlantedCrop() == null && this.farmLot.getFarmTiles()[x][y - 1].getPlantedCrop() == null && this.farmLot.getFarmTiles()[x][y + 1].getPlantedCrop() == null && this.farmLot.getFarmTiles()[x + 1][y - 1].getPlantedCrop() == null && this.farmLot.getFarmTiles()[x + 1][y].getPlantedCrop() == null && this.farmLot.getFarmTiles()[x + 1][y + 1].getPlantedCrop() == null)){
+            System.out.println("2");
+            return false;
         }
+        else if(this.farmLot.getFarmTiles()[x - 1][y - 1].getHasRock() || this.farmLot.getFarmTiles()[x - 1][y].getHasRock() || this.farmLot.getFarmTiles()[x - 1][y + 1].getHasRock() || this.farmLot.getFarmTiles()[x][y - 1].getHasRock() || this.farmLot.getFarmTiles()[x][y + 1].getHasRock() || this.farmLot.getFarmTiles()[x + 1][y - 1].getHasRock() || this.farmLot.getFarmTiles()[x + 1][y].getHasRock() || this.farmLot.getFarmTiles()[x + 1][y + 1].getHasRock()){
+            return false;
+        }
+        System.out.println("TREE VALID");
         return true;
+
     }
 
     public void updateAllTiles(){
