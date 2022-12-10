@@ -291,11 +291,12 @@ public class GameGUI {
             public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==seedInfoBtn)
                 {
+
+                    SoundHandler.RunMusic("src/sfx/buttonClick_sfx.wav",0);
+
                     seedInfoUI.popup.setVisible(true);
                     seedInfoUI.setBounds(100,100,500,500);
                 }
-
-
             }
         };
 
