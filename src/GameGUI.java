@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -51,6 +52,8 @@ public class GameGUI {
 
     private Tile currentTile;
     private Message currentMessage;
+
+    DecimalFormat df = new DecimalFormat("0.00");
 
     public Message getCurrentMessage() {
         return currentMessage;
@@ -110,8 +113,6 @@ public class GameGUI {
         mainFrame.setLocationRelativeTo(null); // Allows window to display relative to the center of the screen
 
         createUIElements();
-
-
 
         ActionListener buttonListener = new ActionListener() {
             String prevCmd = "";
@@ -228,7 +229,7 @@ public class GameGUI {
                 System.out.println("Bal:"+farmer.getFarmerObjectCoin());
                 System.out.println("Exp:"+farmer.getFarmerExp());
                 System.out.println("Lvl:"+farmer.getFarmerLevel());
-                statsUI.balance.setText("Bal: " + farmer.getFarmerObjectCoin());
+                statsUI.balance.setText("Bal: " + df.format(farmer.getFarmerObjectCoin()));
                 statsUI.experience.setText("Exp: "+farmer.getFarmerExp());
             }
         };
@@ -581,7 +582,7 @@ public class GameGUI {
         statsUI.setBounds(50,650,575,150);
         statsUI.setBackground(Color.gray);
 
-        statsUI.balance.setText("Bal: " + farmer.getFarmerObjectCoin());
+        statsUI.balance.setText("Bal: " + df.format(farmer.getFarmerObjectCoin()));
         statsUI.experience.setText("Exp: "+farmer.getFarmerExp());
 
         // SEED STORE (BOTTOM RIGHT UI)
