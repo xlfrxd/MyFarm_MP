@@ -2,54 +2,25 @@ package Models;
 
 public class FarmerStatistics { // untouched
     public static int timesPlanted;
-    public static int timesPlowed;
-    public static int timesWatered;
-    public static int timesFertilized;
+
+    public static int getTimesPlanted() {
+        return timesPlanted;
+    }
+
+    public static void setTimesPlanted(int timesPlanted) {
+        FarmerStatistics.timesPlanted = timesPlanted;
+    }
+
+    public static int getTimesHarvested() {
+        return timesHarvested;
+    }
+
+    public static void setTimesHarvested(int timesHarvested) {
+        FarmerStatistics.timesHarvested = timesHarvested;
+    }
+
     public static int timesHarvested;
-    private static int timesHarvestedSuccessfully;
 
-
-    public static void addPlanted(){
-        /**
-         * This function increments timesPlanted
-         */
-        timesPlanted++;
-    }
-
-    public static void addPlowed(){
-        /**
-         * This function increments timesPlowed
-         */
-        timesPlowed++;
-    }
-
-    public static void addWatered(){
-        /**
-         * This function increments timesWatered
-         */
-        timesWatered++;
-    }
-
-    public static void addFertil(){
-        /**
-         * This function increments timesFertilized
-         */
-        timesFertilized++;
-    }
-
-    public static void addHarv(){
-        /**
-         * This function increments timesHarvested
-         */
-        timesHarvested++;
-    }
-
-    public static void addHarvSuccess(){
-        /**
-         * This function increments successful timesHarvested
-         */
-        timesHarvestedSuccessfully++;
-    }
 
 
 }

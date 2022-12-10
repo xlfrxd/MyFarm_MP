@@ -112,9 +112,6 @@ public class GameGUI {
         createUIElements();
 
 
-        // Update farmLot by updating through setFarmLot -> can be used for mapping too
-
-
 
         ActionListener buttonListener = new ActionListener() {
             String prevCmd = "";
