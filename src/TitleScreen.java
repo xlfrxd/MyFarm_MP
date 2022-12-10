@@ -49,6 +49,7 @@ public class TitleScreen extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            SoundHandler.RunMusic("src/sfx/buttonClick_sfx.wav",0);
             if(e.getSource()==playBtn)
             {
                 titleFrame.setVisible(false);

@@ -474,10 +474,12 @@ public class GameGUI {
         /**
          * Updates farmer level according to next level
          */
-        System.out.println("exp:"+this.farmer.getFarmerExp()+"Level:"+this.farmer.getFarmerLevel());
 
         if(this.farmer.getFarmerLevel()==0){
-            if(this.farmer.getFarmerExp()>=100) this.farmer.setFarmerLevel(1);
+            if(this.farmer.getFarmerExp()>=100){
+                SoundHandler.RunMusic("src/sfx/levelUp_sfx.wav", -15);
+                this.farmer.setFarmerLevel(1);
+            }
         }
         else if((this.farmer.getFarmerExp()>(this.farmer.getFarmerLevel()*100))) {
             this.farmer.setFarmerLevel((int) ((this.farmer.getFarmerExp()/100)));
