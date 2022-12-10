@@ -226,6 +226,27 @@ public class GameGUI {
 
                 }
 
+                // CHECK IF ALL PLANTS WITHERED
+
+                boolean allPlantsWithered=false;
+                for(Tile[] tiles: farmLot.getFarmTiles()){
+                    for(Tile tile: tiles){
+                        if(tile.getPlantedCrop()!=null) {
+                            allPlantsWithered = tile.getIsWithered();
+                        }
+                    }
+                }
+
+
+                if(allPlantsWithered){
+                        if(farmer.getFarmerObjectCoin()<=5){
+                            // END CONDITION
+                            JFrame endFrame = new JFrame("Game over, try again?");
+                        }
+                }
+
+
+
                 System.out.println("Bal:"+farmer.getFarmerObjectCoin());
                 System.out.println("Exp:"+farmer.getFarmerExp());
                 System.out.println("Lvl:"+farmer.getFarmerLevel());
@@ -251,6 +272,7 @@ public class GameGUI {
 
         nextDayBtn.addActionListener(buttonListener);
         registerFarmerBtn.addActionListener(buttonListener);
+
         toolListUI.setActionListener(buttonListener);
         seedStoreUI.setActionListener(buttonListener);
         farmLotUI.setActionListener(buttonListener);
@@ -334,6 +356,7 @@ public class GameGUI {
                         this.farmer.setFarmerObjectCoin(this.farmer.getFarmerObjectCoin() + finalHarvestPrice);
                         this.messagePrompt.feedback.setText("Earned " + finalHarvestPrice + " from " + productsProduced + " pcs of " + currentTile.getPlantedCrop().getCropName() + "!");
                         currentTile.setPlantedCrop(null);
+                        currentTile.setWithered(false);
                         //clearLabel();
                         break;
                     default:
@@ -389,12 +412,6 @@ public class GameGUI {
             this.farmer.setFarmerLevel(this.farmer.getFarmerLevel() + 1);
         }
 
-    }
-
-    public void checkCrops(){
-        /**
-         * function that checks the game ending condition if all crops are withered or no crops are growing
-         */
     }
 
 
@@ -525,6 +542,7 @@ public class GameGUI {
                     else if(farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvCount()>farmLot.getFarmTiles()[i][j].getPlantedCrop().getHarvReq()){
                         farmLotUI.getFarmTiles()[i][j].setIcon(new ImageIcon("src/Views/tiles/Withered.png"));// Update plant icon to withered
                         farmLot.getFarmTiles()[i][j].setWithered(true); // Update plant info
+
                         farmLotUI.getFarmTiles()[i][j].setToolTipText("<html>"+farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " has withered<br><br><i>Use a shovel to remove the plant</i></html>");
 
                         messagePrompt.feedback.setText(farmLot.getFarmTiles()[i][j].getPlantedCrop().getCropName() + " withered");
