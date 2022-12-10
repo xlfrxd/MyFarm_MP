@@ -173,8 +173,6 @@ public class GameGUI {
                                 }
                             }
 
-                            System.out.println("thisRock:"+currentTile.getHasRock());
-                            farmer.setFarmerObjectCoin(1000);
 
                             if(checkTile(i,j,currentTile,prevCmd)){ // checks if command can be executed to current tile
                                 updateAllTiles(); // updates tiles assets and information
@@ -231,24 +229,32 @@ public class GameGUI {
 
                 }
 
+
+
                 if(e.getSource()==registerFarmerBtn){
 
-                    SoundHandler.RunMusic("src/sfx/buttonClick_sfx.wav",0);
+                    messagePrompt.feedback.setText("You are unable to register at this time.");
 
-                    if(farmer.getFarmerLevel()%5==0){
-                        FarmerType ableType = null;
+                    if(farmer.getFarmerLevel()!=0){
                         for (FarmerType type:
                                 farmer.getFarmerTypes()) {
-                            if(type.getFarmerLevelReq()==farmer.getFarmerLevel()/5){
-                                farmer.setFarmerType(type);
-                                farmer.setFarmerObjectCoin(farmer.getFarmerObjectCoin()-type.getFarmerRegFee());
-                                messagePrompt.feedback.setText("You have registered as " + type.getFarmerTypeName());
-                                statsUI.farmerType.setText(" "+ type.getFarmerTypeName());
-                                break;
+                            if (type.getFarmerLevelReq()!=0) {
+                                System.out.println(type.getFarmerLevelReq());
+                                if(farmer.getFarmerLevel()/type.getFarmerLevelReq()>=1) {
+                                    if (farmer.getFarmerObjectCoin() >= type.getFarmerRegFee()) {
+                                        SoundHandler.RunMusic("src/sfx/achievement_sfx.wav", -10);
+
+                                        farmer.setFarmerType(type);
+                                        farmer.setFarmerObjectCoin(farmer.getFarmerObjectCoin() - type.getFarmerRegFee());
+                                        messagePrompt.feedback.setText("You have registered as " + type.getFarmerTypeName());
+                                        statsUI.farmerType.setText(" " + type.getFarmerTypeName());
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
-                    messagePrompt.feedback.setText("You are unable to register at this time.");
+                    SoundHandler.RunMusic("src/sfx/error_sfx.wav", 0);
 
                 }
 
@@ -455,17 +461,19 @@ public class GameGUI {
 
         updateFarmerLevel();
 
-        if(this.farmer.getFarmerLevel()%5==0 && this.farmer.getFarmerLevel()!=0){
-            FarmerType ableType = null;
+        if(farmer.getFarmerLevel()!=0){
             for (FarmerType type:
-                 farmer.getFarmerTypes()) {
-                if(type.getFarmerLevelReq()==this.farmer.getFarmerLevel()/5){
-                    ableType = type;
-                    break;
+                    farmer.getFarmerTypes()) {
+                if (type.getFarmerLevelReq()!=0) {
+                    System.out.println(type.getFarmerLevelReq());
+                    if(farmer.getFarmerLevel()/type.getFarmerLevelReq()>=1) {
+                        if (farmer.getFarmerObjectCoin() >= type.getFarmerRegFee()) {
+
+                            messagePrompt.feedback.setText("You can now register as a " + type.getFarmerTypeName() + " farmer type!");
+                            break;
+                        }
+                    }
                 }
-            }
-            if(ableType!=null){
-                this.messagePrompt.feedback.setText("You can register as a " + ableType.getFarmerTypeName() + " farmer type!");
             }
         }
     }
@@ -482,6 +490,8 @@ public class GameGUI {
             }
         }
         else if((this.farmer.getFarmerExp()>(this.farmer.getFarmerLevel()*100))) {
+            SoundHandler.RunMusic("src/sfx/levelUp_sfx.wav", -15);
+
             this.farmer.setFarmerLevel((int) ((this.farmer.getFarmerExp()/100)));
         }
 
@@ -562,7 +572,6 @@ public class GameGUI {
                                 if(currentSeedName.equals("Mangoes") || currentSeedName.equals("Apples")){
                                     // if the current seed is a tree seed
                                     valid = checkSurroundingTiles(row,col);
-                                    System.out.println("TREEIN");
                                 }
                             }
                         }
@@ -591,7 +600,6 @@ public class GameGUI {
         else if(this.farmLot.getFarmTiles()[x - 1][y - 1].getHasRock() || this.farmLot.getFarmTiles()[x - 1][y].getHasRock() || this.farmLot.getFarmTiles()[x - 1][y + 1].getHasRock() || this.farmLot.getFarmTiles()[x][y - 1].getHasRock() || this.farmLot.getFarmTiles()[x][y + 1].getHasRock() || this.farmLot.getFarmTiles()[x + 1][y - 1].getHasRock() || this.farmLot.getFarmTiles()[x + 1][y].getHasRock() || this.farmLot.getFarmTiles()[x + 1][y + 1].getHasRock()){
             return false;
         }
-        System.out.println("TREE VALID");
         return true;
 
     }
