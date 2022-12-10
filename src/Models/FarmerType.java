@@ -3,7 +3,6 @@ package Models;
 public class FarmerType { //untouched
     private String farmerTypeName;
 
-
     public int getFarmerLevelReq() {
         return farmerLevelReq;
     }
