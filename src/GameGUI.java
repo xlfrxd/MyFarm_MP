@@ -108,7 +108,7 @@ public class GameGUI {
         // MAIN WINDOW SETTINGS
         mainFrame = new JFrame("Sprout Valley");
         mainFrame.setSize(new Dimension(1200,1000));
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         mainFrame.setLayout(null);
         mainFrame.setLocationRelativeTo(null); // Allows window to display relative to the center of the screen
         mainFrame.setLayout(new BorderLayout());
@@ -374,6 +374,7 @@ public class GameGUI {
 
                         if (currentTile.getPlantedCrop().getFertCount() != currentTile.getPlantedCrop().getFertBonus()) {
                             currentTile.getPlantedCrop().setFertCount(currentTile.getPlantedCrop().getFertCount() + 1);
+                            this.farmer.setFarmerObjectCoin(this.farmer.getFarmerObjectCoin() - currentTool.getToolCost());
                             this.farmer.setFarmerExp(this.farmer.getFarmerExp() + currentTool.getToolExp());
                             currentBtn.setToolTipText("<html>" + currentTile.getPlantedCrop().getCropName() + "<br>" + "Times Watered: " + currentTile.getPlantedCrop().getWaterCount() + "<br>" + "Times Fertilized: " + currentTile.getPlantedCrop().getFertCount() + "<br><br><i>" + String.valueOf(currentTile.getPlantedCrop().getHarvReq() - currentTile.getPlantedCrop().getHarvCount()) + " days until harvest</i></html>");
 
@@ -483,17 +484,23 @@ public class GameGUI {
          * Updates farmer level according to next level
          */
 
+        int prevLevel = this.farmer.getFarmerLevel();
+
         if(this.farmer.getFarmerLevel()==0){
             if(this.farmer.getFarmerExp()>=100){
-                SoundHandler.RunMusic("src/sfx/levelUp_sfx.wav", -15);
                 this.farmer.setFarmerLevel(1);
             }
         }
         else if((this.farmer.getFarmerExp()>(this.farmer.getFarmerLevel()*100))) {
-            SoundHandler.RunMusic("src/sfx/levelUp_sfx.wav", -15);
+
 
             this.farmer.setFarmerLevel((int) ((this.farmer.getFarmerExp()/100)));
         }
+
+        if(this.farmer.getFarmerLevel()!=prevLevel){
+            SoundHandler.RunMusic("src/sfx/levelUp_sfx.wav", -15);
+        }
+
 
     }
 
