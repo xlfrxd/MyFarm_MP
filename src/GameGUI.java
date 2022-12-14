@@ -260,6 +260,7 @@ public class GameGUI {
 
                 // CHECK IF ALL PLANTS WITHERED
 
+
                 boolean allPlantsWithered=false;
 
                 for(Tile[] tiles: farmLot.getFarmTiles()){
@@ -286,12 +287,10 @@ public class GameGUI {
                 }
 
                 // GAME END
-                if(allPlantsWithered && plantsNonExist){
-                        if(farmer.getFarmerObjectCoin()<=5){
-                            // END CONDITION
-                            System.out.println(allPlantsWithered + "\n" + plantsNonExist);
-                            mainFrame.setVisible(false);
-                        }
+                if((allPlantsWithered || plantsNonExist) && farmer.getFarmerObjectCoin()<=5){
+                        // END CONDITION
+                        mainFrame.setVisible(false);
+                        TitleScreen.setVisibleTrue();
                 }
 
 

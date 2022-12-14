@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class TitleScreen extends JFrame{
 
-    public JFrame titleFrame;
+    public static JFrame titleFrame;
     public JButton playBtn = new JButton("play");
     public JButton quitBtn = new JButton("quit");
 
@@ -103,4 +103,8 @@ public class TitleScreen extends JFrame{
         btn.setIcon(new ImageIcon(imagePath)); // scale this image to fit button
     }
 
+
+    public static void setVisibleTrue(){
+        titleFrame.setVisible(true);
+    }
 }
