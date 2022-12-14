@@ -17,7 +17,7 @@ public class Game {
 
     public static void main(String[] args) {
 
-        SoundHandler.RunMusic("src/sfx/Music Background.wav",-20);
+        SoundHandler.RunMusic("src/sfx/Music Background.wav",-20,true);
 
         new TitleScreen();
     }

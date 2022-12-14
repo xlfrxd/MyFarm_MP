@@ -265,7 +265,12 @@ public class GameGUI {
                 for(Tile[] tiles: farmLot.getFarmTiles()){
                     for(Tile tile: tiles){
                         if(tile.getPlantedCrop()!=null) {
-                            allPlantsWithered = tile.getIsWithered();
+                            if(tile.getIsWithered()) {
+                            allPlantsWithered=true;
+                            }
+                            else{
+                                break;
+                            }
                         }
                     }
                 }
@@ -284,6 +289,7 @@ public class GameGUI {
                 if(allPlantsWithered && plantsNonExist){
                         if(farmer.getFarmerObjectCoin()<=5){
                             // END CONDITION
+                            System.out.println(allPlantsWithered + "\n" + plantsNonExist);
                             mainFrame.setVisible(false);
                         }
                 }
@@ -431,7 +437,7 @@ public class GameGUI {
                         this.messagePrompt.feedback.setText("Earned " + df.format(finalHarvestPrice) + " from " + productsProduced + " pcs of " + currentTile.getPlantedCrop().getCropName() + "!");
                         currentTile.setPlantedCrop(null);
                         currentTile.setWithered(false);
-                        farmerStats.setTimesHarvested(farmerStats.getTimesHarvested()+1);
+                        FarmerStatistics.setTimesHarvested(farmerStats.getTimesHarvested()+1);
                         statsUI.harvested.setText("Harvested: " + farmerStats.getTimesHarvested() + " crop/s" );
                         //clearLabel();
                         break;
